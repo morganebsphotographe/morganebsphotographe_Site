@@ -39,8 +39,10 @@
 
     /* Titre hero : s'adapte a la fois a la largeur ET la hauteur.
        min() prend la plus petite valeur -> jamais trop grand
-       quand la fenetre est basse (paysage) ou etroite (mobile). */
-    --hero-size:    min(15vh, 9vw, 8.4rem);
+       quand la fenetre est basse (paysage) ou etroite (mobile).
+       Le plafond (3e valeur) est volontairement genereux pour
+       continuer a grandir sur les grands ecrans / plein ecran. */
+    --hero-size:    min(18vh, 9vw, 11.5rem);
     --hero-size-sm: min(12vh, 13vw, 5rem);
 }
 
@@ -71,7 +73,7 @@ a { color: inherit; text-decoration: none; }
 
 img { display: block; width: 100%; height: auto; }
 
-::selection { background: var(--ink); color: var(--paper); }
+::sélection { background: var(--ink); color: var(--paper); }
 
 em { font-style: italic; font-weight: 400; }
 
@@ -217,11 +219,10 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
 
 .hero {
     position: relative;
-    min-height: 100svh;
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: clamp(104px, 13vh, 150px) var(--page-x) clamp(60px, 10vh, 120px);
+    padding: clamp(120px, 17vh, 190px) var(--page-x) clamp(70px, 11vh, 130px);
     overflow: hidden;
 
     background:
@@ -427,6 +428,7 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     overflow: hidden;
     background: var(--paper-soft);
     aspect-ratio: 4 / 5;
+    border-radius: clamp(8px, 1vw, 14px);
 }
 
 .work-image img {
@@ -478,7 +480,7 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
 .about-text {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(1.7rem, 3.6vw, 3.2rem);
+    font-size: clamp(1.8rem, 4vw, 4.4rem);
     line-height: 1.16;
     letter-spacing: -.015em;
 }
@@ -687,7 +689,7 @@ button:focus-visible {
         <a href="index.html" class="active">Accueil</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="prestations.html">Prestations</a>
-        <a href="index.html#about">A propos</a>
+        <a href="index.html#about">À propos</a>
         <a href="contact.html" class="appointment">Contact</a>
     </nav>
 
@@ -720,31 +722,10 @@ button:focus-visible {
                 Des images naturelles, sensibles et intemporelles.
             </p>
             <a href="portfolio.html" class="hero-link">
-                Decouvrir le portfolio →
+                Découvrir le portfolio →
             </a>
         </div>
 
-    </div>
-
-    <div class="hero-scroll" aria-hidden="true"></div>
-
-</section>
-
-
-<!-- ===================================================== PORTFOLIO (apercu) ===================================================== -->
-
-<section class="section section-first">
-
-    <div class="section-head reveal">
-        <div>
-            <div class="section-label">Portfolio</div>
-            <h2 class="section-title">Quelques<br><em>histoires.</em></h2>
-        </div>
-        <a href="portfolio.html" class="section-link">Voir toutes les series →</a>
-    </div>
-
-    <div id="home-gallery" class="portfolio-grid">
-        <p class="loading-note">Chargement des photographies…</p>
     </div>
 
 </section>
@@ -752,19 +733,38 @@ button:focus-visible {
 
 <!-- ===================================================== A PROPOS ===================================================== -->
 
-<section class="about reveal" id="about">
+<section class="about reveal section-first" id="about">
 
     <div class="about-inner">
-        <div class="section-label">A propos</div>
+        <div class="section-label">À propos</div>
         <p class="about-text">
             Photographier les gens et les instants
             tels qu'ils sont <em>vraiment.</em>
         </p>
         <p class="about-small">
-            Des images naturelles, elegantes et sinceres, avec une
-            attention particuliere portee a la lumiere et aux details.
-            Basee a Martigues, disponible partout en region.
+            Des images naturelles, élégantes et sincères, avec une
+            attention particulière portée à la lumière et aux détails.
+            Basée à Martigues, disponible partout en région.
         </p>
+    </div>
+
+</section>
+
+
+<!-- ===================================================== PORTFOLIO (apercu) ===================================================== -->
+
+<section class="section">
+
+    <div class="section-head reveal">
+        <div>
+            <div class="section-label">Portfolio</div>
+            <h2 class="section-title">Quelques<br><em>histoires.</em></h2>
+        </div>
+        <a href="portfolio.html" class="section-link">Voir toutes les séries →</a>
+    </div>
+
+    <div id="home-gallery" class="portfolio-grid">
+        <p class="loading-note">Chargement des photographies…</p>
     </div>
 
 </section>
