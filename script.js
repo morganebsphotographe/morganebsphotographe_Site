@@ -251,21 +251,18 @@ function createPhoto(photo) {
 
     const image = document.createElement("img");
     image.src = photo.url;
-    image.alt = prettyName(photo.name) + " · " + categoryNames[photo.category];
+    image.alt = "Photographie " + categoryNames[photo.category] + " - MorganeBS";
     image.loading = "lazy";
 
     imageWrapper.appendChild(image);
 
+    // Legende : uniquement la categorie (jamais le nom du fichier)
     const caption = document.createElement("div");
     caption.className = "work-caption";
-
-    const name = document.createElement("span");
-    name.textContent = prettyName(photo.name);
 
     const category = document.createElement("span");
     category.textContent = categoryNames[photo.category];
 
-    caption.appendChild(name);
     caption.appendChild(category);
 
     work.appendChild(imageWrapper);
@@ -310,7 +307,7 @@ async function loadHomeGallery() {
         gallery.appendChild(createPhoto(photo));
     });
 
-    revealNewCards(gallery);
+    revealCards(gallery);
 }
 
 
@@ -337,30 +334,7 @@ async function loadPortfolio() {
     });
 
     setupFilters();
-    revealNewCards(gallery);
-}
-
-
-/* =====================================================
-   HERO - premiere photo disponible
-===================================================== */
-
-async function loadHero() {
-
-    const container = document.getElementById("hero-image");
-    if (!container) return;
-
-    let images = await getImages("portrait");
-    if (images.length === 0) {
-        images = await getAllImages();
-    }
-    if (images.length === 0) return;
-
-    const image = document.createElement("img");
-    image.src = images[0].url;
-    image.alt = "Photographie de MorganeBS";
-    container.appendChild(image);
-    container.classList.add("has-image");
+    revealCards(gallery);
 }
 
 
@@ -450,8 +424,51 @@ function setupReveal() {
 }
 
 
-function revealNewCards(container) {
-    if (revealObserver && container.classList.contains("reveal")) {
-        revealObserver.observe(container);
+/* Apparition en cascade des cartes photo au scroll */
+function revealCards(container) {
+
+    const cards = container.querySelectorAll(".work");
+
+    if (!("IntersectionObserver" in window)) {
+        cards.forEach(c => c.classList.add("in"));
+        return;
     }
+
+    const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                // petit decalage selon la position dans la grille
+                const i = Array.prototype.indexOf.call(cards, el);
+                el.style.transitionDelay = (Math.min(i, 5) * 70) + "ms";
+                el.classList.add("in");
+                o.unobserve(el);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+
+    cards.forEach(c => obs.observe(c));
+}
+
+
+/* Header : liseré + fond apres un leger defilement */
+function initHeader() {
+    const header = document.getElementById("site-header");
+    if (!header || header.classList.contains("solid")) {
+        // pages ou le header est deja solide en permanence (contact)
+        if (header && header.dataset.always === "solid") return;
+    }
+    if (!header) return;
+
+    function onScroll() {
+        if (window.scrollY > 24) header.classList.add("solid");
+        else header.classList.remove("solid");
+    }
+    // sur les pages interieures on peut vouloir le garder solide :
+    if (header.classList.contains("solid")) {
+        header.dataset.always = "solid";
+        return;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 }
