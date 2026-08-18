@@ -71,7 +71,7 @@ a { color: inherit; text-decoration: none; }
 
 img { display: block; width: 100%; height: auto; }
 
-::selection { background: var(--ink); color: var(--paper); }
+::sélection { background: var(--ink); color: var(--paper); }
 
 em { font-style: italic; font-weight: 400; }
 
@@ -930,7 +930,7 @@ button:focus-visible {
         <a href="index.html">Accueil</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="prestations.html">Prestations</a>
-        <a href="index.html#about">A propos</a>
+        <a href="index.html#about">À propos</a>
         <a href="contact.html" class="appointment active">Contact</a>
     </nav>
 
@@ -951,7 +951,7 @@ button:focus-visible {
         <span class="small">Prise de contact</span>
         <h1>Parlons de<br>votre <em>projet.</em></h1>
         <p class="contact-lede">
-            Portrait, couple, mariage ou famille. Decrivez votre projet
+            Portrait, couple, mariage ou famille. Décrivez votre projet
             en quelques lignes et je reviens vers vous sous 48 heures.
         </p>
     </div>
@@ -971,7 +971,7 @@ button:focus-visible {
                 <div class="form-row">
 
                     <div class="field">
-                        <label for="prenom">Prenom</label>
+                        <label for="prenom">Prénom</label>
                         <input type="text" id="prenom" name="prenom" placeholder="Marie" required>
                     </div>
 
@@ -1001,7 +1001,7 @@ button:focus-visible {
 
                 <div class="field">
                     <label for="message">Votre projet</label>
-                    <textarea id="message" name="message" placeholder="Decrivez votre projet en quelques mots : date, lieu, ambiance souhaitee..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Décrivez votre projet en quelques mots : date, lieu, ambiance souhaitée..." required></textarea>
                 </div>
 
                 <button type="submit" class="form-submit" id="submit-btn">
@@ -1015,15 +1015,15 @@ button:focus-visible {
                 <h2>Merci.</h2>
                 <p>
                     Votre message est bien parti. Je reviens vers vous
-                    sous 48 heures. Pensez a verifier vos spams au cas ou.
+                    sous 48 heures. Pensez à vérifier vos spams au cas où.
                 </p>
             </div>
 
             <div class="form-status error" id="status-error">
                 <h2>Oups.</h2>
                 <p>
-                    L'envoi n'a pas fonctionne. Reessayez dans un instant,
-                    ou ecrivez-moi directement a l'adresse ci-contre.
+                    L'envoi n'a pas fonctionné. Réessayez dans un instant,
+                    ou écrivez-moi directement à l'adresse ci-contre.
                 </p>
             </div>
 
@@ -1033,19 +1033,19 @@ button:focus-visible {
         <aside class="contact-aside">
 
             <div class="aside-block">
-                <span class="small">Ecrire</span>
+                <span class="small">Écrire</span>
                 <a href="mailto:morganebsphotographe@hotmail.com">morganebsphotographe@hotmail.com</a>
             </div>
 
             <div class="aside-block">
                 <span class="small">Zone</span>
-                <p>Martigues et alentours,<br>disponible partout en region.</p>
+                <p>Martigues et alentours,<br>disponible partout en région.</p>
             </div>
 
             <div class="aside-block">
-                <span class="small">Reponse</span>
+                <span class="small">Réponse</span>
                 <p class="aside-note">
-                    Sous 48 heures ouvrees. Pour une date precise en tete,
+                    Sous 48 heures ouvrées. Pour une date précise en tête,
                     indiquez-la dans votre message.
                 </p>
             </div>
@@ -1086,7 +1086,7 @@ button:focus-visible {
             if (!configured) {
                 var sujet = encodeURIComponent("Demande de shooting - " + (form.type.value || ""));
                 var corps = encodeURIComponent(
-                    "Prenom : " + form.prenom.value + "\n" +
+                    "Prénom : " + form.prenom.value + "\n" +
                     "Nom : " + form.nom.value + "\n" +
                     "Email : " + form.email.value + "\n" +
                     "Type : " + form.type.value + "\n\n" +
