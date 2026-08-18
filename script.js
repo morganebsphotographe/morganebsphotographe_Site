@@ -54,12 +54,13 @@ const fallbackPhotos = {
 };
 
 
-/* Configuration manuelle du depot (optionnel).
-   Laissez vide : detection automatique sur GitHub Pages.
-   A remplir seulement en cas de domaine personnalise. */
+/* Configuration du depot GitHub.
+   Renseignee en dur : le chargement des photos continue de
+   fonctionner meme si le site passe un jour sur un nom de
+   domaine personnalise (qui ne contient plus ".github.io"). */
 const REPO = {
-    username:   "",   // ex : "morganebsphotographe"
-    repository: "",   // ex : "morganebsphotographe_Site"
+    username:   "morganebsphotographe",
+    repository: "morganebsphotographe_Site",
     branch:     "main"
 };
 
