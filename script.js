@@ -1,23 +1,24 @@
 /* =====================================================
    MORGANEBS - script
 
-   DEUX MODES DE CHARGEMENT DES PHOTOS
-   -----------------------------------
-   1) MANIFESTE (recommande, 100% fiable) :
-      Ecrivez simplement le nom de vos fichiers dans la
-      liste "photos" ci-dessous, sous la bonne categorie.
-      Les images sont chargees directement, sans limite.
+   CHARGEMENT AUTOMATIQUE DES PHOTOS
+   ---------------------------------
+   Deposez simplement vos images dans les dossiers :
+       photos/portrait/
+       photos/couple/
+       photos/mariage/
+       photos/famille/
+   Elles apparaissent automatiquement sur le site.
+   (Formats acceptes : jpg, jpeg, png, webp, avif -
+    les majuscules d'extension .JPG sont acceptees.)
 
-   2) AUTO via API GitHub (repli) :
-      Si une categorie est laissee VIDE dans le manifeste,
-      le script tente de lister automatiquement le dossier
-      correspondant via l'API GitHub. Attention : l'API est
-      limitee a 60 requetes/heure et par adresse IP, donc ce
-      mode peut echouer si vous rechargez souvent la page.
-
-   Pour ajouter une photo : deposez le fichier dans
-   photos/<categorie>/ sur GitHub, puis ajoutez son nom
-   exact (avec l'extension) dans la liste ci-dessous.
+   Comment ca marche :
+   - Le site lit le contenu des dossiers via l'API GitHub.
+   - Les listes sont mises en cache dans le navigateur
+     (le temps de la session) pour eviter de solliciter
+     l'API a chaque page et rester rapide.
+   - Si l'API est momentanement indisponible, le site
+     utilise le manifeste de secours ci-dessous.
 ===================================================== */
 
 
@@ -39,48 +40,33 @@ const categoryNames = {
 
 
 /* =====================================================
-   MANIFESTE DES PHOTOS
-   Ajoutez ici le nom EXACT de chaque fichier (avec son
-   extension, majuscules comprises), sous sa categorie.
-   Laissez une categorie vide ( [] ) pour tenter l'API.
+   MANIFESTE DE SECOURS (optionnel)
+   Sert uniquement si l'API GitHub est indisponible.
+   Vous pouvez le laisser vide : le chargement auto
+   fonctionne sans. Pour plus de securite, vous pouvez
+   y recopier les noms de vos fichiers.
 ===================================================== */
-const photos = {
-
-    portrait: [
-        // "ma-photo.jpg",
-        // "autre-photo.JPG",
-    ],
-
-    couple: [
-        // "couple-01.jpg",
-    ],
-
-    mariage: [
-        "1W2A9246.JPG",
-    ],
-
-    famille: [
-        // "famille-01.jpg",
-    ]
-
+const fallbackPhotos = {
+    portrait: [],
+    couple:   [],
+    mariage:  ["1W2A9246.JPG"],
+    famille:  []
 };
 
 
-/* =====================================================
-   Detection du compte / depot GitHub
-   - GitHub Pages projet : compte.github.io/mon-repo
-   - GitHub Pages user   : compte.github.io
-   - Repli manuel possible via REPO ci-dessous
-===================================================== */
-
-/* Si la detection automatique echoue (ex : domaine
-   personnalise), renseignez ces deux valeurs a la main. */
+/* Configuration manuelle du depot (optionnel).
+   Laissez vide : detection automatique sur GitHub Pages.
+   A remplir seulement en cas de domaine personnalise. */
 const REPO = {
     username:   "",   // ex : "morganebsphotographe"
     repository: "",   // ex : "morganebsphotographe_Site"
     branch:     "main"
 };
 
+
+/* =====================================================
+   Detection du depot GitHub
+===================================================== */
 
 function getGithubInfo() {
 
@@ -99,12 +85,8 @@ function getGithubInfo() {
     let repository = "";
 
     if (hostname.endsWith(".github.io")) {
-
         username = hostname.split(".")[0];
-
         const parts = pathname.split("/").filter(Boolean);
-
-        // 1er segment = nom du repo, sauf si c'est un fichier .html
         if (parts.length && !parts[0].includes(".")) {
             repository = parts[0];
         }
@@ -114,96 +96,126 @@ function getGithubInfo() {
 }
 
 
+/* Nom du repo effectif (gere le cas "user site") */
+function repoName() {
+    const { username, repository } = getGithubInfo();
+    if (!username) return null;
+    return repository || (username + ".github.io");
+}
+
+
 /* Base des URLs brutes des images */
 function rawBase() {
-
-    const { username, repository, branch } = getGithubInfo();
-
-    if (!username) return null;
-
-    // Repo "user site" : compte.github.io
-    const repo = repository || (username + ".github.io");
-
+    const { username, branch } = getGithubInfo();
+    const repo = repoName();
+    if (!username || !repo) return null;
     return "https://raw.githubusercontent.com/" +
         username + "/" + repo + "/" + branch + "/photos";
 }
 
 
-/* URL API pour lister un dossier (mode repli) */
+/* URL API pour lister un dossier */
 function apiUrl(category) {
-
-    const { username, repository } = getGithubInfo();
-    if (!username) return null;
-
-    const repo = repository || (username + ".github.io");
-
+    const { username } = getGithubInfo();
+    const repo = repoName();
+    if (!username || !repo) return null;
     return "https://api.github.com/repos/" +
         username + "/" + repo + "/contents/photos/" + category;
 }
 
 
 /* =====================================================
+   Cache navigateur (session) pour les listes de fichiers
+===================================================== */
+
+function cacheKey(category) {
+    const repo = repoName() || "repo";
+    return "mbs:" + repo + ":" + category;
+}
+
+function readCache(category) {
+    try {
+        const raw = sessionStorage.getItem(cacheKey(category));
+        if (!raw) return null;
+        const data = JSON.parse(raw);
+        if (!Array.isArray(data)) return null;
+        return data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function writeCache(category, names) {
+    try {
+        sessionStorage.setItem(cacheKey(category), JSON.stringify(names));
+    } catch (e) {
+        /* stockage indisponible : on ignore */
+    }
+}
+
+
+/* Transforme une liste de noms en objets photo */
+function toPhotos(category, names) {
+    const base = rawBase();
+    if (!base) return [];
+    return names.map(name => ({
+        name: name,
+        category: category,
+        url: base + "/" + category + "/" + encodeURIComponent(name)
+    }));
+}
+
+
+/* =====================================================
    Recuperation des photos d'une categorie
+   (cache -> API GitHub -> manifeste de secours)
 ===================================================== */
 
 async function getImages(category) {
 
-    const base = rawBase();
-    if (!base) {
-        console.error("[MorganeBS] Impossible de determiner le depot GitHub. " +
-            "Renseignez REPO.username et REPO.repository dans script.js.");
-        return [];
+    // 1) Cache de session
+    const cached = readCache(category);
+    if (cached) {
+        return toPhotos(category, cached);
     }
 
-    const listed = photos[category] || [];
-
-    // MODE 1 : manifeste rempli -> URLs directes
-    if (listed.length > 0) {
-        return listed.map(name => ({
-            name: name,
-            category: category,
-            url: base + "/" + category + "/" + encodeURIComponent(name)
-        }));
-    }
-
-    // MODE 2 : repli via API GitHub
+    // 2) API GitHub
     const url = apiUrl(category);
-    if (!url) return [];
 
-    try {
-        const response = await fetch(url);
+    if (url) {
+        try {
+            const response = await fetch(url);
 
-        if (response.status === 403) {
-            console.warn("[MorganeBS] API GitHub : quota depasse (60 req/h). " +
-                "Categorie '" + category + "' non chargee. " +
-                "Ajoutez vos fichiers dans le manifeste 'photos' de script.js pour eviter ce probleme.");
-            return [];
+            if (response.ok) {
+                const files = await response.json();
+
+                if (Array.isArray(files)) {
+                    const names = files
+                        .filter(f =>
+                            f.type === "file" &&
+                            /\.(jpg|jpeg|png|webp|avif)$/i.test(f.name)
+                        )
+                        .map(f => f.name);
+
+                    writeCache(category, names);
+                    return toPhotos(category, names);
+                }
+            } else if (response.status === 403) {
+                console.warn("[MorganeBS] API GitHub : quota temporairement depasse. " +
+                    "Utilisation du manifeste de secours pour '" + category + "'. " +
+                    "Cela n'affecte pas vos visiteurs (quota par adresse IP).");
+            } else {
+                console.warn("[MorganeBS] API GitHub : reponse " + response.status +
+                    " pour '" + category + "'.");
+            }
+        } catch (error) {
+            console.warn("[MorganeBS] API GitHub injoignable pour '" + category + "'.", error);
         }
-
-        if (!response.ok) {
-            console.warn("[MorganeBS] API GitHub : reponse " + response.status +
-                " pour la categorie '" + category + "'.");
-            return [];
-        }
-
-        const files = await response.json();
-        if (!Array.isArray(files)) return [];
-
-        return files
-            .filter(file =>
-                file.type === "file" &&
-                /\.(jpg|jpeg|png|webp|avif)$/i.test(file.name)
-            )
-            .map(file => ({
-                name: file.name,
-                category: category,
-                url: base + "/" + category + "/" + encodeURIComponent(file.name)
-            }));
-
-    } catch (error) {
-        console.error("[MorganeBS] Erreur de chargement (" + category + ") :", error);
-        return [];
     }
+
+    // 3) Manifeste de secours
+    const fb = fallbackPhotos[category] || [];
+    return toPhotos(category, fb);
 }
 
 
@@ -267,9 +279,10 @@ function createPhoto(photo) {
 function emptyMessage(target) {
     target.innerHTML =
         '<p class="loading-note">' +
-        'Aucune photo a afficher. Ajoutez le nom de vos fichiers dans le ' +
-        'manifeste <code>photos</code> de <code>script.js</code> ' +
-        '(categories : portrait, couple, mariage, famille), ' +
+        'Les photographies apparaitront ici automatiquement. ' +
+        'Ajoutez vos images dans les dossiers ' +
+        '<code>photos/portrait</code>, <code>photos/couple</code>, ' +
+        '<code>photos/mariage</code>, <code>photos/famille</code> du depot, ' +
         'puis publiez le site.' +
         '</p>';
 }
@@ -329,8 +342,7 @@ async function loadPortfolio() {
 
 
 /* =====================================================
-   HERO - premiere photo de la categorie "portrait"
-   (repli : premiere photo toutes categories)
+   HERO - premiere photo disponible
 ===================================================== */
 
 async function loadHero() {
@@ -339,17 +351,16 @@ async function loadHero() {
     if (!container) return;
 
     let images = await getImages("portrait");
-
     if (images.length === 0) {
         images = await getAllImages();
     }
-
     if (images.length === 0) return;
 
     const image = document.createElement("img");
     image.src = images[0].url;
     image.alt = "Photographie de MorganeBS";
     container.appendChild(image);
+    container.classList.add("has-image");
 }
 
 
@@ -393,7 +404,6 @@ function initUI() {
     const nav = document.querySelector("nav");
 
     if (toggle && nav) {
-
         toggle.addEventListener("click", () => {
             const open = document.body.classList.toggle("nav-open");
             toggle.setAttribute("aria-expanded", open ? "true" : "false");
