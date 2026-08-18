@@ -979,7 +979,7 @@ button:focus-visible {
             <form
                 class="form"
                 id="contact-form"
-                action="https://formspree.io/f/VOTRE_ID_FORMSPREE"
+                action="https://formspree.io/f/xppaoqyd"
                 method="POST"
             >
 
@@ -1051,7 +1051,7 @@ button:focus-visible {
 
             <div class="aside-block">
                 <span class="small">Ecrire</span>
-                <a href="mailto:tonemail@gmail.com">tonemail@gmail.com</a>
+                <a href="mailto:tonemail@gmail.com">morganebsphotographe@hotmail.com</a>
             </div>
 
             <div class="aside-block">
@@ -1098,8 +1098,12 @@ button:focus-visible {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
 
-            // Si l'ID Formspree n'est pas configure, on bascule sur mailto
-            if (form.action.indexOf("VOTRE_ID_FORMSPREE") !== -1) {
+            // Garde-fou : si l'endpoint Formspree n'est pas configure
+            // (placeholder encore present), on bascule sur l'app mail.
+            var configured = /formspree\.io\/f\/[a-zA-Z0-9]+$/.test(form.action) &&
+                             form.action.indexOf("VOTRE_ID_FORMSPREE") === -1;
+
+            if (!configured) {
                 var sujet = encodeURIComponent("Demande de shooting - " + (form.type.value || ""));
                 var corps = encodeURIComponent(
                     "Prenom : " + form.prenom.value + "\n" +
