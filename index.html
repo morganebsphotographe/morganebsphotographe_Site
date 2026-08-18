@@ -1,51 +1,712 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Vincent Thevenon — Photographie</title>
 
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap');
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            background: #f5f4f0;
+            color: #111111;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-weight: 300;
+
+            line-height: 1.5;
+        }
+
+
+        a {
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        img {
+            display: block;
+
+            width: 100%;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+
+            height: 90px;
+
+            padding: 0 5vw;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom: 1px solid #deddd8;
+
+        }
+
+
+        .logo {
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 12px;
+
+            letter-spacing: .12em;
+
+        }
+
+
+        nav {
+
+            display: flex;
+
+            gap: 35px;
+
+            font-size: 12px;
+
+        }
+
+
+        nav a {
+
+            position: relative;
+
+        }
+
+
+        nav a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: -5px;
+
+            width: 0;
+
+            height: 1px;
+
+            background: #111;
+
+            transition: width .3s ease;
+
+        }
+
+
+        nav a:hover::after {
+
+            width: 100%;
+
+        }
+
+
+        /* =========================
+           TEXT
+        ========================== */
+
+        .small {
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            letter-spacing: .14em;
+
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        h1,
+        h2 {
+
+            font-weight: 300;
+
+            letter-spacing: -.045em;
+
+            line-height: .93;
+
+        }
+
+
+        h1 {
+
+            font-size: clamp(
+                55px,
+                8vw,
+                125px
+            );
+
+        }
+
+
+        h2 {
+
+            font-size: clamp(
+                45px,
+                6vw,
+                90px
+            );
+
+        }
+
+
+        .description {
+
+            margin-top: 45px;
+
+            max-width: 400px;
+
+            font-size: 16px;
+
+        }
+
+
+        .link {
+
+            display: inline-block;
+
+            margin-top: 35px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
+            border-bottom: 1px solid #111;
+
+            padding-bottom: 5px;
+
+            transition: opacity .3s ease;
+
+        }
+
+
+        .link:hover {
+
+            opacity: .5;
+
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+
+            min-height: 80vh;
+
+            padding: 12vh 5vw;
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+
+        .hero-photo {
+
+            padding: 0 5vw 12vw;
+
+        }
+
+
+        .hero-photo img {
+
+            height: 75vh;
+
+            object-fit: cover;
+
+        }
+
+
+        /* =========================
+           WORKS
+        ========================== */
+
+        .works {
+
+            padding: 10vw 5vw;
+
+        }
+
+
+        .section-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            margin-bottom: 80px;
+
+        }
+
+
+        /* =========================
+           GALLERY
+        ========================== */
+
+        .home-gallery {
+
+            display: grid;
+
+            grid-template-columns: repeat(
+                12,
+                1fr
+            );
+
+            gap: 25px;
+
+        }
+
+
+        .photo-card {
+
+            overflow: hidden;
+
+        }
+
+
+        .home-gallery
+        .photo-card:nth-child(1) {
+
+            grid-column: span 7;
+
+        }
+
+
+        .home-gallery
+        .photo-card:nth-child(2) {
+
+            grid-column: 9 / span 4;
+
+            margin-top: 120px;
+
+        }
+
+
+        .home-gallery
+        .photo-card:nth-child(3) {
+
+            grid-column: 2 / span 5;
+
+            margin-top: 100px;
+
+        }
+
+
+        .home-gallery
+        .photo-card:nth-child(4) {
+
+            grid-column: 8 / span 5;
+
+        }
+
+
+        .photo-card img {
+
+            aspect-ratio: 4 / 5;
+
+            object-fit: cover;
+
+            transition:
+                transform .8s
+                cubic-bezier(.2,.7,.2,1);
+
+        }
+
+
+        .photo-card:hover img {
+
+            transform: scale(1.025);
+
+        }
+
+
+        .photo-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding-top: 12px;
+
+            font-family:
+                "DM Mono",
+                monospace;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .08em;
+
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about {
+
+            border-top:
+                1px solid #deddd8;
+
+            padding: 12vw 5vw;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 2fr;
+
+        }
+
+
+        .number {
+
+            font-family:
+                "DM Mono",
+                monospace;
+
+            font-size: 11px;
+
+        }
+
+
+        .about-text {
+
+            max-width: 520px;
+
+            margin-top: 50px;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact {
+
+            border-top:
+                1px solid #deddd8;
+
+            padding: 14vw 5vw;
+
+            text-align: center;
+
+        }
+
+
+        .contact h2 {
+
+            margin-top: 25px;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+
+            border-top:
+                1px solid #deddd8;
+
+            padding: 30px 5vw;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-family:
+                "DM Mono",
+                monospace;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .08em;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+
+            header {
+
+                height: 75px;
+
+                padding: 0 6vw;
+
+            }
+
+
+            nav {
+
+                gap: 15px;
+
+            }
+
+
+            nav a:nth-child(3) {
+
+                display: none;
+
+            }
+
+
+            .hero {
+
+                min-height: 75vh;
+
+                padding:
+                    15vh 6vw;
+
+            }
+
+
+            .hero-photo {
+
+                padding:
+                    0 6vw 20vw;
+
+            }
+
+
+            .hero-photo img {
+
+                height: 65vh;
+
+            }
+
+
+            .works {
+
+                padding:
+                    20vw 6vw;
+
+            }
+
+
+            .section-title {
+
+                display: block;
+
+                margin-bottom: 50px;
+
+            }
+
+
+            .home-gallery {
+
+                display: block;
+
+            }
+
+
+            .home-gallery
+            .photo-card {
+
+                margin:
+                    0 0 70px 0 !important;
+
+            }
+
+
+            .about {
+
+                padding:
+                    20vw 6vw;
+
+                display: block;
+
+            }
+
+
+            .number {
+
+                margin-bottom: 70px;
+
+            }
+
+
+            .contact {
+
+                padding:
+                    20vw 6vw;
+
+            }
+
+
+            footer {
+
+                padding:
+                    25px 6vw;
+
+                flex-direction:
+                    column;
+
+                gap: 10px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================== -->
+
 <header>
-    <a href="index.html" class="logo">VINCENT THEVENON</a>
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        VINCENT THEVENON
+    </a>
+
 
     <nav>
-        <a href="index.html">Accueil</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="#about">À propos</a>
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="portfolio.html">
+            Portfolio
+        </a>
+
+        <a href="#about">
+            À propos
+        </a>
+
     </nav>
+
 </header>
+
 
 
 <main>
 
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
     <section class="hero">
 
         <div>
-            <p class="small">PHOTOGRAPHE · MARSEILLE</p>
 
-            <h1>
-                La lumière,<br>
-                saisie juste<br>
-                à temps.
-            </h1>
-
-            <p class="description">
-                Portrait, paysage, reportage et éditorial.
+            <p class="small">
+                PHOTOGRAPHE · MARSEILLE
             </p>
 
-            <a href="portfolio.html" class="link">
+
+            <h1>
+
+                La lumière,<br>
+
+                saisie juste<br>
+
+                à temps.
+
+            </h1>
+
+
+            <p class="description">
+
+                Portrait, paysage,
+                reportage et éditorial.
+
+            </p>
+
+
+            <a
+                href="portfolio.html"
+                class="link"
+            >
+
                 Voir le portfolio →
+
             </a>
+
         </div>
 
     </section>
 
+
+
+    <!-- =========================
+         HERO PHOTO
+    ========================== -->
 
     <section class="hero-photo">
 
@@ -57,94 +718,585 @@
     </section>
 
 
+
+    <!-- =========================
+         TRAVAUX
+    ========================== -->
+
     <section class="works">
+
 
         <div class="section-title">
 
+
             <div>
-                <p class="small">01 / TRAVAUX</p>
+
+                <p class="small">
+                    01 / TRAVAUX
+                </p>
+
 
                 <h2>
+
                     Travaux<br>
+
                     sélectionnés
+
                 </h2>
+
             </div>
 
-            <a href="portfolio.html" class="link">
+
+            <a
+                href="portfolio.html"
+                class="link"
+            >
+
                 Voir tout →
+
             </a>
 
+
         </div>
+
 
 
         <div
             id="home-gallery"
             class="home-gallery"
-        ></div>
+        >
+
+        </div>
+
 
     </section>
 
 
-    <section class="about" id="about">
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section
+        class="about"
+        id="about"
+    >
+
 
         <div class="number">
+
             02
+
         </div>
+
 
         <div>
 
-            <p class="small">À PROPOS</p>
+
+            <p class="small">
+
+                À PROPOS
+
+            </p>
+
 
             <h2>
+
                 Photographier<br>
+
                 ce qui reste.
+
             </h2>
 
+
             <p class="about-text">
-                Je recherche les moments où la lumière,
-                le mouvement et le silence se rencontrent.
+
+                Je recherche les moments où
+                la lumière, le mouvement et
+                le silence se rencontrent.
+
                 Chaque image raconte une histoire.
+
             </p>
+
 
         </div>
 
+
     </section>
 
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
 
     <section class="contact">
 
-        <p class="small">03 / CONTACT</p>
+
+        <p class="small">
+
+            03 / CONTACT
+
+        </p>
+
 
         <h2>
+
             Une image<br>
+
             à créer ensemble ?
+
         </h2>
 
-        <a href="mailto:tonemail@gmail.com" class="link">
+
+        <a
+            href="mailto:tonemail@gmail.com"
+            class="link"
+        >
+
             Me contacter →
+
         </a>
 
+
     </section>
+
 
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+========================== -->
+
 <footer>
 
-    <span>© 2026 Vincent Thevenon</span>
+    <span>
 
-    <span>Marseille · France</span>
+        © 2026 Vincent Thevenon
 
-    <a href="portfolio.html">Portfolio</a>
+    </span>
+
+
+    <span>
+
+        Marseille · France
+
+    </span>
+
+
+    <a href="portfolio.html">
+
+        Portfolio
+
+    </a>
 
 </footer>
 
 
-<script src="script.js"></script>
+
+<!-- =========================
+     AUTOMATIC GALLERY
+========================== -->
 
 <script>
+
+    /*
+        IMPORTANT :
+
+        GitHub Pages fonctionne avec cette adresse :
+
+        https://TON-PSEUDO.github.io/TON-REPO/
+
+        Le script récupère automatiquement
+        les photos présentes dans :
+
+        photos/portrait/
+        photos/paysage/
+        photos/reportage/
+        photos/editorial/
+    */
+
+
+    const categories = [
+        "portrait",
+        "paysage",
+        "reportage",
+        "editorial"
+    ];
+
+
+    const categoryNames = {
+
+        portrait: "Portrait",
+
+        paysage: "Paysage",
+
+        reportage: "Reportage",
+
+        editorial: "Éditorial"
+
+    };
+
+
+    /*
+        Récupère automatiquement le compte
+        GitHub et le repository.
+    */
+
+    function getGitHubInfo() {
+
+
+        const hostname =
+            window.location.hostname;
+
+
+        const pathname =
+            window.location.pathname;
+
+
+        let username = "";
+
+        let repository = "";
+
+
+        /*
+            Exemple :
+
+            vincent.github.io/photo/
+
+            username = vincent
+            repository = photo
+        */
+
+        if (
+            hostname.endsWith(
+                ".github.io"
+            )
+        ) {
+
+
+            username =
+                hostname.split(".")[0];
+
+
+            const parts =
+                pathname
+                    .split("/")
+                    .filter(Boolean);
+
+
+            repository =
+                parts[0] || "";
+
+        }
+
+
+        return {
+            username,
+            repository
+        };
+
+    }
+
+
+
+    /*
+        Récupère les images
+        d'un dossier GitHub.
+    */
+
+    async function getImages(
+        category
+    ) {
+
+
+        const {
+            username,
+            repository
+        } = getGitHubInfo();
+
+
+        if (
+            !username ||
+            !repository
+        ) {
+
+            console.error(
+                "GitHub Pages non détecté."
+            );
+
+            return [];
+
+        }
+
+
+        const apiUrl =
+            `https://api.github.com/repos/${username}/${repository}/contents/photos/${category}?ref=main`;
+
+
+        try {
+
+
+            const response =
+                await fetch(apiUrl);
+
+
+            if (!response.ok) {
+
+                console.error(
+                    "Erreur GitHub :",
+                    category
+                );
+
+                return [];
+
+            }
+
+
+            const files =
+                await response.json();
+
+
+            return files
+
+                .filter(
+                    file =>
+
+                    file.type === "file"
+
+                    &&
+
+                    /\.(jpg|jpeg|png|webp)$/i
+                        .test(file.name)
+
+                )
+
+                .map(
+                    file => ({
+
+                        name:
+                            file.name,
+
+                        category:
+                            category,
+
+                        url:
+                            `https://raw.githubusercontent.com/${username}/${repository}/main/photos/${category}/${encodeURIComponent(file.name)}`
+
+                    })
+                );
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+            return [];
+
+        }
+
+    }
+
+
+
+    /*
+        Récupère toutes les photos.
+    */
+
+    async function getAllImages() {
+
+
+        const results =
+            await Promise.all(
+
+                categories.map(
+                    category =>
+                        getImages(category)
+                )
+
+            );
+
+
+        return results.flat();
+
+    }
+
+
+
+    /*
+        Création d'une carte photo.
+    */
+
+    function createPhotoCard(
+        photo
+    ) {
+
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "photo-card";
+
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            photo.url;
+
+
+        image.alt =
+            photo.name;
+
+
+        image.loading =
+            "lazy";
+
+
+        const info =
+            document.createElement(
+                "div"
+            );
+
+
+        info.className =
+            "photo-info";
+
+
+        const title =
+            document.createElement(
+                "span"
+            );
+
+
+        title.textContent =
+            photo.name
+
+                .replace(
+                    /\.[^/.]+$/,
+                    ""
+                )
+
+                .replace(
+                    /[-_]/g,
+                    " "
+                );
+
+
+        const category =
+            document.createElement(
+                "span"
+            );
+
+
+        category.textContent =
+            categoryNames[
+                photo.category
+            ];
+
+
+        info.appendChild(
+            title
+        );
+
+
+        info.appendChild(
+            category
+        );
+
+
+        card.appendChild(
+            image
+        );
+
+
+        card.appendChild(
+            info
+        );
+
+
+        return card;
+
+    }
+
+
+
+    /*
+        Charge les photos
+        sur la page d'accueil.
+    */
+
+    async function loadHomeGallery() {
+
+
+        const gallery =
+            document.getElementById(
+                "home-gallery"
+            );
+
+
+        if (!gallery) {
+
+            return;
+
+        }
+
+
+        const images =
+            await getAllImages();
+
+
+        gallery.innerHTML =
+            "";
+
+
+        /*
+            Affiche les 6 premières.
+        */
+
+        images
+
+            .slice(0, 6)
+
+            .forEach(
+                photo => {
+
+                    gallery.appendChild(
+                        createPhotoCard(
+                            photo
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+
+    /*
+        Lance le chargement.
+    */
+
     loadHomeGallery();
+
 </script>
 
+
 </body>
+
 </html>
