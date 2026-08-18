@@ -485,87 +485,32 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
 
 
 /* =====================================================
-   PRESTATIONS
-===================================================== */
-
-.services {
-    padding: clamp(60px, 10vh, 120px) var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto clamp(80px, 14vh, 180px);
-    border-top: 1px solid var(--line);
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-}
-
-.service {
-    background: var(--paper);
-    padding: clamp(28px, 3.5vw, 52px) clamp(22px, 2.5vw, 36px);
-    min-height: clamp(200px, 26vh, 320px);
-    display: flex;
-    flex-direction: column;
-    transition: background .4s var(--ease);
-}
-
-.service:hover { background: var(--paper-soft); }
-
-.service-number {
-    font-family: var(--display);
-    font-size: .85rem;
-    color: var(--ink-soft);
-    margin-bottom: auto;
-}
-
-.service-name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2vw, 2rem);
-    line-height: 1.1;
-    letter-spacing: -.01em;
-    margin-top: 40px;
-}
-
-.service-description {
-    font-size: 13px;
-    color: var(--ink-soft);
-    letter-spacing: .02em;
-    margin-top: 10px;
-}
-
-
-/* =====================================================
    A PROPOS
 ===================================================== */
 
 .about {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(20px, 5vw, 90px);
     padding: 0 var(--page-x);
     max-width: var(--maxw);
     margin: 0 auto clamp(80px, 14vh, 180px);
+    padding-top: clamp(60px, 10vh, 120px);
+    border-top: 1px solid var(--line);
 }
 
-.about > .section-number { padding-top: .8rem; }
+.about .section-label { margin-bottom: 22px; }
 
 .about-text {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(1.6rem, 3.4vw, 3rem);
-    line-height: 1.18;
+    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    line-height: 1.16;
     letter-spacing: -.015em;
-    max-width: 22ch;
+    max-width: 20ch;
 }
 
 .about-small {
     margin-top: clamp(24px, 4vh, 40px);
-    max-width: 52ch;
-    font-size: clamp(.95rem, 1.2vw, 1.05rem);
+    max-width: 54ch;
+    font-size: clamp(.98rem, 1.2vw, 1.08rem);
     color: var(--ink-soft);
     line-height: 1.75;
 }
@@ -653,7 +598,6 @@ footer a:hover { color: var(--ink); }
 
 @media (max-width: 1024px) {
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 720px) {
@@ -706,15 +650,11 @@ footer a:hover { color: var(--ink); }
     .section-head { align-items: flex-start; }
     .section-head-left { flex-direction: column; gap: 12px; }
 
-    .about { grid-template-columns: 1fr; gap: 20px; }
-    .about > .section-number { padding-top: 0; }
-
     .work-image { aspect-ratio: 3 / 4; }
 }
 
 @media (max-width: 480px) {
     .portfolio-grid { grid-template-columns: 1fr; gap: 28px; }
-    .services-grid { grid-template-columns: 1fr; }
     .service { min-height: auto; }
     .service-name { margin-top: 28px; }
 }
@@ -760,7 +700,7 @@ button:focus-visible {
     <nav>
         <a href="index.html" class="active">Accueil</a>
         <a href="portfolio.html">Portfolio</a>
-        <a href="#services">Prestations</a>
+        <a href="#about">A propos</a>
         <a href="#contact" class="appointment">Rendez-vous</a>
     </nav>
 
@@ -815,7 +755,6 @@ button:focus-visible {
 
     <div class="section-head reveal">
         <div class="section-head-left">
-            <div class="section-number">01</div>
             <div>
                 <div class="section-label">Portfolio</div>
                 <h2 class="section-title">Quelques<br><em>histoires.</em></h2>
@@ -831,70 +770,20 @@ button:focus-visible {
 </section>
 
 
-<!-- ===================================================== PRESTATIONS ===================================================== -->
-
-<section class="services" id="services">
-
-    <div class="section-head reveal">
-        <div class="section-head-left">
-            <div class="section-number">02</div>
-            <div>
-                <div class="section-label">Prestations</div>
-                <h2 class="section-title">Pour vos<br><em>moments.</em></h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="services-grid reveal">
-
-        <div class="service">
-            <div class="service-number">01</div>
-            <div class="service-name">Portrait</div>
-            <div class="service-description">Individuel · Couple</div>
-        </div>
-
-        <div class="service">
-            <div class="service-number">02</div>
-            <div class="service-name">Evenement</div>
-            <div class="service-description">Mariage · Soiree</div>
-        </div>
-
-        <div class="service">
-            <div class="service-number">03</div>
-            <div class="service-name">Lifestyle</div>
-            <div class="service-description">Naturel · Spontane</div>
-        </div>
-
-        <div class="service">
-            <div class="service-number">04</div>
-            <div class="service-name">Projet</div>
-            <div class="service-description">Sur mesure</div>
-        </div>
-
-    </div>
-
-</section>
-
-
 <!-- ===================================================== A PROPOS ===================================================== -->
 
 <section class="about reveal" id="about">
 
-    <div class="section-number">03</div>
-
-    <div>
-        <div class="section-label">A propos</div>
-        <p class="about-text">
-            Photographier les personnes, les lieux et les moments
-            tels qu'ils sont <em>vraiment.</em>
-        </p>
-        <p class="about-small">
-            Mon approche est simple : creer des images naturelles,
-            elegantes et sinceres, avec une attention particuliere
-            portee a la lumiere et aux details. Basee a Martigues,
-            disponible partout en region et au-dela.
-        </p>
-    </div>
+    <div class="section-label">A propos</div>
+    <p class="about-text">
+        Photographier les personnes, les lieux et les moments
+        tels qu'ils sont <em>vraiment.</em>
+    </p>
+    <p class="about-small">
+        Des images naturelles, elegantes et sinceres, avec une
+        attention particuliere portee a la lumiere et aux details.
+        Basee a Martigues, disponible partout en region et au-dela.
+    </p>
 
 </section>
 
@@ -903,7 +792,7 @@ button:focus-visible {
 
 <section class="contact" id="contact">
 
-    <div class="section-label">04 · Contact</div>
+    <div class="section-label">Contact</div>
 
     <h2 class="contact-title">Un projet ?<br>Parlons-<em>en.</em></h2>
 
@@ -927,6 +816,7 @@ button:focus-visible {
 <script src="script.js"></script>
 <script>
     loadHomeGallery();
+    loadHero();
     initUI();
 
     (function () {
