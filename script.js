@@ -341,8 +341,57 @@ function emptyMessage(target) {
 
 
 /* =====================================================
-   HOME - apercu (6 photos)
+   HOME - apercu : 3 photos de categories differentes,
+   choisies au hasard a chaque chargement.
 ===================================================== */
+
+/* Melange un tableau (Fisher-Yates) */
+function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+/* Choisit jusqu'a 3 photos, en privilegiant des categories differentes */
+function pickThree(images) {
+
+    // Regrouper par categorie
+    const byCat = {};
+    images.forEach(p => {
+        (byCat[p.category] = byCat[p.category] || []).push(p);
+    });
+
+    // Categories disponibles, dans un ordre aleatoire
+    const cats = shuffle(Object.keys(byCat));
+
+    const chosen = [];
+    const used = new Set();
+
+    // 1) une photo au hasard par categorie differente
+    cats.forEach(cat => {
+        if (chosen.length >= 3) return;
+        const pick = shuffle(byCat[cat])[0];
+        chosen.push(pick);
+        used.add(pick.url);
+    });
+
+    // 2) s'il manque des photos (moins de 3 categories),
+    //    completer avec d'autres photos au hasard
+    if (chosen.length < 3) {
+        shuffle(images).forEach(p => {
+            if (chosen.length >= 3) return;
+            if (!used.has(p.url)) {
+                chosen.push(p);
+                used.add(p.url);
+            }
+        });
+    }
+
+    return chosen.slice(0, 3);
+}
 
 async function loadHomeGallery() {
 
@@ -358,7 +407,7 @@ async function loadHomeGallery() {
         return;
     }
 
-    images.slice(0, 6).forEach(photo => {
+    pickThree(images).forEach(photo => {
         gallery.appendChild(createPhoto(photo));
     });
 
