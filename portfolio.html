@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Portfolio — Vincent Thevenon</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<body>
+
+<header>
+
+    <a href="index.html" class="logo">
+        VINCENT THEVENON
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="portfolio.html" class="active">
+            Portfolio
+        </a>
+
+        <a href="index.html#about">
+            À propos
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="portfolio-intro">
+
+        <p class="small">
+            PORTFOLIO
+        </p>
+
+        <h1>
+            Le travail,<br>
+            par séries.
+        </h1>
+
+    </section>
+
+
+    <div class="filters">
+
+        <button
+            class="filter active"
+            data-category="all"
+        >
+            Tous
+        </button>
+
+        <button
+            class="filter"
+            data-category="portrait"
+        >
+            Portrait
+        </button>
+
+        <button
+            class="filter"
+            data-category="paysage"
+        >
+            Paysage
+        </button>
+
+        <button
+            class="filter"
+            data-category="reportage"
+        >
+            Reportage
+        </button>
+
+        <button
+            class="filter"
+            data-category="editorial"
+        >
+            Éditorial
+        </button>
+
+    </div>
+
+
+    <section
+        id="portfolio-gallery"
+        class="portfolio-gallery"
+    ></section>
+
+
+    <section class="portfolio-contact">
+
+        <p class="small">
+            UNE SÉRIE À CRÉER ?
+        </p>
+
+        <h2>
+            Parlons-en.
+        </h2>
+
+        <a
+            href="mailto:tonemail@gmail.com"
+            class="link"
+        >
+            Me contacter →
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <span>© 2026 Vincent Thevenon</span>
+
+    <span>Marseille · France</span>
+
+    <a href="index.html">Accueil</a>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script>
+    loadPortfolio();
+</script>
+
+</body>
+</html>
