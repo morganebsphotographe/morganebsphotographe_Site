@@ -85,10 +85,16 @@
             height: clamp(60px, 8vh, 80px);
             padding: 0 var(--page-x);
 
-            background: rgba(255, 255, 255, .88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            color: var(--ink);
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: background .5s var(--ease), border-color .5s var(--ease);
+        }
 
+        header.solid {
+            background: color-mix(in srgb, var(--paper) 85%, transparent);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--line);
         }
 
@@ -105,10 +111,12 @@
         }
 
         .logo-img {
-            width: 36px;
-            height: 36px;
+            width: auto;
+            height: clamp(28px, 4vh, 38px);
             border-radius: 50%;
             object-fit: cover;
+            aspect-ratio: 1 / 1;
+            flex: none;
         }
 
         nav {
@@ -156,6 +164,22 @@
             transform: scaleX(1);
             transform-origin: left;
         }
+
+        nav a.appointment {
+            padding: 9px 18px;
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            opacity: 1;
+            white-space: nowrap;
+            transition: background .3s var(--ease), color .3s var(--ease);
+        }
+
+        nav a.appointment:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        nav a.appointment::after { display: none; }
 
         nav a.nav-cta {
             padding: 10px 20px;
@@ -206,15 +230,29 @@
                 opacity .3s var(--ease);
         }
 
+        /* Burger qui se transforme en croix (identique aux autres pages) */
+        body.nav-open .menu-toggle span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        body.nav-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.nav-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+
         /* =========================
            HERO
         ========================= */
 
         .hero {
             padding:
-                clamp(130px, 18vh, 210px)
+                clamp(92px, 12vh, 140px)
                 var(--page-x)
-                clamp(75px, 10vh, 130px);
+                clamp(40px, 6vh, 70px);
 
             max-width: var(--maxw);
             margin: auto;
@@ -282,7 +320,7 @@
         }
 
         .section {
-            padding: clamp(80px, 12vh, 150px) 0;
+            padding: clamp(50px, 8vh, 100px) 0;
         }
 
         .section-head {
@@ -657,33 +695,67 @@
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 850px) {
+        @media (max-width: 720px) {
 
             nav {
-                display: none;
-
-                position: absolute;
-
-                top: 100%;
-                left: 0;
-                right: 0;
+                position: fixed;
+                inset: clamp(60px, 8vh, 80px) 0 auto 0;
 
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 4px;
 
-                padding: 25px var(--page-x);
+                padding: 20px var(--page-x) 34px;
 
                 background: var(--paper);
-
+                color: var(--ink);
                 border-bottom: 1px solid var(--line);
+
+                transform: translateY(-12px);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform .35s var(--ease), opacity .3s var(--ease);
             }
 
-            nav.open {
-                display: flex;
+            body.nav-open nav {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .logo {
+                letter-spacing: .12em;
+                font-size: 10.5px;
+                gap: 9px;
+            }
+
+            .logo-img {
+                height: 26px;
             }
 
             .menu-toggle {
                 display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                padding: 14px 0;
+                font-size: 17px;
+                border-bottom: 1px solid var(--line);
+            }
+
+            nav a.appointment {
+                width: auto;
+                margin-top: 16px;
+                border: 1px solid var(--ink);
+                text-align: center;
+            }
+
+            nav a.nav-cta {
+                width: auto;
+                margin-top: 10px;
+                border: none;
+                text-align: center;
             }
 
             .hero {
@@ -767,17 +839,17 @@
          HEADER
     ========================= -->
 
-    <header>
+    <header id="site-header">
 
         <a href="index.html" class="logo">
 
             <img
                 src="logo.png"
-                alt="Morgane BS Photographe"
+                alt=""
                 class="logo-img"
             >
 
-            Morgane BS
+            <span>Morgane BS Photographe</span>
 
         </a>
 
@@ -796,12 +868,12 @@
                 Prestations
             </a>
 
-            <a href="contact.html">
-                À propos
+            <a href="contact.html" class="appointment">
+                Contact
             </a>
 
-            <a href="contact.html" class="nav-cta">
-                Prendre rendez-vous
+            <a href="https://fotostudio.io" class="nav-cta" target="_blank" rel="noopener">
+                Prendre RDV
             </a>
 
         </nav>
@@ -1385,7 +1457,7 @@
                             <br><br>
 
                             <strong>
-                                Album disponible en option — sur devis.
+                                Album disponible en option, sur devis.
                             </strong>
 
                         </p>
@@ -1487,36 +1559,10 @@
     </footer>
 
 
-    <!-- =========================
-         MOBILE MENU
-    ========================= -->
-
+    <script src="script.js"></script>
     <script>
-
-        const menuButton =
-            document.querySelector(".menu-toggle");
-
-        const nav =
-            document.querySelector("nav");
-
-
-        menuButton.addEventListener("click", () => {
-
-            nav.classList.toggle("open");
-
-        });
-
-
-        nav.querySelectorAll("a").forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                nav.classList.remove("open");
-
-            });
-
-        });
-
+        initUI();
+        initHeader();
     </script>
 
 </body>
