@@ -1,3 +1,10 @@
+/* =====================================================
+   MORGANEBS - script
+   Photos chargées automatiquement depuis le dossier
+   /photos/<catégorie> du dépôt GitHub (via l'API GitHub).
+   Fonctionne une fois le site publié sur GitHub Pages.
+===================================================== */
+
 const categories = [
     "portrait",
     "paysage",
@@ -5,337 +12,356 @@ const categories = [
     "editorial"
 ];
 
-
 const categoryNames = {
-    portrait: "Portrait",
-    paysage: "Paysage",
+    portrait:  "Portrait",
+    paysage:   "Paysage",
     reportage: "Reportage",
     editorial: "Éditorial"
 };
 
 
-/*
-    Détecte automatiquement :
+/* =====================================================
+   Détection du compte / dépôt GitHub
+   - GitHub Pages projet : morgane.github.io/mon-repo
+   - GitHub Pages user   : morgane.github.io
+===================================================== */
 
-    ton compte GitHub
-    ton repository
-    la branche main
-*/
-
-function getGitHubInfo() {
+function getGithubInfo() {
 
     const hostname = window.location.hostname;
-
     const pathname = window.location.pathname;
 
     let username = "";
     let repository = "";
 
-
-    if (hostname.includes("github.io")) {
+    if (hostname.endsWith(".github.io")) {
 
         username = hostname.split(".")[0];
 
-        const parts =
-            pathname
-                .split("/")
-                .filter(Boolean);
+        const parts = pathname.split("/").filter(Boolean);
 
-        repository = parts[0] || "";
-
+        // Si le 1er segment est un fichier .html, il n'y a pas de repo dans l'URL
+        if (parts.length && !parts[0].includes(".")) {
+            repository = parts[0];
+        }
     }
 
-
-    return {
-        username,
-        repository
-    };
-
+    return { username, repository };
 }
 
+
+/* Construit la base des URLs bruteS des photos */
+
+function buildBase(username, repository) {
+
+    if (repository) {
+        return {
+            api: `https://api.github.com/repos/${username}/${repository}/contents/photos`,
+            raw: `https://raw.githubusercontent.com/${username}/${repository}/main/photos`
+        };
+    }
+
+    // Dépôt "user site" : le repo s'appelle username.github.io
+    return {
+        api: `https://api.github.com/repos/${username}/${username}.github.io/contents/photos`,
+        raw: `https://raw.githubusercontent.com/${username}/${username}.github.io/main/photos`
+    };
+}
+
+
+/* =====================================================
+   Récupération des photos d'une catégorie
+===================================================== */
 
 async function getImages(category) {
 
-    const {
-        username,
-        repository
-    } = getGitHubInfo();
+    const { username, repository } = getGithubInfo();
 
-
-    if (!username || !repository) {
-
-        console.error(
-            "Impossible de détecter le repository GitHub."
-        );
-
+    if (!username) {
         return [];
-
     }
 
-
-    const url =
-        `https://api.github.com/repos/${username}/${repository}/contents/photos/${category}`;
-
+    const { api, raw } = buildBase(username, repository);
+    const url = `${api}/${category}`;
 
     try {
 
-        const response =
-            await fetch(url);
-
+        const response = await fetch(url);
 
         if (!response.ok) {
-
             return [];
-
         }
 
+        const files = await response.json();
 
-        const files =
-            await response.json();
-
+        if (!Array.isArray(files)) {
+            return [];
+        }
 
         return files
-
             .filter(file =>
                 file.type === "file" &&
-                /\.(jpg|jpeg|png|webp)$/i.test(file.name)
+                /\.(jpg|jpeg|png|webp|avif)$/i.test(file.name)
             )
-
             .map(file => ({
-
                 name: file.name,
-
                 category: category,
-
-                url:
-                    `https://raw.githubusercontent.com/${username}/${repository}/main/photos/${category}/${encodeURIComponent(file.name)}`
-
+                url: `${raw}/${category}/${encodeURIComponent(file.name)}`
             }));
 
-    }
-
-    catch (error) {
-
-        console.error(error);
-
+    } catch (error) {
+        console.error("Erreur de chargement (" + category + ") :", error);
         return [];
-
     }
-
 }
 
 
+/* Toutes les catégories, dans l'ordre défini */
+
 async function getAllImages() {
 
-    const results =
-        await Promise.all(
-            categories.map(
-                category => getImages(category)
-            )
-        );
-
+    const results = await Promise.all(
+        categories.map(category => getImages(category))
+    );
 
     return results.flat();
+}
 
+
+/* =====================================================
+   Création d'une carte photo
+===================================================== */
+
+function prettyName(filename) {
+    return filename
+        .replace(/\.[^/.]+$/, "")
+        .replace(/[-_]/g, " ")
+        .trim();
 }
 
 
 function createPhoto(photo) {
 
-    const card =
-        document.createElement("article");
+    const work = document.createElement("article");
+    work.className = "work";
+    work.dataset.category = photo.category;
 
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "work-image";
 
-    card.className =
-        "photo-card";
+    const image = document.createElement("img");
+    image.src = photo.url;
+    image.alt = prettyName(photo.name) + " · " + categoryNames[photo.category];
+    image.loading = "lazy";
 
+    imageWrapper.appendChild(image);
 
-    card.dataset.category =
-        photo.category;
+    const caption = document.createElement("div");
+    caption.className = "work-caption";
 
+    const name = document.createElement("span");
+    name.textContent = prettyName(photo.name);
 
-    const image =
-        document.createElement("img");
+    const category = document.createElement("span");
+    category.textContent = categoryNames[photo.category];
 
+    caption.appendChild(name);
+    caption.appendChild(category);
 
-    image.src =
-        photo.url;
+    work.appendChild(imageWrapper);
+    work.appendChild(caption);
 
-
-    image.alt =
-        photo.name;
-
-
-    image.loading =
-        "lazy";
-
-
-    const info =
-        document.createElement("div");
-
-
-    info.className =
-        "photo-info";
-
-
-    const name =
-        document.createElement("span");
-
-
-    name.textContent =
-        photo.name
-            .replace(/\.[^/.]+$/, "")
-            .replace(/[-_]/g, " ");
-
-
-    const category =
-        document.createElement("span");
-
-
-    category.textContent =
-        categoryNames[photo.category];
-
-
-    info.appendChild(name);
-
-    info.appendChild(category);
-
-
-    card.appendChild(image);
-
-    card.appendChild(info);
-
-
-    return card;
-
+    return work;
 }
 
 
-/* HOME */
+/* Message affiché quand aucune photo n'est trouvée */
+
+function emptyMessage(target) {
+    target.innerHTML =
+        '<p class="loading-note">' +
+        'Aucune photo pour le moment. Ajoutez vos images dans ' +
+        '<code>photos/portrait</code>, <code>photos/paysage</code>, ' +
+        '<code>photos/reportage</code> ou <code>photos/editorial</code>, ' +
+        'puis publiez le site sur GitHub Pages.' +
+        '</p>';
+}
+
+
+/* =====================================================
+   HOME - aperçu (6 photos)
+===================================================== */
 
 async function loadHomeGallery() {
 
-    const gallery =
-        document.getElementById(
-            "home-gallery"
-        );
-
-
+    const gallery = document.getElementById("home-gallery");
     if (!gallery) return;
 
-
-    const images =
-        await getAllImages();
-
+    const images = await getAllImages();
 
     gallery.innerHTML = "";
 
+    if (images.length === 0) {
+        emptyMessage(gallery);
+        return;
+    }
 
-    images
-        .slice(0, 6)
-        .forEach(photo => {
+    images.slice(0, 6).forEach(photo => {
+        gallery.appendChild(createPhoto(photo));
+    });
 
-            gallery.appendChild(
-                createPhoto(photo)
-            );
-
-        });
-
+    revealNewCards(gallery);
 }
 
 
-/* PORTFOLIO */
+/* =====================================================
+   PORTFOLIO - toutes les photos + filtres
+===================================================== */
 
 async function loadPortfolio() {
 
-    const gallery =
-        document.getElementById(
-            "portfolio-gallery"
-        );
-
-
+    const gallery = document.getElementById("portfolio-gallery");
     if (!gallery) return;
 
-
-    const images =
-        await getAllImages();
-
+    const images = await getAllImages();
 
     gallery.innerHTML = "";
 
+    if (images.length === 0) {
+        emptyMessage(gallery);
+        return;
+    }
 
     images.forEach(photo => {
-
-        gallery.appendChild(
-            createPhoto(photo)
-        );
-
+        gallery.appendChild(createPhoto(photo));
     });
 
-
     setupFilters();
-
+    revealNewCards(gallery);
 }
 
 
-/* FILTERS */
+/* =====================================================
+   HERO - première photo de la catégorie "portrait"
+   (repli : première photo toutes catégories)
+===================================================== */
+
+async function loadHero() {
+
+    const container = document.getElementById("hero-image");
+    if (!container) return;
+
+    let images = await getImages("portrait");
+
+    if (images.length === 0) {
+        images = await getAllImages();
+    }
+
+    if (images.length === 0) return;
+
+    const image = document.createElement("img");
+    image.src = images[0].url;
+    image.alt = "Photographie de MorganeBS";
+    container.appendChild(image);
+}
+
+
+/* =====================================================
+   FILTRES du portfolio
+===================================================== */
 
 function setupFilters() {
 
-    const buttons =
-        document.querySelectorAll(
-            ".filter"
-        );
-
+    const buttons = document.querySelectorAll(".filter");
 
     buttons.forEach(button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+        button.addEventListener("click", () => {
 
-                const category =
-                    button.dataset.category;
+            const category = button.dataset.category;
+
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const photos = document.querySelectorAll(
+                ".portfolio-gallery .work"
+            );
+
+            photos.forEach(photo => {
+                const show =
+                    category === "all" ||
+                    photo.dataset.category === category;
+                photo.style.display = show ? "" : "none";
+            });
+        });
+    });
+}
 
 
-                buttons.forEach(btn =>
-                    btn.classList.remove("active")
-                );
+/* =====================================================
+   UI - menu mobile + reveal au scroll
+===================================================== */
+
+function initUI() {
+
+    /* Menu mobile */
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+
+    if (toggle && nav) {
+
+        toggle.addEventListener("click", () => {
+            const open = document.body.classList.toggle("nav-open");
+            toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+
+        nav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                document.body.classList.remove("nav-open");
+                toggle.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
+
+    /* Reveal au scroll */
+    setupReveal();
+}
 
 
-                button.classList.add("active");
+let revealObserver = null;
 
+function setupReveal() {
 
-                const photos =
-                    document.querySelectorAll(
-                        ".portfolio-gallery .photo-card"
-                    );
-
-
-                photos.forEach(photo => {
-
-                    if (
-                        category === "all" ||
-                        photo.dataset.category === category
-                    ) {
-
-                        photo.style.display =
-                            "";
-
-                    }
-
-                    else {
-
-                        photo.style.display =
-                            "none";
-
-                    }
-
-                });
-
-            }
+    if (!("IntersectionObserver" in window)) {
+        document.querySelectorAll(".reveal").forEach(el =>
+            el.classList.add("is-visible")
         );
+        return;
+    }
 
+    revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
     });
 
+    document.querySelectorAll(".reveal").forEach(el =>
+        revealObserver.observe(el)
+    );
+}
+
+
+/* Applique un léger reveal aux cartes ajoutées dynamiquement */
+
+function revealNewCards(container) {
+    // le conteneur .reveal parent se révèle déjà ; rien de plus nécessaire ici
+    if (revealObserver && container.classList.contains("reveal")) {
+        revealObserver.observe(container);
+    }
 }
