@@ -382,6 +382,43 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
 
 
 /* =====================================================
+   COMPOSITION D'ACCUEIL (deux photos)
+   Portrait a gauche, paysage a droite legerement
+   decalee : composition asymetrique editoriale.
+===================================================== */
+
+.showcase {
+    display: grid;
+    grid-template-columns: .86fr 1.14fr;
+    gap: clamp(14px, 2vw, 34px);
+    align-items: center;
+
+    padding: 0 var(--page-x);
+    max-width: var(--maxw);
+    margin: 0 auto clamp(56px, 9vh, 120px);
+}
+
+.showcase-item {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: clamp(10px, 1.2vw, 18px);
+    background: var(--paper-soft);
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Ratios proches du format natif : aucun recadrage brutal */
+.showcase-portrait  { aspect-ratio: 5 / 7; }
+.showcase-landscape { aspect-ratio: 3 / 2; }
+
+
+/* =====================================================
    SECTIONS generiques
 ===================================================== */
 
@@ -660,6 +697,11 @@ footer a:hover { color: var(--ink); }
     }
 
     .hero-title { font-size: var(--hero-size-sm); }
+
+    .showcase {
+        grid-template-columns: 1fr;
+        gap: clamp(14px, 2.5vh, 22px);
+    }
 
     .about {
         grid-template-columns: 1fr;
@@ -997,6 +1039,21 @@ button:focus-visible {
         </div>
 
     </div>
+
+</section>
+
+
+<!-- ===================================================== COMPOSITION ACCUEIL ===================================================== -->
+
+<section class="showcase reveal">
+
+    <figure class="showcase-item showcase-portrait">
+        <img src="accueil%201.jpg" alt="Photographie de Morgane BS Photographe" loading="lazy">
+    </figure>
+
+    <figure class="showcase-item showcase-landscape">
+        <img src="accueil%202.jpg" alt="Photographie de Morgane BS Photographe" loading="lazy">
+    </figure>
 
 </section>
 
