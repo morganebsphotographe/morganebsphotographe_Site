@@ -8,6 +8,8 @@
        photos/couple/
        photos/mariage/
        photos/famille/
+       photos/animalier/
+       photos/grossesse/
    Elles apparaissent automatiquement sur le site.
    (Formats acceptes : jpg, jpeg, png, webp, avif -
     les majuscules d'extension .JPG sont acceptees.)
@@ -27,15 +29,19 @@ const categories = [
     "portrait",
     "couple",
     "mariage",
-    "famille"
+    "famille",
+    "animalier",
+    "grossesse"
 ];
 
 /* Nom affiche pour chaque categorie */
 const categoryNames = {
-    portrait: "Portrait",
-    couple:   "Couple",
-    mariage:  "Mariage",
-    famille:  "Famille"
+    portrait:  "Portrait",
+    couple:    "Couple",
+    mariage:   "Mariage",
+    famille:   "Famille",
+    animalier: "Animalier",
+    grossesse: "Grossesse"
 };
 
 
@@ -47,10 +53,12 @@ const categoryNames = {
    y recopier les noms de vos fichiers.
 ===================================================== */
 const fallbackPhotos = {
-    portrait: [],
-    couple:   [],
-    mariage:  ["1W2A9246.JPG", "1W2A9259.JPG"],
-    famille:  []
+    portrait:  [],
+    couple:    [],
+    mariage:   ["1W2A9246.JPG", "1W2A9259.JPG"],
+    famille:   [],
+    animalier: [],
+    grossesse: []
 };
 
 
@@ -335,7 +343,8 @@ function emptyMessage(target) {
         'Les photographies apparaitront ici automatiquement. ' +
         'Ajoutez vos images dans les dossiers ' +
         '<code>photos/portrait</code>, <code>photos/couple</code>, ' +
-        '<code>photos/mariage</code>, <code>photos/famille</code> du depot, ' +
+        '<code>photos/mariage</code>, <code>photos/famille</code>, ' +
+        '<code>photos/animalier</code>, <code>photos/grossesse</code> du depot, ' +
         'puis publiez le site.' +
         '</p>';
 }
