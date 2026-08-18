@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact · MorganeBS</title>
-    <meta name="description" content="Contactez MorganeBS, photographe à Martigues. Décrivez votre projet, réponse sous 48h.">
+    <title>Contact · Morgane BS Photographe</title>
+    <meta name="description" content="Contactez Morgane BS Photographe, photographe à Martigues. Décrivez votre projet, réponse sous 48h.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,11 +117,23 @@ header.solid {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-size: clamp(12px, .95vw, 13px);
     font-weight: 500;
     letter-spacing: .26em;
     text-transform: uppercase;
     white-space: nowrap;
+}
+
+.logo-img {
+    width: auto;
+    height: clamp(28px, 4vh, 38px);
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    flex: none;
 }
 
 nav {
@@ -568,8 +580,13 @@ footer a:hover { color: var(--ink); }
 @media (max-width: 720px) {
 
     .logo {
-        letter-spacing: .14em;
-        font-size: 11px;
+        letter-spacing: .12em;
+        font-size: 10.5px;
+        gap: 9px;
+    }
+
+    .logo-img {
+        height: 26px;
     }
 
     .hero-title { font-size: var(--hero-size-sm); }
@@ -907,7 +924,7 @@ button:focus-visible {
 
 <header id="site-header" class="solid">
 
-    <a href="index.html" class="logo">Morgan BS Photographe</a>
+    <a href="index.html" class="logo"><img src="logo.jpg" alt="" class="logo-img"><span>Morgane BS Photographe</span></a>
 
     <nav>
         <a href="index.html">Accueil</a>
@@ -1016,7 +1033,7 @@ button:focus-visible {
 
             <div class="aside-block">
                 <span class="small">Ecrire</span>
-                <a href="mailto:tonemail@gmail.com">tonemail@gmail.com</a>
+                <a href="mailto:morganebsphotographe@hotmail.com">morganebsphotographe@hotmail.com</a>
             </div>
 
             <div class="aside-block">
@@ -1042,7 +1059,7 @@ button:focus-visible {
 <!-- ===================================================== FOOTER ===================================================== -->
 
 <footer>
-    <span>© 2026 MorganeBS</span>
+    <span>© 2026 Morgane BS Photographe</span>
     <span>Martigues · France</span>
     <a href="index.html">Accueil</a>
 </footer>
@@ -1074,7 +1091,7 @@ button:focus-visible {
                     "Type : " + form.type.value + "\n\n" +
                     form.message.value
                 );
-                window.location.href = "mailto:tonemail@gmail.com?subject=" + sujet + "&body=" + corps;
+                window.location.href = "mailto:morganebsphotographe@hotmail.com?subject=" + sujet + "&body=" + corps;
                 return;
             }
 
