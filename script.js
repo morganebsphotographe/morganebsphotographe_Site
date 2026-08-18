@@ -49,7 +49,7 @@ const categoryNames = {
 const fallbackPhotos = {
     portrait: [],
     couple:   [],
-    mariage:  ["1W2A9246.JPG"],
+    mariage:  ["1W2A9246.JPG", "1W2A9259.JPG"],
     famille:  []
 };
 
@@ -125,21 +125,48 @@ function apiUrl(category) {
 
 
 /* =====================================================
-   Cache navigateur (session) pour les listes de fichiers
+   Cache navigateur des listes de fichiers
+   -----------------------------------------------------
+   On memorise la liste des photos de chaque categorie
+   dans le navigateur pendant CACHE_TTL. Tant que le cache
+   est valide, on N'APPELLE PAS l'API GitHub : les
+   rechargements de page restent instantanes et le quota
+   (60 requetes/heure) n'est pas sollicite.
+   Le cache se rafraichit tout seul apres CACHE_TTL, donc
+   les nouvelles photos apparaissent d'elles-memes.
 ===================================================== */
+
+/* Duree de validite du cache : 10 minutes */
+const CACHE_TTL = 10 * 60 * 1000;
 
 function cacheKey(category) {
     const repo = repoName() || "repo";
     return "mbs:" + repo + ":" + category;
 }
 
+/* Lecture : renvoie la liste si le cache est encore valide */
 function readCache(category) {
     try {
-        const raw = sessionStorage.getItem(cacheKey(category));
+        const raw = localStorage.getItem(cacheKey(category));
         if (!raw) return null;
         const data = JSON.parse(raw);
-        if (!Array.isArray(data)) return null;
-        return data;
+        if (!data || !Array.isArray(data.names)) return null;
+        if (Date.now() - data.time > CACHE_TTL) return null; // expire
+        return data.names;
+    } catch (e) {
+        return null;
+    }
+}
+
+/* Lecture "de secours" : renvoie la derniere liste connue,
+   MEME si elle est expiree (utile si l'API est bloquee). */
+function readStaleCache(category) {
+    try {
+        const raw = localStorage.getItem(cacheKey(category));
+        if (!raw) return null;
+        const data = JSON.parse(raw);
+        if (!data || !Array.isArray(data.names)) return null;
+        return data.names;
     } catch (e) {
         return null;
     }
@@ -147,7 +174,10 @@ function readCache(category) {
 
 function writeCache(category, names) {
     try {
-        sessionStorage.setItem(cacheKey(category), JSON.stringify(names));
+        localStorage.setItem(
+            cacheKey(category),
+            JSON.stringify({ names: names, time: Date.now() })
+        );
     } catch (e) {
         /* stockage indisponible : on ignore */
     }
@@ -166,20 +196,40 @@ function toPhotos(category, names) {
 }
 
 
+/* Vide le cache des photos.
+   Astuce : ajoutez "?refresh" a la fin de l'adresse du site
+   (ex : ...github.io/...Site/?refresh) pour forcer le
+   rechargement immediat apres avoir ajoute des photos. */
+function clearPhotoCache() {
+    try {
+        categories.forEach(function (c) {
+            localStorage.removeItem(cacheKey(c));
+        });
+    } catch (e) { /* ignore */ }
+}
+
+if (typeof window !== "undefined" &&
+    window.location &&
+    window.location.search.indexOf("refresh") !== -1) {
+    clearPhotoCache();
+}
+
+
 /* =====================================================
    Recuperation des photos d'une categorie
-   (cache -> API GitHub -> manifeste de secours)
+   Ordre : cache valide -> API GitHub -> cache expire
+   (si API bloquee) -> manifeste de secours
 ===================================================== */
 
 async function getImages(category) {
 
-    // 1) Cache de session
+    // 1) Cache encore valide : pas d'appel API
     const cached = readCache(category);
     if (cached) {
         return toPhotos(category, cached);
     }
 
-    // 2) API GitHub
+    // 2) API GitHub (chargement automatique)
     const url = apiUrl(category);
 
     if (url) {
@@ -201,9 +251,8 @@ async function getImages(category) {
                     return toPhotos(category, names);
                 }
             } else if (response.status === 403) {
-                console.warn("[MorganeBS] API GitHub : quota temporairement depasse. " +
-                    "Utilisation du manifeste de secours pour '" + category + "'. " +
-                    "Cela n'affecte pas vos visiteurs (quota par adresse IP).");
+                console.warn("[MorganeBS] API GitHub : quota temporairement depasse (60 req/h). " +
+                    "Utilisation de la derniere liste connue pour '" + category + "'.");
             } else {
                 console.warn("[MorganeBS] API GitHub : reponse " + response.status +
                     " pour '" + category + "'.");
@@ -213,7 +262,13 @@ async function getImages(category) {
         }
     }
 
-    // 3) Manifeste de secours
+    // 3) API indisponible : on reutilise la derniere liste connue (meme expiree)
+    const stale = readStaleCache(category);
+    if (stale && stale.length) {
+        return toPhotos(category, stale);
+    }
+
+    // 4) Dernier recours : manifeste de secours
     const fb = fallbackPhotos[category] || [];
     return toPhotos(category, fb);
 }
