@@ -719,10 +719,9 @@ button:focus-visible {
 
 .contact-layout {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: clamp(40px, 7vw, 110px);
-    align-items: start;
-    margin-top: clamp(48px, 8vh, 90px);
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    margin-top: clamp(40px, 6vh, 72px);
 }
 
 
@@ -834,43 +833,6 @@ button:focus-visible {
 }
 
 
-/* Colonne infos à droite */
-
-.contact-aside {
-    display: grid;
-    gap: clamp(28px, 4vh, 40px);
-    padding-top: 6px;
-}
-
-.aside-block .small {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.aside-block p,
-.aside-block a {
-    font-size: clamp(1rem, 1.2vw, 1.1rem);
-    line-height: 1.6;
-    color: var(--ink);
-}
-
-.aside-block a {
-    border-bottom: 1px solid var(--line-strong);
-    padding-bottom: 2px;
-    transition: border-color .3s var(--ease);
-}
-
-.aside-block a:hover {
-    border-color: var(--ink);
-}
-
-.aside-note {
-    font-size: .9rem;
-    line-height: 1.6;
-    color: var(--ink-soft);
-}
-
-
 /* Message de confirmation */
 
 .form-status {
@@ -899,13 +861,6 @@ button:focus-visible {
 
 .form-status.error h2 { color: #7a2e2e; }
 
-
-@media (max-width: 860px) {
-    .contact-layout {
-        grid-template-columns: 1fr;
-        gap: clamp(40px, 7vh, 60px);
-    }
-}
 
 @media (max-width: 520px) {
     .form-row {
@@ -1022,34 +977,11 @@ button:focus-visible {
                 <h2>Oups.</h2>
                 <p>
                     L'envoi n'a pas fonctionné. Réessayez dans un instant,
-                    ou écrivez-moi directement à l'adresse ci-contre.
+                    ou écrivez-moi directement à morganebsphotographe@hotmail.com
                 </p>
             </div>
 
         </div>
-
-
-        <aside class="contact-aside">
-
-            <div class="aside-block">
-                <span class="small">Écrire</span>
-                <a href="mailto:morganebsphotographe@hotmail.com">morganebsphotographe@hotmail.com</a>
-            </div>
-
-            <div class="aside-block">
-                <span class="small">Zone</span>
-                <p>Martigues et alentours,<br>disponible partout en région.</p>
-            </div>
-
-            <div class="aside-block">
-                <span class="small">Réponse</span>
-                <p class="aside-note">
-                    Sous 48 heures ouvrées. Pour une date précise en tête,
-                    indiquez-la dans votre message.
-                </p>
-            </div>
-
-        </aside>
 
     </div>
 
