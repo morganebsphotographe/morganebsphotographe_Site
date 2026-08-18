@@ -71,7 +71,7 @@ a { color: inherit; text-decoration: none; }
 
 img { display: block; width: 100%; height: auto; }
 
-::selection { background: var(--ink); color: var(--paper); }
+::sélection { background: var(--ink); color: var(--paper); }
 
 em { font-style: italic; font-weight: 400; }
 
@@ -427,6 +427,7 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     overflow: hidden;
     background: var(--paper-soft);
     aspect-ratio: 4 / 5;
+    border-radius: clamp(8px, 1vw, 14px);
 }
 
 .work-image img {
@@ -795,7 +796,7 @@ button:focus-visible {
         <a href="index.html">Accueil</a>
         <a href="portfolio.html" class="active">Portfolio</a>
         <a href="prestations.html">Prestations</a>
-        <a href="index.html#about">A propos</a>
+        <a href="index.html#about">À propos</a>
         <a href="contact.html" class="appointment">Contact</a>
     </nav>
 
@@ -812,7 +813,7 @@ button:focus-visible {
 
 <section class="portfolio-intro">
     <span class="small">Portfolio</span>
-    <h1>Le travail,<br>par <em>series.</em></h1>
+    <h1>Le travail,<br>par <em>séries.</em></h1>
 </section>
 
 
@@ -837,7 +838,7 @@ button:focus-visible {
 <!-- ===================================================== CONTACT ===================================================== -->
 
 <section class="portfolio-contact">
-    <span class="small">Une serie a creer ?</span>
+    <span class="small">Une série a créer ?</span>
     <h2>Parlons-<em>en.</em></h2>
     <a href="contact.html" class="link">Me contacter →</a>
 </section>
