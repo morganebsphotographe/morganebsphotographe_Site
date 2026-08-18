@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio · MorganeBS</title>
-    <meta name="description" content="Le portfolio de MorganeBS, photographe à Martigues. Portrait, couple, mariage et famille.">
+    <title>Portfolio · Morgane BS Photographe</title>
+    <meta name="description" content="Le portfolio de Morgane BS Photographe, photographe à Martigues. Portrait, couple, mariage et famille.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,11 +117,23 @@ header.solid {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-size: clamp(12px, .95vw, 13px);
     font-weight: 500;
     letter-spacing: .26em;
     text-transform: uppercase;
     white-space: nowrap;
+}
+
+.logo-img {
+    width: auto;
+    height: clamp(28px, 4vh, 38px);
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    flex: none;
 }
 
 nav {
@@ -568,8 +580,13 @@ footer a:hover { color: var(--ink); }
 @media (max-width: 720px) {
 
     .logo {
-        letter-spacing: .14em;
-        font-size: 11px;
+        letter-spacing: .12em;
+        font-size: 10.5px;
+        gap: 9px;
+    }
+
+    .logo-img {
+        height: 26px;
     }
 
     .hero-title { font-size: var(--hero-size-sm); }
@@ -658,7 +675,7 @@ button:focus-visible {
 ===================================================== */
 
 .portfolio-intro {
-    padding: clamp(120px, 20vh, 200px) var(--page-x) clamp(40px, 7vh, 80px);
+    padding: clamp(104px, 12vh, 140px) var(--page-x) clamp(36px, 6vh, 70px);
     max-width: var(--maxw);
     margin: 0 auto;
 }
@@ -772,7 +789,7 @@ button:focus-visible {
 
 <header id="site-header">
 
-    <a href="index.html" class="logo">Morgan BS Photographe</a>
+    <a href="index.html" class="logo"><img src="logo.jpg" alt="" class="logo-img"><span>Morgane BS Photographe</span></a>
 
     <nav>
         <a href="index.html">Accueil</a>
@@ -828,7 +845,7 @@ button:focus-visible {
 <!-- ===================================================== FOOTER ===================================================== -->
 
 <footer>
-    <span>© 2026 MorganeBS</span>
+    <span>© 2026 Morgane BS Photographe</span>
     <span>Martigues · France</span>
     <a href="index.html">Accueil</a>
 </footer>
