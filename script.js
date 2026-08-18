@@ -318,6 +318,18 @@ function createPhoto(photo) {
     image.alt = "Photographie " + categoryNames[photo.category] + " - MorganeBS";
     image.loading = "lazy";
 
+    /* Fondu doux quand l'image est chargee (evite l'apparition brutale) */
+    if (image.complete && image.naturalWidth) {
+        image.classList.add("loaded");
+    } else {
+        image.addEventListener("load", function () {
+            image.classList.add("loaded");
+        });
+        image.addEventListener("error", function () {
+            image.classList.add("loaded");
+        });
+    }
+
     imageWrapper.appendChild(image);
 
     // Legende : uniquement la categorie (jamais le nom du fichier)
@@ -331,6 +343,13 @@ function createPhoto(photo) {
 
     work.appendChild(imageWrapper);
     work.appendChild(caption);
+
+    /* Ouverture de la visionneuse au clic / au clavier */
+    work.dataset.src = photo.url;
+    work.dataset.label = categoryNames[photo.category];
+    work.setAttribute("role", "button");
+    work.setAttribute("tabindex", "0");
+    work.setAttribute("aria-label", "Agrandir cette photographie");
 
     return work;
 }
@@ -506,6 +525,8 @@ function initUI() {
     }
 
     setupReveal();
+    initLightbox();
+    initPhotoCursor();
 }
 
 
@@ -585,4 +606,215 @@ function initHeader() {
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+}
+
+
+/* =====================================================
+   VISIONNEUSE PLEIN ECRAN (lightbox)
+   Clic sur une photo : ouverture en grand.
+   Fleches gauche/droite ou balayage : navigation.
+   Echap ou clic sur le fond : fermeture.
+===================================================== */
+
+let lb = null;          /* references DOM de la visionneuse */
+let lbItems = [];       /* photos actuellement navigables */
+let lbIndex = 0;
+let lbLastFocus = null;
+
+function initLightbox() {
+
+    if (document.getElementById("lightbox")) return;
+
+    /* Construction du markup une seule fois */
+    const overlay = document.createElement("div");
+    overlay.id = "lightbox";
+    overlay.className = "lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Visionneuse de photographies");
+    overlay.innerHTML =
+        '<button class="lightbox-close" aria-label="Fermer">' +
+            '<span aria-hidden="true"></span><span aria-hidden="true"></span>' +
+        '</button>' +
+        '<button class="lightbox-nav lightbox-prev" aria-label="Photo precedente">&#8592;</button>' +
+        '<button class="lightbox-nav lightbox-next" aria-label="Photo suivante">&#8594;</button>' +
+        '<figure class="lightbox-figure">' +
+            '<img alt="">' +
+            '<figcaption class="lightbox-caption"></figcaption>' +
+        '</figure>';
+
+    document.body.appendChild(overlay);
+
+    lb = {
+        overlay: overlay,
+        image:   overlay.querySelector("img"),
+        caption: overlay.querySelector(".lightbox-caption"),
+        close:   overlay.querySelector(".lightbox-close"),
+        prev:    overlay.querySelector(".lightbox-prev"),
+        next:    overlay.querySelector(".lightbox-next")
+    };
+
+    /* Fermeture : bouton, ou clic sur le fond (pas sur l'image) */
+    lb.close.addEventListener("click", closeLightbox);
+    overlay.addEventListener("click", function (e) {
+        if (e.target === overlay || e.target.classList.contains("lightbox-figure")) {
+            closeLightbox();
+        }
+    });
+
+    lb.prev.addEventListener("click", function (e) {
+        e.stopPropagation();
+        stepLightbox(-1);
+    });
+    lb.next.addEventListener("click", function (e) {
+        e.stopPropagation();
+        stepLightbox(1);
+    });
+
+    /* Clavier */
+    document.addEventListener("keydown", function (e) {
+        if (!overlay.classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") stepLightbox(-1);
+        else if (e.key === "ArrowRight") stepLightbox(1);
+    });
+
+    /* Balayage tactile */
+    let startX = null;
+    overlay.addEventListener("touchstart", function (e) {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    overlay.addEventListener("touchend", function (e) {
+        if (startX === null) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 45) stepLightbox(dx < 0 ? 1 : -1);
+        startX = null;
+    }, { passive: true });
+
+    /* Ouverture : delegation, fonctionne aussi pour les cartes ajoutees plus tard */
+    document.addEventListener("click", function (e) {
+        const card = e.target.closest(".work");
+        if (card) openLightbox(card);
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        const card = document.activeElement;
+        if (card && card.classList && card.classList.contains("work")) {
+            e.preventDefault();
+            openLightbox(card);
+        }
+    });
+}
+
+
+/* Construit la liste des photos visibles autour de celle cliquee */
+function openLightbox(card) {
+
+    if (!lb) return;
+
+    const gallery = card.closest(".portfolio-grid, .portfolio-gallery");
+    const all = gallery
+        ? Array.prototype.slice.call(gallery.querySelectorAll(".work"))
+        : [card];
+
+    /* On ignore les photos masquees par un filtre */
+    lbItems = all.filter(function (el) {
+        return el.style.display !== "none";
+    });
+
+    lbIndex = lbItems.indexOf(card);
+    if (lbIndex < 0) lbIndex = 0;
+
+    lbLastFocus = document.activeElement;
+
+    showLightboxItem();
+
+    lb.overlay.classList.add("open");
+    document.body.classList.add("lightbox-open");
+    lb.close.focus();
+
+    /* Fleches inutiles s'il n'y a qu'une seule photo */
+    const solo = lbItems.length < 2;
+    lb.prev.hidden = solo;
+    lb.next.hidden = solo;
+}
+
+
+function showLightboxItem() {
+
+    const card = lbItems[lbIndex];
+    if (!card) return;
+
+    lb.image.classList.remove("loaded");
+    lb.image.src = card.dataset.src || "";
+    lb.image.alt = "Photographie " + (card.dataset.label || "");
+    lb.caption.textContent = card.dataset.label || "";
+
+    if (lb.image.complete && lb.image.naturalWidth) {
+        lb.image.classList.add("loaded");
+    } else {
+        lb.image.addEventListener("load", function onLoad() {
+            lb.image.classList.add("loaded");
+            lb.image.removeEventListener("load", onLoad);
+        });
+    }
+}
+
+
+function stepLightbox(direction) {
+    if (!lbItems.length) return;
+    lbIndex = (lbIndex + direction + lbItems.length) % lbItems.length;
+    showLightboxItem();
+}
+
+
+function closeLightbox() {
+    if (!lb) return;
+    lb.overlay.classList.remove("open");
+    document.body.classList.remove("lightbox-open");
+    if (lbLastFocus && lbLastFocus.focus) lbLastFocus.focus();
+}
+
+
+/* =====================================================
+   CURSEUR "VOIR" sur les photos
+   Uniquement sur les appareils avec une souris.
+===================================================== */
+
+function initPhotoCursor() {
+
+    /* Pas de curseur personnalise sur tactile ni en mouvement reduit */
+    if (!window.matchMedia) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (document.querySelector(".photo-cursor")) return;
+
+    const dot = document.createElement("div");
+    dot.className = "photo-cursor";
+    dot.textContent = "Voir";
+    dot.setAttribute("aria-hidden", "true");
+    document.body.appendChild(dot);
+
+    let visible = false;
+
+    document.addEventListener("mousemove", function (e) {
+
+        dot.style.transform = "translate(" + e.clientX + "px, " + e.clientY + "px)";
+
+        const overPhoto = !!e.target.closest(".work-image") &&
+                          !document.body.classList.contains("lightbox-open");
+
+        if (overPhoto !== visible) {
+            visible = overPhoto;
+            dot.classList.toggle("visible", visible);
+        }
+    }, { passive: true });
+
+    /* On masque le curseur si la souris quitte la fenetre */
+    document.addEventListener("mouseleave", function () {
+        visible = false;
+        dot.classList.remove("visible");
+    });
 }
