@@ -7,16 +7,16 @@
 
 const categories = [
     "portrait",
-    "paysage",
-    "reportage",
-    "editorial"
+    "couple",
+    "mariage",
+    "famille"
 ];
 
 const categoryNames = {
-    portrait:  "Portrait",
-    paysage:   "Paysage",
-    reportage: "Reportage",
-    editorial: "Éditorial"
+    portrait: "Portrait",
+    couple:   "Couple",
+    mariage:  "Mariage",
+    famille:  "Famille"
 };
 
 
@@ -181,8 +181,8 @@ function emptyMessage(target) {
     target.innerHTML =
         '<p class="loading-note">' +
         'Aucune photo pour le moment. Ajoutez vos images dans ' +
-        '<code>photos/portrait</code>, <code>photos/paysage</code>, ' +
-        '<code>photos/reportage</code> ou <code>photos/editorial</code>, ' +
+        '<code>photos/portrait</code>, <code>photos/couple</code>, ' +
+        '<code>photos/mariage</code> ou <code>photos/famille</code>, ' +
         'puis publiez le site sur GitHub Pages.' +
         '</p>';
 }
