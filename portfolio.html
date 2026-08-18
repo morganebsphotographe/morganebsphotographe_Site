@@ -929,11 +929,11 @@ button:focus-visible {
 .portfolio-gallery {
     padding: 0 var(--page-x);
     max-width: var(--maxw);
-    margin: 0 auto clamp(90px, 15vh, 180px);
+    margin: 0 auto clamp(50px, 8vh, 100px);
 }
 
 .portfolio-contact {
-    padding: clamp(80px, 14vh, 180px) var(--page-x);
+    padding: clamp(44px, 6.5vh, 80px) var(--page-x) clamp(48px, 7vh, 88px);
     max-width: var(--maxw);
     margin: 0 auto;
     border-top: 1px solid var(--line);
@@ -942,30 +942,35 @@ button:focus-visible {
 
 .portfolio-contact .small {
     display: block;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
 }
 
 .portfolio-contact h2 {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(2.4rem, 7vw, 5.5rem);
-    line-height: 1;
+    font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+    line-height: 1.05;
     letter-spacing: -.02em;
 }
 
 .portfolio-contact .link {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-top: clamp(28px, 5vh, 46px);
-    font-size: clamp(13px, 1vw, 14px);
-    letter-spacing: .02em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--ink);
-    transition: gap .35s var(--ease);
+    gap: 10px;
+    margin-top: clamp(18px, 2.6vh, 26px);
+    font-size: clamp(12px, .95vw, 13px);
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line-strong);
+    transition: gap .35s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
 }
 
-.portfolio-contact .link:hover { gap: 18px; }
+.portfolio-contact .link:hover {
+    gap: 16px;
+    color: var(--ink);
+    border-color: var(--ink);
+}
     </style>
 
 </head>
@@ -1027,7 +1032,7 @@ button:focus-visible {
 <!-- ===================================================== CONTACT ===================================================== -->
 
 <section class="portfolio-contact">
-    <span class="small">Une collection a créer ?</span>
+    <span class="small">Une collection à créer ?</span>
     <h2>Parlons-<em>en.</em></h2>
     <a href="contact.html" class="link">Me contacter →</a>
 </section>
