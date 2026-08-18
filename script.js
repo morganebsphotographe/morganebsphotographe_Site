@@ -625,6 +625,9 @@ function initLightbox() {
 
     if (document.getElementById("lightbox")) return;
 
+    /* Uniquement sur les pages qui affichent des photos */
+    if (!document.querySelector(".portfolio-grid, .portfolio-gallery")) return;
+
     /* Construction du markup une seule fois */
     const overlay = document.createElement("div");
     overlay.id = "lightbox";
@@ -784,6 +787,9 @@ function closeLightbox() {
 ===================================================== */
 
 function initPhotoCursor() {
+
+    /* Uniquement sur les pages qui affichent des photos */
+    if (!document.querySelector(".portfolio-grid, .portfolio-gallery")) return;
 
     /* Pas de curseur personnalise sur tactile ni en mouvement reduit */
     if (!window.matchMedia) return;
