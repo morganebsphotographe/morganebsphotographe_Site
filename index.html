@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Morgane BS Photographe</title>
-    <meta name="description" content="Morgane BS Photographe, photographe à Martigues. Portraits, couples, mariages et familles. Des images naturelles, sensibles et intemporelles.">
+    <meta name="description" content="Morgane BS Photographe, photographe à Martigues. Portraits, couples, mariages et famille. Des images naturelles, sensibles et intemporelles.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,6 +187,25 @@ nav a.appointment:hover {
     background: var(--ink);
     color: var(--paper);
 }
+
+/* Bouton principal : fond noir plein */
+nav a.nav-cta {
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    opacity: 1;
+    white-space: nowrap;
+    transition: transform .35s var(--ease), background .35s var(--ease);
+}
+
+nav a.nav-cta:hover {
+    background: #000;
+    transform: translateY(-2px);
+    color: var(--paper);
+}
+
+nav a.nav-cta::after { display: none; }
 
 
 .menu-toggle {
@@ -647,6 +666,14 @@ footer a:hover { color: var(--ink); }
         text-align: center;
     }
 
+    nav a.nav-cta {
+        margin-top: 10px;
+        width: auto;
+        border: none;
+        border-bottom: none;
+        text-align: center;
+    }
+
     .hero-foot { flex-direction: column; align-items: flex-start; }
 
     .section-head { align-items: flex-start; }
@@ -886,6 +913,7 @@ button:focus-visible {
         <a href="portfolio.html">Portfolio</a>
         <a href="prestations.html">Prestations</a>
         <a href="contact.html" class="appointment">Contact</a>
+        <a href="https://fotostudio.io" class="nav-cta" target="_blank" rel="noopener">Prendre RDV</a>
     </nav>
 
     <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
@@ -911,7 +939,7 @@ button:focus-visible {
 
         <div class="hero-foot">
             <p class="hero-subtitle">
-                Portraits, couples, mariages et familles.
+                Portraits, couples, mariages et famille.
                 Des images naturelles, sensibles et intemporelles.
             </p>
             <a href="portfolio.html" class="hero-link">
