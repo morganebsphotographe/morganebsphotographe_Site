@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vincent Thevenon — Photographie</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MorganeBS — Photographe</title>
+
 
 <style>
 
-/* =========================
-   RESET
-========================= */
+/* =====================================================
+   BASE
+===================================================== */
 
 * {
     margin: 0;
@@ -25,8 +30,15 @@ html {
 body {
     background: #f4f3ef;
     color: #111;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-weight: 300;
+
+    overflow-x: hidden;
 }
 
 a {
@@ -34,348 +46,1121 @@ a {
     text-decoration: none;
 }
 
+img {
+    display: block;
+    width: 100%;
+}
 
-/* =========================
+
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header {
-    height: 90px;
-    padding: 0 5vw;
+
+    height: 92px;
+
+    padding:
+        0 4vw;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    border-bottom: 1px solid #d8d7d2;
+    border-bottom:
+        1px solid #d7d6d1;
+
+    position: relative;
+
+    z-index: 10;
 }
+
 
 .logo {
-    font-size: 12px;
-    letter-spacing: 2px;
+
+    font-size: 13px;
+
+    letter-spacing:
+        .08em;
+
     font-weight: 400;
+
+    white-space: nowrap;
 }
 
-nav {
+
+.navigation {
+
     display: flex;
-    gap: 35px;
-}
 
-nav a {
-    font-size: 12px;
-    letter-spacing: 1px;
-}
+    align-items: center;
 
-nav a:hover {
-    opacity: .45;
-}
+    gap: clamp(
+        18px,
+        3vw,
+        45px
+    );
 
+    font-size: 11px;
 
-/* =========================
-   TEXT
-========================= */
+    letter-spacing:
+        .06em;
 
-.small {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-}
-
-h1,
-h2 {
-    font-weight: 300;
-    letter-spacing: -5px;
-    line-height: .9;
-}
-
-h1 {
-    font-size: clamp(60px, 9vw, 135px);
-}
-
-h2 {
-    font-size: clamp(50px, 7vw, 100px);
-}
-
-.description {
-    margin-top: 45px;
-    font-size: 15px;
-    max-width: 420px;
-    line-height: 1.6;
-}
-
-.link {
-    display: inline-block;
-
-    margin-top: 35px;
-
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-
-    border-bottom: 1px solid #111;
-
-    padding-bottom: 6px;
-}
-
-.link:hover {
-    opacity: .45;
+    text-transform:
+        uppercase;
 }
 
 
-/* =========================
+.navigation a {
+
+    transition:
+        opacity .25s ease;
+}
+
+.navigation a:hover {
+
+    opacity: .4;
+}
+
+
+/* BOUTON RDV */
+
+.appointment {
+
+    border:
+        1px solid #111;
+
+    padding:
+        12px 18px;
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+
+.appointment:hover {
+
+    background: #111;
+
+    color: #f4f3ef;
+
+    opacity: 1 !important;
+}
+
+
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero {
-    min-height: 82vh;
 
-    padding: 12vh 5vw;
+    min-height:
+        calc(100vh - 92px);
+
+    padding:
+        8vw 4vw
+        10vw 4vw;
 
     display: flex;
+
     align-items: center;
+
+    position: relative;
 }
 
-.hero-photo {
-    padding: 0 5vw 12vw;
-}
 
-.hero-photo img {
+.hero-content {
+
     width: 100%;
-    height: 75vh;
+
+    max-width:
+        1500px;
+}
+
+
+.eyebrow {
+
+    font-size:
+        clamp(
+            9px,
+            .65vw,
+            11px
+        );
+
+    letter-spacing:
+        .16em;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom:
+        clamp(
+            25px,
+            4vw,
+            55px
+        );
+}
+
+
+.hero-title {
+
+    font-size:
+        clamp(
+            58px,
+            10.5vw,
+            170px
+        );
+
+    line-height:
+        .82;
+
+    letter-spacing:
+        -.065em;
+
+    font-weight:
+        300;
+
+    max-width:
+        1300px;
+}
+
+
+.hero-title span {
+
+    display: block;
+}
+
+
+.hero-subtitle {
+
+    margin-top:
+        clamp(
+            40px,
+            7vw,
+            90px
+        );
+
+    margin-left:
+        clamp(
+            0px,
+            17vw,
+            280px
+        );
+
+    max-width:
+        410px;
+
+    font-size:
+        clamp(
+            14px,
+            1.15vw,
+            18px
+        );
+
+    line-height:
+        1.6;
+}
+
+
+.hero-link {
+
+    margin-top:
+        30px;
+
+    margin-left:
+        clamp(
+            0px,
+            17vw,
+            280px
+        );
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .12em;
+
+    text-transform:
+        uppercase;
+
+    border-bottom:
+        1px solid #111;
+
+    padding-bottom:
+        7px;
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image {
+
+    padding:
+        0 4vw
+        12vw;
+}
+
+
+.hero-image-container {
+
+    width: 100%;
+
+    height:
+        min(
+            82vh,
+            950px
+        );
+
+    overflow: hidden;
+
+    background:
+        #ddd;
+}
+
+
+.hero-image img {
+
+    width: 100%;
+
+    height: 100%;
 
     object-fit: cover;
 
-    background: #ddd;
+    transition:
+        transform 1.2s
+        cubic-bezier(.2,.7,.2,1);
 }
 
 
-/* =========================
-   WORKS
-========================= */
+.hero-image:hover img {
 
-.works {
-    padding: 10vw 5vw;
+    transform:
+        scale(1.015);
 }
+
+
+/* =====================================================
+   SECTION INTRO
+===================================================== */
+
+.section {
+
+    padding:
+        10vw 4vw;
+}
+
+
+.section-border {
+
+    border-top:
+        1px solid #d7d6d1;
+}
+
+
+.section-header {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 3fr;
+
+    gap:
+        40px;
+
+    margin-bottom:
+        8vw;
+}
+
+
+.section-number {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .12em;
+}
+
+
+.section-label {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .15em;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom:
+        30px;
+}
+
 
 .section-title {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
 
-    margin-bottom: 90px;
+    font-size:
+        clamp(
+            48px,
+            7vw,
+            110px
+        );
+
+    line-height:
+        .88;
+
+    letter-spacing:
+        -.06em;
+
+    font-weight:
+        300;
 }
 
 
-/* =========================
-   GALLERY
-========================= */
+/* =====================================================
+   PORTFOLIO
+===================================================== */
 
-.home-gallery {
-    display: grid;
+.portfolio-grid {
 
-    grid-template-columns: repeat(12, 1fr);
+    display:
+        grid;
 
-    gap: 25px;
-}
+    grid-template-columns:
+        repeat(12, 1fr);
 
-.photo-card {
-    overflow: hidden;
-}
-
-.photo-card img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-
-    object-fit: cover;
-
-    transition: transform .8s ease;
-}
-
-.photo-card:hover img {
-    transform: scale(1.03);
-}
-
-.home-gallery .photo-card:nth-child(1) {
-    grid-column: 1 / span 7;
-}
-
-.home-gallery .photo-card:nth-child(2) {
-    grid-column: 9 / span 4;
-    margin-top: 130px;
-}
-
-.home-gallery .photo-card:nth-child(3) {
-    grid-column: 2 / span 5;
-    margin-top: 120px;
-}
-
-.home-gallery .photo-card:nth-child(4) {
-    grid-column: 8 / span 5;
-}
-
-.home-gallery .photo-card:nth-child(5) {
-    grid-column: 1 / span 6;
-    margin-top: 100px;
-}
-
-.home-gallery .photo-card:nth-child(6) {
-    grid-column: 8 / span 4;
-    margin-top: 200px;
-}
-
-.photo-info {
-    display: flex;
-    justify-content: space-between;
-
-    padding-top: 12px;
-
-    font-size: 9px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    gap:
+        clamp(
+            30px,
+            5vw,
+            90px
+        )
+        24px;
 }
 
 
-/* =========================
+.work {
+
+    overflow:
+        hidden;
+}
+
+
+.work:nth-child(1) {
+
+    grid-column:
+        1 / span 7;
+}
+
+
+.work:nth-child(2) {
+
+    grid-column:
+        9 / span 4;
+
+    margin-top:
+        13vw;
+}
+
+
+.work:nth-child(3) {
+
+    grid-column:
+        2 / span 5;
+
+    margin-top:
+        7vw;
+}
+
+
+.work:nth-child(4) {
+
+    grid-column:
+        8 / span 5;
+
+    margin-top:
+        2vw;
+}
+
+
+.work:nth-child(5) {
+
+    grid-column:
+        1 / span 6;
+
+    margin-top:
+        8vw;
+}
+
+
+.work:nth-child(6) {
+
+    grid-column:
+        8 / span 4;
+
+    margin-top:
+        14vw;
+}
+
+
+.work-image {
+
+    overflow:
+        hidden;
+
+    background:
+        #ddd;
+}
+
+
+.work-image img {
+
+    aspect-ratio:
+        4 / 5;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform 1s
+        cubic-bezier(.2,.7,.2,1);
+}
+
+
+.work:hover img {
+
+    transform:
+        scale(1.025);
+}
+
+
+.work-caption {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    padding-top:
+        12px;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .1em;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* =====================================================
+   VIEW PORTFOLIO
+===================================================== */
+
+.portfolio-link-section {
+
+    padding:
+        8vw 4vw
+        15vw;
+
+    text-align:
+        center;
+}
+
+
+.big-link {
+
+    display:
+        inline-block;
+
+    font-size:
+        clamp(
+            40px,
+            7vw,
+            105px
+        );
+
+    line-height:
+        .9;
+
+    letter-spacing:
+        -.06em;
+
+    font-weight:
+        300;
+
+    border-bottom:
+        1px solid #111;
+
+    padding-bottom:
+        8px;
+
+    transition:
+        opacity .3s ease;
+}
+
+
+.big-link:hover {
+
+    opacity:
+        .4;
+}
+
+
+/* =====================================================
+   PRESTATIONS
+===================================================== */
+
+.services {
+
+    border-top:
+        1px solid #d7d6d1;
+
+    padding:
+        10vw 4vw;
+}
+
+
+.services-grid {
+
+    margin-top:
+        8vw;
+
+    border-top:
+        1px solid #d7d6d1;
+}
+
+
+.service {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        80px 1fr auto;
+
+    gap:
+        30px;
+
+    align-items:
+        center;
+
+    padding:
+        30px 0;
+
+    border-bottom:
+        1px solid #d7d6d1;
+}
+
+
+.service-number {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .1em;
+}
+
+
+.service-name {
+
+    font-size:
+        clamp(
+            24px,
+            3vw,
+            48px
+        );
+
+    letter-spacing:
+        -.04em;
+}
+
+
+.service-description {
+
+    font-size:
+        11px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .08em;
+}
+
+
+/* =====================================================
    ABOUT
-========================= */
+===================================================== */
 
 .about {
-    border-top: 1px solid #d8d7d2;
 
-    padding: 13vw 5vw;
+    border-top:
+        1px solid #d7d6d1;
 
-    display: grid;
+    padding:
+        12vw 4vw;
 
-    grid-template-columns: 1fr 2fr;
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 3fr;
+
+    gap:
+        40px;
 }
 
-.number {
-    font-size: 10px;
-    letter-spacing: 2px;
-}
 
 .about-text {
-    max-width: 520px;
 
-    margin-top: 50px;
+    max-width:
+        750px;
 
-    font-size: 17px;
+    font-size:
+        clamp(
+            25px,
+            3.3vw,
+            52px
+        );
 
-    line-height: 1.8;
+    line-height:
+        1.05;
+
+    letter-spacing:
+        -.04em;
 }
 
 
-/* =========================
-   CONTACT
-========================= */
+.about-small {
 
-.contact {
-    border-top: 1px solid #d8d7d2;
+    margin-top:
+        60px;
 
-    padding: 15vw 5vw;
+    max-width:
+        500px;
 
-    text-align: center;
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
 }
 
-.contact h2 {
-    margin-top: 25px;
+
+/* =====================================================
+   RENDEZ-VOUS
+===================================================== */
+
+.appointment-section {
+
+    border-top:
+        1px solid #d7d6d1;
+
+    padding:
+        14vw 4vw;
+
+    text-align:
+        center;
 }
 
 
-/* =========================
+.appointment-title {
+
+    font-size:
+        clamp(
+            50px,
+            9vw,
+            140px
+        );
+
+    line-height:
+        .84;
+
+    letter-spacing:
+        -.065em;
+
+    font-weight:
+        300;
+}
+
+
+.appointment-button {
+
+    display:
+        inline-block;
+
+    margin-top:
+        60px;
+
+    padding:
+        18px 28px;
+
+    border:
+        1px solid #111;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .15em;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+
+.appointment-button:hover {
+
+    background:
+        #111;
+
+    color:
+        #f4f3ef;
+}
+
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer {
-    border-top: 1px solid #d8d7d2;
 
-    padding: 30px 5vw;
+    border-top:
+        1px solid #d7d6d1;
 
-    display: flex;
-    justify-content: space-between;
+    padding:
+        28px 4vw;
 
-    font-size: 9px;
+    display:
+        flex;
 
-    letter-spacing: 1px;
+    justify-content:
+        space-between;
 
-    text-transform: uppercase;
+    font-size:
+        9px;
+
+    letter-spacing:
+        .1em;
+
+    text-transform:
+        uppercase;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =====================================================
+   TABLET
+===================================================== */
 
-@media (max-width: 700px) {
+@media (
+    max-width: 900px
+) {
+
+    .hero-title {
+
+        font-size:
+            clamp(
+                55px,
+                11vw,
+                110px
+            );
+
+    }
+
+    .section-header {
+
+        grid-template-columns:
+            1fr 4fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (
+    max-width: 650px
+) {
 
     header {
-        height: 75px;
-        padding: 0 6vw;
+
+        height:
+            75px;
+
+        padding:
+            0 6vw;
+
     }
 
-    nav {
-        gap: 15px;
+
+    .logo {
+
+        font-size:
+            11px;
+
     }
 
-    nav a:last-child {
-        display: none;
+
+    .navigation {
+
+        gap:
+            12px;
+
+        font-size:
+            9px;
+
     }
+
+
+    .navigation a:nth-child(2) {
+
+        display:
+            none;
+
+    }
+
+
+    .appointment {
+
+        padding:
+            9px 11px;
+
+    }
+
 
     .hero {
-        min-height: 75vh;
-        padding: 15vh 6vw;
+
+        min-height:
+            78vh;
+
+        padding:
+            15vh 6vw
+            12vw;
+
     }
 
-    .hero-photo {
-        padding: 0 6vw 20vw;
+
+    .hero-title {
+
+        font-size:
+            clamp(
+                55px,
+                17vw,
+                100px
+            );
+
+        letter-spacing:
+            -.07em;
+
     }
 
-    .hero-photo img {
-        height: 65vh;
+
+    .hero-subtitle {
+
+        margin-left:
+            0;
+
+        margin-top:
+            45px;
+
+        max-width:
+            300px;
+
     }
 
-    .works {
-        padding: 20vw 6vw;
+
+    .hero-link {
+
+        margin-left:
+            0;
+
     }
+
+
+    .hero-image {
+
+        padding:
+            0 6vw
+            20vw;
+
+    }
+
+
+    .hero-image-container {
+
+        height:
+            65vh;
+
+    }
+
+
+    .section {
+
+        padding:
+            20vw 6vw;
+
+    }
+
+
+    .section-header {
+
+        display:
+            block;
+
+        margin-bottom:
+            60px;
+
+    }
+
+
+    .section-number {
+
+        margin-bottom:
+            60px;
+
+    }
+
 
     .section-title {
-        display: block;
-        margin-bottom: 60px;
+
+        font-size:
+            clamp(
+                50px,
+                15vw,
+                80px
+            );
+
     }
 
-    .section-title .link {
-        margin-top: 30px;
+
+    .portfolio-grid {
+
+        display:
+            block;
+
     }
 
-    .home-gallery {
-        display: block;
+
+    .work {
+
+        margin:
+            0 0 75px 0 !important;
+
     }
 
-    .photo-card {
-        margin: 0 0 70px 0 !important;
+
+    .services {
+
+        padding:
+            20vw 6vw;
+
     }
+
+
+    .service {
+
+        grid-template-columns:
+            35px 1fr;
+
+        gap:
+            15px;
+
+        padding:
+            25px 0;
+
+    }
+
+
+    .service-description {
+
+        grid-column:
+            2;
+
+    }
+
 
     .about {
-        display: block;
-        padding: 20vw 6vw;
+
+        display:
+            block;
+
+        padding:
+            20vw 6vw;
+
     }
 
-    .number {
-        margin-bottom: 70px;
+
+    .about-text {
+
+        font-size:
+            clamp(
+                28px,
+                8vw,
+                45px
+            );
+
     }
 
-    .contact {
-        padding: 20vw 6vw;
+
+    .appointment-section {
+
+        padding:
+            25vw 6vw;
+
     }
+
+
+    .appointment-title {
+
+        font-size:
+            clamp(
+                52px,
+                16vw,
+                90px
+            );
+
+    }
+
 
     footer {
-        padding: 25px 6vw;
 
-        display: flex;
-        flex-direction: column;
+        padding:
+            25px 6vw;
 
-        gap: 12px;
+        flex-direction:
+            column;
+
+        gap:
+            12px;
+
     }
 
 }
@@ -388,17 +1173,21 @@ footer {
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================= -->
+===================================================== -->
 
 <header>
 
-    <a href="index.html" class="logo">
-        VINCENT THEVENON
+    <a
+        href="index.html"
+        class="logo"
+    >
+        MORGANEBS
     </a>
 
-    <nav>
+
+    <nav class="navigation">
 
         <a href="index.html">
             Accueil
@@ -408,8 +1197,15 @@ footer {
             Portfolio
         </a>
 
-        <a href="#about">
-            À propos
+        <a href="#services">
+            Prestations
+        </a>
+
+        <a
+            href="#rendez-vous"
+            class="appointment"
+        >
+            Rendez-vous
         </a>
 
     </nav>
@@ -417,30 +1213,60 @@ footer {
 </header>
 
 
-<!-- =========================
+
+<!-- =====================================================
      HERO
-========================= -->
+===================================================== -->
 
 <section class="hero">
 
-    <div>
+    <div class="hero-content">
 
-        <div class="small">
-            PHOTOGRAPHE · MARSEILLE
+        <div class="eyebrow">
+
+            PHOTOGRAPHE
+            ·
+            MARTIGUES
+
         </div>
 
-        <h1>
-            La lumière,<br>
-            saisie juste<br>
-            à temps.
+
+        <h1 class="hero-title">
+
+            <span>
+                Des images
+            </span>
+
+            <span>
+                qui racontent
+            </span>
+
+            <span>
+                quelque chose.
+            </span>
+
         </h1>
 
-        <p class="description">
-            Portrait, paysage, reportage et éditorial.
+
+        <p class="hero-subtitle">
+
+            Portraits, événements,
+            couples et instants de vie.
+            Des images naturelles,
+            sensibles et intemporelles.
+
         </p>
 
-        <a href="portfolio.html" class="link">
-            Voir le portfolio →
+
+        <a
+            href="portfolio.html"
+            class="hero-link"
+        >
+
+            Découvrir le portfolio
+
+            <span>→</span>
+
         </a>
 
     </div>
@@ -448,132 +1274,322 @@ footer {
 </section>
 
 
-<!-- =========================
-     GRANDE PHOTO
-========================= -->
 
-<section class="hero-photo">
+<!-- =====================================================
+     GRANDE IMAGE
+===================================================== -->
 
-    <img
-        src="photos/portrait/photo1.jpg"
-        alt="Vincent Thevenon photographie"
+<section class="hero-image">
+
+    <div
+        class="hero-image-container"
+        id="hero-image"
     >
+
+        <!--
+            La première photo trouvée
+            dans le dossier portrait
+            sera automatiquement utilisée.
+        -->
+
+    </div>
 
 </section>
 
 
-<!-- =========================
-     TRAVAUX
-========================= -->
 
-<section class="works">
+<!-- =====================================================
+     PORTFOLIO
+===================================================== -->
 
-    <div class="section-title">
+<section class="section section-border">
+
+
+    <div class="section-header">
+
+
+        <div class="section-number">
+
+            01
+
+        </div>
+
 
         <div>
 
-            <div class="small">
-                01 / TRAVAUX
+            <div class="section-label">
+
+                Portfolio
+
             </div>
 
-            <h2>
-                Travaux<br>
-                sélectionnés
+
+            <h2 class="section-title">
+
+                Quelques<br>
+                histoires.
+
             </h2>
 
         </div>
 
-        <a href="portfolio.html" class="link">
-            Voir tout →
-        </a>
-
     </div>
+
 
 
     <div
         id="home-gallery"
-        class="home-gallery"
+        class="portfolio-grid"
     ></div>
 
-</section>
-
-
-<!-- =========================
-     À PROPOS
-========================= -->
-
-<section
-    class="about"
-    id="about"
->
-
-    <div class="number">
-        02
-    </div>
-
-    <div>
-
-        <div class="small">
-            À PROPOS
-        </div>
-
-        <h2>
-            Photographier<br>
-            ce qui reste.
-        </h2>
-
-        <p class="about-text">
-
-            Je recherche les moments où
-            la lumière, le mouvement et
-            le silence se rencontrent.
-
-            Chaque image raconte une histoire.
-
-        </p>
-
-    </div>
 
 </section>
 
 
-<!-- =========================
-     CONTACT
-========================= -->
 
-<section class="contact">
+<!-- =====================================================
+     LIEN PORTFOLIO
+===================================================== -->
 
-    <div class="small">
-        03 / CONTACT
-    </div>
-
-    <h2>
-        Une image<br>
-        à créer ensemble ?
-    </h2>
+<section class="portfolio-link-section">
 
     <a
-        href="mailto:tonemail@gmail.com"
-        class="link"
+        href="portfolio.html"
+        class="big-link"
     >
-        Me contacter →
+
+        Voir tout<br>
+        le portfolio →
+
     </a>
 
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
+     PRESTATIONS
+===================================================== -->
+
+<section
+    class="services"
+    id="services"
+>
+
+
+    <div class="section-header">
+
+        <div class="section-number">
+
+            02
+
+        </div>
+
+
+        <div>
+
+            <div class="section-label">
+
+                Prestations
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                Pour vos<br>
+                moments.
+
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="services-grid">
+
+
+        <div class="service">
+
+            <div class="service-number">
+                01
+            </div>
+
+            <div class="service-name">
+                Portrait
+            </div>
+
+            <div class="service-description">
+                Individuel · Couple
+            </div>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-number">
+                02
+            </div>
+
+            <div class="service-name">
+                Événement
+            </div>
+
+            <div class="service-description">
+                Mariage · Soirée
+            </div>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-number">
+                03
+            </div>
+
+            <div class="service-name">
+                Lifestyle
+            </div>
+
+            <div class="service-description">
+                Naturel · Spontané
+            </div>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-number">
+                04
+            </div>
+
+            <div class="service-name">
+                Projet
+            </div>
+
+            <div class="service-description">
+                Sur mesure
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     À PROPOS
+===================================================== -->
+
+<section class="about">
+
+
+    <div class="section-number">
+
+        03
+
+    </div>
+
+
+    <div>
+
+        <div class="section-label">
+
+            À propos
+
+        </div>
+
+
+        <p class="about-text">
+
+            Photographier les personnes,
+            les lieux et les moments
+            tels qu'ils sont vraiment.
+
+        </p>
+
+
+        <p class="about-small">
+
+            Mon approche est simple :
+            créer des images naturelles,
+            élégantes et sincères,
+            avec une attention particulière
+            portée à la lumière et aux détails.
+
+        </p>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     RENDEZ-VOUS
+===================================================== -->
+
+<section
+    class="appointment-section"
+    id="rendez-vous"
+>
+
+
+    <div class="section-label">
+
+        04 · CONTACT
+
+    </div>
+
+
+    <h2 class="appointment-title">
+
+        Un projet ?<br>
+
+        Parlons-en.
+
+    </h2>
+
+
+    <!--
+        CHANGE l'adresse email ici
+    -->
+
+    <a
+        href="mailto:tonemail@gmail.com?subject=Demande%20de%20rendez-vous"
+        class="appointment-button"
+    >
+
+        Prendre rendez-vous →
+
+    </a>
+
+
+</section>
+
+
+
+<!-- =====================================================
      FOOTER
-========================= -->
+===================================================== -->
 
 <footer>
 
     <span>
-        © 2026 Vincent Thevenon
+        © 2026 MorganeBS
     </span>
 
     <span>
-        Marseille · France
+        Martigues · France
     </span>
 
     <a href="portfolio.html">
@@ -583,11 +1599,14 @@ footer {
 </footer>
 
 
-<!-- =========================
-     PHOTOS AUTOMATIQUES
-========================= -->
+
+<!-- =====================================================
+     JAVASCRIPT
+     PHOTOS AUTOMATIQUES GITHUB
+===================================================== -->
 
 <script>
+
 
 const categories = [
     "portrait",
@@ -596,74 +1615,98 @@ const categories = [
     "editorial"
 ];
 
+
 const categoryNames = {
 
-    portrait: "Portrait",
+    portrait:
+        "Portrait",
 
-    paysage: "Paysage",
+    paysage:
+        "Paysage",
 
-    reportage: "Reportage",
+    reportage:
+        "Reportage",
 
-    editorial: "Éditorial"
+    editorial:
+        "Éditorial"
 
 };
 
 
+
+/*
+=====================================================
+RÉCUPÉRATION DU COMPTE GITHUB
+=====================================================
+*/
+
 function getGithubInfo() {
+
 
     const hostname =
         window.location.hostname;
+
 
     const pathname =
         window.location.pathname;
 
 
     let username = "";
+
     let repository = "";
 
 
-    /*
-       Exemple :
-
-       https://vincent.github.io/photo/
-
-       devient :
-
-       username = vincent
-       repository = photo
-    */
-
     if (
-        hostname.endsWith(".github.io")
+        hostname.endsWith(
+            ".github.io"
+        )
     ) {
+
 
         username =
             hostname.split(".")[0];
+
 
         const parts =
             pathname
                 .split("/")
                 .filter(Boolean);
 
+
         repository =
             parts[0] || "";
 
     }
 
+
     return {
+
         username,
+
         repository
+
     };
 
 }
 
 
-async function getImages(category) {
+
+/*
+=====================================================
+RÉCUPÉRATION DES PHOTOS
+=====================================================
+*/
+
+async function getImages(
+    category
+) {
+
 
     const {
         username,
         repository
-    } = getGithubInfo();
+    } =
+        getGithubInfo();
 
 
     if (
@@ -671,28 +1714,31 @@ async function getImages(category) {
         !repository
     ) {
 
-        console.log(
-            "GitHub Pages non détecté."
-        );
-
         return [];
 
     }
 
 
-    const url =
+    const apiUrl =
+
         "https://api.github.com/repos/" +
+
         username +
+
         "/" +
+
         repository +
+
         "/contents/photos/" +
+
         category;
 
 
     try {
 
+
         const response =
-            await fetch(url);
+            await fetch(apiUrl);
 
 
         if (!response.ok) {
@@ -708,44 +1754,55 @@ async function getImages(category) {
 
         return files
 
-            .filter(file => {
+            .filter(
+                file =>
 
-                return (
-                    file.type === "file" &&
-                    /\.(jpg|jpeg|png|webp)$/i
-                    .test(file.name)
-                );
+                file.type === "file"
 
-            })
+                &&
 
-            .map(file => {
+                /\.(jpg|jpeg|png|webp)$/i
+                    .test(
+                        file.name
+                    )
+            )
 
-                return {
+            .map(
+                file => ({
 
-                    name: file.name,
+                    name:
+                        file.name,
 
-                    category: category,
+                    category:
+                        category,
 
                     url:
+
                         "https://raw.githubusercontent.com/" +
+
                         username +
+
                         "/" +
+
                         repository +
+
                         "/main/photos/" +
+
                         category +
+
                         "/" +
+
                         encodeURIComponent(
                             file.name
                         )
 
-                };
-
-            });
+                })
+            );
 
 
     } catch (error) {
 
-        console.log(error);
+        console.error(error);
 
         return [];
 
@@ -754,14 +1811,25 @@ async function getImages(category) {
 }
 
 
+
+/*
+=====================================================
+TOUTES LES PHOTOS
+=====================================================
+*/
+
 async function getAllImages() {
 
+
     const results =
+
         await Promise.all(
 
             categories.map(
                 category =>
-                    getImages(category)
+                    getImages(
+                        category
+                    )
             )
 
         );
@@ -772,69 +1840,137 @@ async function getAllImages() {
 }
 
 
-function createPhoto(photo) {
 
-    const card =
-        document.createElement("article");
+/*
+=====================================================
+CRÉATION PHOTO
+=====================================================
+*/
 
-    card.className =
-        "photo-card";
+function createPhoto(
+    photo
+) {
+
+
+    const work =
+        document.createElement(
+            "article"
+        );
+
+
+    work.className =
+        "work";
+
+
+    const imageWrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    imageWrapper.className =
+        "work-image";
 
 
     const image =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
+
 
     image.src =
         photo.url;
 
+
     image.alt =
         photo.name;
+
 
     image.loading =
         "lazy";
 
 
-    const info =
-        document.createElement("div");
+    imageWrapper.appendChild(
+        image
+    );
 
-    info.className =
-        "photo-info";
+
+    const caption =
+        document.createElement(
+            "div"
+        );
+
+
+    caption.className =
+        "work-caption";
 
 
     const name =
-        document.createElement("span");
+        document.createElement(
+            "span"
+        );
+
 
     name.textContent =
+
         photo.name
-            .replace(/\.[^/.]+$/, "")
-            .replace(/[-_]/g, " ");
+            .replace(
+                /\.[^/.]+$/,
+                ""
+            )
+            .replace(
+                /[-_]/g,
+                " "
+            );
 
 
     const category =
-        document.createElement("span");
+        document.createElement(
+            "span"
+        );
+
 
     category.textContent =
+
         categoryNames[
             photo.category
         ];
 
 
-    info.appendChild(name);
-
-    info.appendChild(category);
-
-
-    card.appendChild(image);
-
-    card.appendChild(info);
+    caption.appendChild(
+        name
+    );
 
 
-    return card;
+    caption.appendChild(
+        category
+    );
+
+
+    work.appendChild(
+        imageWrapper
+    );
+
+
+    work.appendChild(
+        caption
+    );
+
+
+    return work;
 
 }
 
 
+
+/*
+=====================================================
+CHARGEMENT DU PORTFOLIO
+=====================================================
+*/
+
 async function loadGallery() {
+
 
     const gallery =
         document.getElementById(
@@ -853,26 +1989,97 @@ async function loadGallery() {
         await getAllImages();
 
 
-    gallery.innerHTML = "";
-
-
     images
+
         .slice(0, 6)
-        .forEach(photo => {
 
-            gallery.appendChild(
-                createPhoto(photo)
-            );
+        .forEach(
+            photo => {
 
-        });
+                gallery.appendChild(
+                    createPhoto(
+                        photo
+                    )
+                );
+
+            }
+        );
 
 }
 
 
+
+/*
+=====================================================
+PREMIÈRE IMAGE = HERO
+=====================================================
+*/
+
+async function loadHero() {
+
+
+    const container =
+        document.getElementById(
+            "hero-image"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const images =
+        await getAllImages();
+
+
+    if (
+        images.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const image =
+        document.createElement(
+            "img"
+        );
+
+
+    image.src =
+        images[0].url;
+
+
+    image.alt =
+        "Photographie MorganeBS";
+
+
+    container.appendChild(
+        image
+    );
+
+}
+
+
+
+/*
+=====================================================
+LANCEMENT
+=====================================================
+*/
+
 loadGallery();
+
+loadHero();
+
 
 </script>
 
 
 </body>
+
 </html>
