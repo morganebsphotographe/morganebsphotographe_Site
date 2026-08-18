@@ -1,618 +1,386 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vincent Thevenon — Photographie</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f4f3ef;
+    color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+}
 
-    <meta charset="UTF-8">
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <title>Vincent Thevenon — Photographie</title>
+/* =========================
+   HEADER
+========================= */
 
+header {
+    height: 90px;
+    padding: 0 5vw;
 
-    <!-- =========================
-         CSS
-    ========================== -->
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    <style>
+    border-bottom: 1px solid #d8d7d2;
+}
 
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap');
+.logo {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
 
+nav {
+    display: flex;
+    gap: 35px;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+nav a {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
 
+nav a:hover {
+    opacity: .45;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
 
+/* =========================
+   TEXT
+========================= */
 
-        body {
-            background: #f5f4f0;
-            color: #111111;
+.small {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
 
-            font-family: "DM Sans", sans-serif;
+h1,
+h2 {
+    font-weight: 300;
+    letter-spacing: -5px;
+    line-height: .9;
+}
 
-            font-weight: 300;
+h1 {
+    font-size: clamp(60px, 9vw, 135px);
+}
 
-            line-height: 1.5;
-        }
+h2 {
+    font-size: clamp(50px, 7vw, 100px);
+}
 
+.description {
+    margin-top: 45px;
+    font-size: 15px;
+    max-width: 420px;
+    line-height: 1.6;
+}
 
-        a {
-            color: inherit;
+.link {
+    display: inline-block;
 
-            text-decoration: none;
-        }
+    margin-top: 35px;
 
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 
-        img {
-            display: block;
+    border-bottom: 1px solid #111;
 
-            width: 100%;
-        }
+    padding-bottom: 6px;
+}
 
+.link:hover {
+    opacity: .45;
+}
 
-        /* =========================
-           HEADER
-        ========================== */
 
-        header {
+/* =========================
+   HERO
+========================= */
 
-            height: 90px;
+.hero {
+    min-height: 82vh;
 
-            padding: 0 5vw;
+    padding: 12vh 5vw;
 
-            display: flex;
+    display: flex;
+    align-items: center;
+}
 
-            align-items: center;
+.hero-photo {
+    padding: 0 5vw 12vw;
+}
 
-            justify-content: space-between;
+.hero-photo img {
+    width: 100%;
+    height: 75vh;
 
-            border-bottom: 1px solid #deddd8;
+    object-fit: cover;
 
-        }
+    background: #ddd;
+}
 
 
-        .logo {
+/* =========================
+   WORKS
+========================= */
 
-            font-family: "DM Mono", monospace;
+.works {
+    padding: 10vw 5vw;
+}
 
-            font-size: 12px;
+.section-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
-            letter-spacing: .12em;
+    margin-bottom: 90px;
+}
 
-        }
 
+/* =========================
+   GALLERY
+========================= */
 
-        nav {
+.home-gallery {
+    display: grid;
 
-            display: flex;
+    grid-template-columns: repeat(12, 1fr);
 
-            gap: 35px;
+    gap: 25px;
+}
 
-            font-size: 12px;
+.photo-card {
+    overflow: hidden;
+}
 
-        }
+.photo-card img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
 
+    object-fit: cover;
 
-        nav a {
+    transition: transform .8s ease;
+}
 
-            position: relative;
+.photo-card:hover img {
+    transform: scale(1.03);
+}
 
-        }
+.home-gallery .photo-card:nth-child(1) {
+    grid-column: 1 / span 7;
+}
 
+.home-gallery .photo-card:nth-child(2) {
+    grid-column: 9 / span 4;
+    margin-top: 130px;
+}
 
-        nav a::after {
+.home-gallery .photo-card:nth-child(3) {
+    grid-column: 2 / span 5;
+    margin-top: 120px;
+}
 
-            content: "";
+.home-gallery .photo-card:nth-child(4) {
+    grid-column: 8 / span 5;
+}
 
-            position: absolute;
+.home-gallery .photo-card:nth-child(5) {
+    grid-column: 1 / span 6;
+    margin-top: 100px;
+}
 
-            left: 0;
+.home-gallery .photo-card:nth-child(6) {
+    grid-column: 8 / span 4;
+    margin-top: 200px;
+}
 
-            bottom: -5px;
+.photo-info {
+    display: flex;
+    justify-content: space-between;
 
-            width: 0;
+    padding-top: 12px;
 
-            height: 1px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-            background: #111;
 
-            transition: width .3s ease;
+/* =========================
+   ABOUT
+========================= */
 
-        }
+.about {
+    border-top: 1px solid #d8d7d2;
 
+    padding: 13vw 5vw;
 
-        nav a:hover::after {
+    display: grid;
 
-            width: 100%;
+    grid-template-columns: 1fr 2fr;
+}
 
-        }
+.number {
+    font-size: 10px;
+    letter-spacing: 2px;
+}
 
+.about-text {
+    max-width: 520px;
 
-        /* =========================
-           TEXT
-        ========================== */
+    margin-top: 50px;
 
-        .small {
+    font-size: 17px;
 
-            font-family: "DM Mono", monospace;
+    line-height: 1.8;
+}
 
-            font-size: 10px;
 
-            letter-spacing: .14em;
+/* =========================
+   CONTACT
+========================= */
 
-            text-transform: uppercase;
+.contact {
+    border-top: 1px solid #d8d7d2;
 
-            margin-bottom: 25px;
+    padding: 15vw 5vw;
 
-        }
+    text-align: center;
+}
 
+.contact h2 {
+    margin-top: 25px;
+}
 
-        h1,
-        h2 {
 
-            font-weight: 300;
+/* =========================
+   FOOTER
+========================= */
 
-            letter-spacing: -.045em;
+footer {
+    border-top: 1px solid #d8d7d2;
 
-            line-height: .93;
+    padding: 30px 5vw;
 
-        }
+    display: flex;
+    justify-content: space-between;
 
+    font-size: 9px;
 
-        h1 {
+    letter-spacing: 1px;
 
-            font-size: clamp(
-                55px,
-                8vw,
-                125px
-            );
+    text-transform: uppercase;
+}
 
-        }
 
+/* =========================
+   MOBILE
+========================= */
 
-        h2 {
+@media (max-width: 700px) {
 
-            font-size: clamp(
-                45px,
-                6vw,
-                90px
-            );
+    header {
+        height: 75px;
+        padding: 0 6vw;
+    }
 
-        }
+    nav {
+        gap: 15px;
+    }
 
+    nav a:last-child {
+        display: none;
+    }
 
-        .description {
+    .hero {
+        min-height: 75vh;
+        padding: 15vh 6vw;
+    }
 
-            margin-top: 45px;
+    .hero-photo {
+        padding: 0 6vw 20vw;
+    }
 
-            max-width: 400px;
+    .hero-photo img {
+        height: 65vh;
+    }
 
-            font-size: 16px;
+    .works {
+        padding: 20vw 6vw;
+    }
 
-        }
+    .section-title {
+        display: block;
+        margin-bottom: 60px;
+    }
 
+    .section-title .link {
+        margin-top: 30px;
+    }
 
-        .link {
+    .home-gallery {
+        display: block;
+    }
 
-            display: inline-block;
+    .photo-card {
+        margin: 0 0 70px 0 !important;
+    }
 
-            margin-top: 35px;
+    .about {
+        display: block;
+        padding: 20vw 6vw;
+    }
 
-            font-family: "DM Mono", monospace;
+    .number {
+        margin-bottom: 70px;
+    }
 
-            font-size: 10px;
+    .contact {
+        padding: 20vw 6vw;
+    }
 
-            letter-spacing: .08em;
+    footer {
+        padding: 25px 6vw;
 
-            text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
 
-            border-bottom: 1px solid #111;
+        gap: 12px;
+    }
 
-            padding-bottom: 5px;
+}
 
-            transition: opacity .3s ease;
-
-        }
-
-
-        .link:hover {
-
-            opacity: .5;
-
-        }
-
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero {
-
-            min-height: 80vh;
-
-            padding: 12vh 5vw;
-
-            display: flex;
-
-            align-items: center;
-
-        }
-
-
-        .hero-photo {
-
-            padding: 0 5vw 12vw;
-
-        }
-
-
-        .hero-photo img {
-
-            height: 75vh;
-
-            object-fit: cover;
-
-        }
-
-
-        /* =========================
-           WORKS
-        ========================== */
-
-        .works {
-
-            padding: 10vw 5vw;
-
-        }
-
-
-        .section-title {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: flex-end;
-
-            margin-bottom: 80px;
-
-        }
-
-
-        /* =========================
-           GALLERY
-        ========================== */
-
-        .home-gallery {
-
-            display: grid;
-
-            grid-template-columns: repeat(
-                12,
-                1fr
-            );
-
-            gap: 25px;
-
-        }
-
-
-        .photo-card {
-
-            overflow: hidden;
-
-        }
-
-
-        .home-gallery
-        .photo-card:nth-child(1) {
-
-            grid-column: span 7;
-
-        }
-
-
-        .home-gallery
-        .photo-card:nth-child(2) {
-
-            grid-column: 9 / span 4;
-
-            margin-top: 120px;
-
-        }
-
-
-        .home-gallery
-        .photo-card:nth-child(3) {
-
-            grid-column: 2 / span 5;
-
-            margin-top: 100px;
-
-        }
-
-
-        .home-gallery
-        .photo-card:nth-child(4) {
-
-            grid-column: 8 / span 5;
-
-        }
-
-
-        .photo-card img {
-
-            aspect-ratio: 4 / 5;
-
-            object-fit: cover;
-
-            transition:
-                transform .8s
-                cubic-bezier(.2,.7,.2,1);
-
-        }
-
-
-        .photo-card:hover img {
-
-            transform: scale(1.025);
-
-        }
-
-
-        .photo-info {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            padding-top: 12px;
-
-            font-family:
-                "DM Mono",
-                monospace;
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: .08em;
-
-        }
-
-
-        /* =========================
-           ABOUT
-        ========================== */
-
-        .about {
-
-            border-top:
-                1px solid #deddd8;
-
-            padding: 12vw 5vw;
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 2fr;
-
-        }
-
-
-        .number {
-
-            font-family:
-                "DM Mono",
-                monospace;
-
-            font-size: 11px;
-
-        }
-
-
-        .about-text {
-
-            max-width: 520px;
-
-            margin-top: 50px;
-
-            font-size: 17px;
-
-            line-height: 1.8;
-
-        }
-
-
-        /* =========================
-           CONTACT
-        ========================== */
-
-        .contact {
-
-            border-top:
-                1px solid #deddd8;
-
-            padding: 14vw 5vw;
-
-            text-align: center;
-
-        }
-
-
-        .contact h2 {
-
-            margin-top: 25px;
-
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================== */
-
-        footer {
-
-            border-top:
-                1px solid #deddd8;
-
-            padding: 30px 5vw;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            font-family:
-                "DM Mono",
-                monospace;
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: .08em;
-
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================== */
-
-        @media (max-width: 700px) {
-
-
-            header {
-
-                height: 75px;
-
-                padding: 0 6vw;
-
-            }
-
-
-            nav {
-
-                gap: 15px;
-
-            }
-
-
-            nav a:nth-child(3) {
-
-                display: none;
-
-            }
-
-
-            .hero {
-
-                min-height: 75vh;
-
-                padding:
-                    15vh 6vw;
-
-            }
-
-
-            .hero-photo {
-
-                padding:
-                    0 6vw 20vw;
-
-            }
-
-
-            .hero-photo img {
-
-                height: 65vh;
-
-            }
-
-
-            .works {
-
-                padding:
-                    20vw 6vw;
-
-            }
-
-
-            .section-title {
-
-                display: block;
-
-                margin-bottom: 50px;
-
-            }
-
-
-            .home-gallery {
-
-                display: block;
-
-            }
-
-
-            .home-gallery
-            .photo-card {
-
-                margin:
-                    0 0 70px 0 !important;
-
-            }
-
-
-            .about {
-
-                padding:
-                    20vw 6vw;
-
-                display: block;
-
-            }
-
-
-            .number {
-
-                margin-bottom: 70px;
-
-            }
-
-
-            .contact {
-
-                padding:
-                    20vw 6vw;
-
-            }
-
-
-            footer {
-
-                padding:
-                    25px 6vw;
-
-                flex-direction:
-                    column;
-
-                gap: 10px;
-
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -622,17 +390,13 @@
 
 <!-- =========================
      HEADER
-========================== -->
+========================= -->
 
 <header>
 
-    <a
-        href="index.html"
-        class="logo"
-    >
+    <a href="index.html" class="logo">
         VINCENT THEVENON
     </a>
-
 
     <nav>
 
@@ -653,650 +417,462 @@
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
 
-<main>
+<section class="hero">
 
+    <div>
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <section class="hero">
-
-        <div>
-
-            <p class="small">
-                PHOTOGRAPHE · MARSEILLE
-            </p>
-
-
-            <h1>
-
-                La lumière,<br>
-
-                saisie juste<br>
-
-                à temps.
-
-            </h1>
-
-
-            <p class="description">
-
-                Portrait, paysage,
-                reportage et éditorial.
-
-            </p>
-
-
-            <a
-                href="portfolio.html"
-                class="link"
-            >
-
-                Voir le portfolio →
-
-            </a>
-
+        <div class="small">
+            PHOTOGRAPHE · MARSEILLE
         </div>
 
-    </section>
+        <h1>
+            La lumière,<br>
+            saisie juste<br>
+            à temps.
+        </h1>
+
+        <p class="description">
+            Portrait, paysage, reportage et éditorial.
+        </p>
+
+        <a href="portfolio.html" class="link">
+            Voir le portfolio →
+        </a>
+
+    </div>
+
+</section>
 
 
+<!-- =========================
+     GRANDE PHOTO
+========================= -->
 
-    <!-- =========================
-         HERO PHOTO
-    ========================== -->
+<section class="hero-photo">
 
-    <section class="hero-photo">
-
-        <img
-            src="photos/portrait/photo1.jpg"
-            alt="Photographie"
-        >
-
-    </section>
-
-
-
-    <!-- =========================
-         TRAVAUX
-    ========================== -->
-
-    <section class="works">
-
-
-        <div class="section-title">
-
-
-            <div>
-
-                <p class="small">
-                    01 / TRAVAUX
-                </p>
-
-
-                <h2>
-
-                    Travaux<br>
-
-                    sélectionnés
-
-                </h2>
-
-            </div>
-
-
-            <a
-                href="portfolio.html"
-                class="link"
-            >
-
-                Voir tout →
-
-            </a>
-
-
-        </div>
-
-
-
-        <div
-            id="home-gallery"
-            class="home-gallery"
-        >
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =========================
-         ABOUT
-    ========================== -->
-
-    <section
-        class="about"
-        id="about"
+    <img
+        src="photos/portrait/photo1.jpg"
+        alt="Vincent Thevenon photographie"
     >
 
+</section>
 
-        <div class="number">
 
-            02
+<!-- =========================
+     TRAVAUX
+========================= -->
 
-        </div>
+<section class="works">
 
+    <div class="section-title">
 
         <div>
 
-
-            <p class="small">
-
-                À PROPOS
-
-            </p>
-
+            <div class="small">
+                01 / TRAVAUX
+            </div>
 
             <h2>
-
-                Photographier<br>
-
-                ce qui reste.
-
+                Travaux<br>
+                sélectionnés
             </h2>
-
-
-            <p class="about-text">
-
-                Je recherche les moments où
-                la lumière, le mouvement et
-                le silence se rencontrent.
-
-                Chaque image raconte une histoire.
-
-            </p>
-
 
         </div>
 
+        <a href="portfolio.html" class="link">
+            Voir tout →
+        </a>
 
-    </section>
-
-
-
-    <!-- =========================
-         CONTACT
-    ========================== -->
-
-    <section class="contact">
+    </div>
 
 
-        <p class="small">
+    <div
+        id="home-gallery"
+        class="home-gallery"
+    ></div>
 
-            03 / CONTACT
+</section>
+
+
+<!-- =========================
+     À PROPOS
+========================= -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="number">
+        02
+    </div>
+
+    <div>
+
+        <div class="small">
+            À PROPOS
+        </div>
+
+        <h2>
+            Photographier<br>
+            ce qui reste.
+        </h2>
+
+        <p class="about-text">
+
+            Je recherche les moments où
+            la lumière, le mouvement et
+            le silence se rencontrent.
+
+            Chaque image raconte une histoire.
 
         </p>
 
+    </div>
 
-        <h2>
-
-            Une image<br>
-
-            à créer ensemble ?
-
-        </h2>
+</section>
 
 
-        <a
-            href="mailto:tonemail@gmail.com"
-            class="link"
-        >
+<!-- =========================
+     CONTACT
+========================= -->
 
-            Me contacter →
+<section class="contact">
 
-        </a>
+    <div class="small">
+        03 / CONTACT
+    </div>
 
+    <h2>
+        Une image<br>
+        à créer ensemble ?
+    </h2>
 
-    </section>
+    <a
+        href="mailto:tonemail@gmail.com"
+        class="link"
+    >
+        Me contacter →
+    </a>
 
-
-</main>
-
+</section>
 
 
 <!-- =========================
      FOOTER
-========================== -->
+========================= -->
 
 <footer>
 
     <span>
-
         © 2026 Vincent Thevenon
-
     </span>
-
 
     <span>
-
         Marseille · France
-
     </span>
 
-
     <a href="portfolio.html">
-
         Portfolio
-
     </a>
 
 </footer>
 
 
-
 <!-- =========================
-     AUTOMATIC GALLERY
-========================== -->
+     PHOTOS AUTOMATIQUES
+========================= -->
 
 <script>
 
+const categories = [
+    "portrait",
+    "paysage",
+    "reportage",
+    "editorial"
+];
+
+const categoryNames = {
+
+    portrait: "Portrait",
+
+    paysage: "Paysage",
+
+    reportage: "Reportage",
+
+    editorial: "Éditorial"
+
+};
+
+
+function getGithubInfo() {
+
+    const hostname =
+        window.location.hostname;
+
+    const pathname =
+        window.location.pathname;
+
+
+    let username = "";
+    let repository = "";
+
+
     /*
-        IMPORTANT :
+       Exemple :
 
-        GitHub Pages fonctionne avec cette adresse :
+       https://vincent.github.io/photo/
 
-        https://TON-PSEUDO.github.io/TON-REPO/
+       devient :
 
-        Le script récupère automatiquement
-        les photos présentes dans :
-
-        photos/portrait/
-        photos/paysage/
-        photos/reportage/
-        photos/editorial/
+       username = vincent
+       repository = photo
     */
 
+    if (
+        hostname.endsWith(".github.io")
+    ) {
 
-    const categories = [
-        "portrait",
-        "paysage",
-        "reportage",
-        "editorial"
-    ];
+        username =
+            hostname.split(".")[0];
 
+        const parts =
+            pathname
+                .split("/")
+                .filter(Boolean);
 
-    const categoryNames = {
+        repository =
+            parts[0] || "";
 
-        portrait: "Portrait",
+    }
 
-        paysage: "Paysage",
-
-        reportage: "Reportage",
-
-        editorial: "Éditorial"
-
+    return {
+        username,
+        repository
     };
 
-
-    /*
-        Récupère automatiquement le compte
-        GitHub et le repository.
-    */
-
-    function getGitHubInfo() {
+}
 
 
-        const hostname =
-            window.location.hostname;
+async function getImages(category) {
+
+    const {
+        username,
+        repository
+    } = getGithubInfo();
 
 
-        const pathname =
-            window.location.pathname;
+    if (
+        !username ||
+        !repository
+    ) {
 
+        console.log(
+            "GitHub Pages non détecté."
+        );
 
-        let username = "";
-
-        let repository = "";
-
-
-        /*
-            Exemple :
-
-            vincent.github.io/photo/
-
-            username = vincent
-            repository = photo
-        */
-
-        if (
-            hostname.endsWith(
-                ".github.io"
-            )
-        ) {
-
-
-            username =
-                hostname.split(".")[0];
-
-
-            const parts =
-                pathname
-                    .split("/")
-                    .filter(Boolean);
-
-
-            repository =
-                parts[0] || "";
-
-        }
-
-
-        return {
-            username,
-            repository
-        };
+        return [];
 
     }
 
 
-
-    /*
-        Récupère les images
-        d'un dossier GitHub.
-    */
-
-    async function getImages(
-        category
-    ) {
+    const url =
+        "https://api.github.com/repos/" +
+        username +
+        "/" +
+        repository +
+        "/contents/photos/" +
+        category;
 
 
-        const {
-            username,
-            repository
-        } = getGitHubInfo();
+    try {
+
+        const response =
+            await fetch(url);
 
 
-        if (
-            !username ||
-            !repository
-        ) {
-
-            console.error(
-                "GitHub Pages non détecté."
-            );
+        if (!response.ok) {
 
             return [];
 
         }
 
 
-        const apiUrl =
-            `https://api.github.com/repos/${username}/${repository}/contents/photos/${category}?ref=main`;
+        const files =
+            await response.json();
 
 
-        try {
+        return files
 
+            .filter(file => {
 
-            const response =
-                await fetch(apiUrl);
-
-
-            if (!response.ok) {
-
-                console.error(
-                    "Erreur GitHub :",
-                    category
-                );
-
-                return [];
-
-            }
-
-
-            const files =
-                await response.json();
-
-
-            return files
-
-                .filter(
-                    file =>
-
-                    file.type === "file"
-
-                    &&
-
+                return (
+                    file.type === "file" &&
                     /\.(jpg|jpeg|png|webp)$/i
-                        .test(file.name)
-
-                )
-
-                .map(
-                    file => ({
-
-                        name:
-                            file.name,
-
-                        category:
-                            category,
-
-                        url:
-                            `https://raw.githubusercontent.com/${username}/${repository}/main/photos/${category}/${encodeURIComponent(file.name)}`
-
-                    })
+                    .test(file.name)
                 );
 
+            })
 
-        }
+            .map(file => {
 
-        catch (error) {
+                return {
 
-            console.error(
-                error
-            );
+                    name: file.name,
 
-            return [];
+                    category: category,
 
-        }
-
-    }
-
-
-
-    /*
-        Récupère toutes les photos.
-    */
-
-    async function getAllImages() {
-
-
-        const results =
-            await Promise.all(
-
-                categories.map(
-                    category =>
-                        getImages(category)
-                )
-
-            );
-
-
-        return results.flat();
-
-    }
-
-
-
-    /*
-        Création d'une carte photo.
-    */
-
-    function createPhotoCard(
-        photo
-    ) {
-
-
-        const card =
-            document.createElement(
-                "article"
-            );
-
-
-        card.className =
-            "photo-card";
-
-
-        const image =
-            document.createElement(
-                "img"
-            );
-
-
-        image.src =
-            photo.url;
-
-
-        image.alt =
-            photo.name;
-
-
-        image.loading =
-            "lazy";
-
-
-        const info =
-            document.createElement(
-                "div"
-            );
-
-
-        info.className =
-            "photo-info";
-
-
-        const title =
-            document.createElement(
-                "span"
-            );
-
-
-        title.textContent =
-            photo.name
-
-                .replace(
-                    /\.[^/.]+$/,
-                    ""
-                )
-
-                .replace(
-                    /[-_]/g,
-                    " "
-                );
-
-
-        const category =
-            document.createElement(
-                "span"
-            );
-
-
-        category.textContent =
-            categoryNames[
-                photo.category
-            ];
-
-
-        info.appendChild(
-            title
-        );
-
-
-        info.appendChild(
-            category
-        );
-
-
-        card.appendChild(
-            image
-        );
-
-
-        card.appendChild(
-            info
-        );
-
-
-        return card;
-
-    }
-
-
-
-    /*
-        Charge les photos
-        sur la page d'accueil.
-    */
-
-    async function loadHomeGallery() {
-
-
-        const gallery =
-            document.getElementById(
-                "home-gallery"
-            );
-
-
-        if (!gallery) {
-
-            return;
-
-        }
-
-
-        const images =
-            await getAllImages();
-
-
-        gallery.innerHTML =
-            "";
-
-
-        /*
-            Affiche les 6 premières.
-        */
-
-        images
-
-            .slice(0, 6)
-
-            .forEach(
-                photo => {
-
-                    gallery.appendChild(
-                        createPhotoCard(
-                            photo
+                    url:
+                        "https://raw.githubusercontent.com/" +
+                        username +
+                        "/" +
+                        repository +
+                        "/main/photos/" +
+                        category +
+                        "/" +
+                        encodeURIComponent(
+                            file.name
                         )
-                    );
 
-                }
-            );
+                };
+
+            });
+
+
+    } catch (error) {
+
+        console.log(error);
+
+        return [];
+
+    }
+
+}
+
+
+async function getAllImages() {
+
+    const results =
+        await Promise.all(
+
+            categories.map(
+                category =>
+                    getImages(category)
+            )
+
+        );
+
+
+    return results.flat();
+
+}
+
+
+function createPhoto(photo) {
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "photo-card";
+
+
+    const image =
+        document.createElement("img");
+
+    image.src =
+        photo.url;
+
+    image.alt =
+        photo.name;
+
+    image.loading =
+        "lazy";
+
+
+    const info =
+        document.createElement("div");
+
+    info.className =
+        "photo-info";
+
+
+    const name =
+        document.createElement("span");
+
+    name.textContent =
+        photo.name
+            .replace(/\.[^/.]+$/, "")
+            .replace(/[-_]/g, " ");
+
+
+    const category =
+        document.createElement("span");
+
+    category.textContent =
+        categoryNames[
+            photo.category
+        ];
+
+
+    info.appendChild(name);
+
+    info.appendChild(category);
+
+
+    card.appendChild(image);
+
+    card.appendChild(info);
+
+
+    return card;
+
+}
+
+
+async function loadGallery() {
+
+    const gallery =
+        document.getElementById(
+            "home-gallery"
+        );
+
+
+    if (!gallery) {
+
+        return;
 
     }
 
 
+    const images =
+        await getAllImages();
 
-    /*
-        Lance le chargement.
-    */
 
-    loadHomeGallery();
+    gallery.innerHTML = "";
+
+
+    images
+        .slice(0, 6)
+        .forEach(photo => {
+
+            gallery.appendChild(
+                createPhoto(photo)
+            );
+
+        });
+
+}
+
+
+loadGallery();
 
 </script>
 
 
 </body>
-
 </html>
