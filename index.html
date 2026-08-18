@@ -98,17 +98,18 @@ header {
     height: 76px;
     padding: 0 var(--page-x);
 
-    transition: background .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease);
-    border-bottom: 1px solid transparent;
-    color: var(--paper);
-}
-
-header.solid {
-    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    color: var(--ink);
+    background: color-mix(in srgb, var(--paper) 80%, transparent);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .5s var(--ease), background .5s var(--ease);
+}
+
+/* liseré visible une fois qu'on a scrollé */
+header.solid {
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
     border-bottom: 1px solid var(--line);
-    color: var(--ink);
 }
 
 .logo {
@@ -165,14 +166,9 @@ nav a.appointment {
     transition: background .3s var(--ease), color .3s var(--ease);
 }
 
-header.solid nav a.appointment:hover {
+nav a.appointment:hover {
     background: var(--ink);
     color: var(--paper);
-}
-
-header:not(.solid) nav a.appointment:hover {
-    background: var(--paper);
-    color: var(--ink);
 }
 
 
@@ -201,45 +197,32 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
 
 
 /* =====================================================
-   HERO plein ecran
+   HERO fond degrade clair
 ===================================================== */
 
 .hero {
     position: relative;
-    height: 100svh;
-    min-height: 600px;
     width: 100%;
+    padding: clamp(130px, 20vh, 240px) var(--page-x) clamp(56px, 9vh, 120px);
+
+    /* degrade gris clair, doux, avec un halo lumineux en haut */
+    background:
+        radial-gradient(120% 90% at 78% -10%, #ffffff 0%, rgba(255,255,255,0) 55%),
+        radial-gradient(90% 70% at 8% 4%, #efeee9 0%, rgba(239,238,233,0) 60%),
+        linear-gradient(168deg, #e9e8e3 0%, #e3e2dc 34%, #dcdbd4 66%, #d4d3cb 100%);
+
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
 }
 
-.hero-media {
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    z-index: 0;
-}
-
-.hero-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transform: scale(1.08);
-    animation: heroReveal 1.8s var(--ease) .1s forwards;
-}
-
-@keyframes heroReveal {
-    to { opacity: 1; transform: scale(1); }
-}
-
-.hero-media::after {
+/* fin liseré de séparation en bas du hero */
+.hero::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to top, rgba(10,10,8,.62) 0%, rgba(10,10,8,.12) 42%, rgba(10,10,8,.28) 100%);
+    left: var(--page-x);
+    right: var(--page-x);
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
 }
 
 .hero-inner {
@@ -248,8 +231,7 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     width: 100%;
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 0 var(--page-x) clamp(48px, 9vh, 110px);
-    color: var(--paper);
+    color: var(--ink);
 }
 
 .hero-eyebrow {
@@ -260,24 +242,24 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     font-weight: 500;
     letter-spacing: .24em;
     text-transform: uppercase;
-    margin-bottom: clamp(20px, 4vh, 36px);
+    color: var(--ink-soft);
+    margin-bottom: clamp(24px, 4.5vh, 44px);
     opacity: 0;
-    animation: fadeUp 1s var(--ease) .5s forwards;
+    animation: fadeUp 1s var(--ease) .3s forwards;
 }
 
 .hero-eyebrow::before {
     content: "";
     width: 30px;
     height: 1px;
-    background: currentColor;
-    opacity: .7;
+    background: var(--line-strong);
 }
 
 .hero-title {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(3rem, 9.5vw, 9rem);
-    line-height: .95;
+    font-size: clamp(2.9rem, 9vw, 8.4rem);
+    line-height: .96;
     letter-spacing: -.02em;
     max-width: 16ch;
 }
@@ -289,9 +271,9 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     animation: fadeUp 1.1s var(--ease) forwards;
 }
 
-.hero-title span:nth-child(1) { animation-delay: .55s; }
-.hero-title span:nth-child(2) { animation-delay: .68s; }
-.hero-title span:nth-child(3) { animation-delay: .81s; }
+.hero-title span:nth-child(1) { animation-delay: .35s; }
+.hero-title span:nth-child(2) { animation-delay: .48s; }
+.hero-title span:nth-child(3) { animation-delay: .61s; }
 
 .hero-title .accent { font-style: italic; font-weight: 400; }
 
@@ -305,16 +287,16 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-    margin-top: clamp(28px, 5vh, 48px);
+    margin-top: clamp(30px, 5vh, 52px);
     opacity: 0;
-    animation: fadeUp 1s var(--ease) 1s forwards;
+    animation: fadeUp 1s var(--ease) .8s forwards;
 }
 
 .hero-subtitle {
-    max-width: 40ch;
-    font-size: clamp(.95rem, 1.3vw, 1.1rem);
+    max-width: 42ch;
+    font-size: clamp(.98rem, 1.3vw, 1.12rem);
     line-height: 1.7;
-    opacity: .9;
+    color: var(--ink-soft);
 }
 
 .hero-link {
@@ -324,49 +306,43 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     font-size: 14px;
     letter-spacing: .02em;
     padding-bottom: 6px;
-    border-bottom: 1px solid currentColor;
+    border-bottom: 1px solid var(--ink);
     white-space: nowrap;
     transition: gap .35s var(--ease);
 }
 
 .hero-link:hover { gap: 18px; }
 
-.scroll-cue {
-    position: absolute;
-    left: 50%;
-    bottom: 26px;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: var(--paper);
+
+/* =====================================================
+   GRANDE IMAGE sous le hero
+===================================================== */
+
+.hero-image {
+    max-width: var(--maxw);
+    margin: 0 auto clamp(80px, 14vh, 180px);
+    padding: clamp(20px, 4vh, 48px) var(--page-x) 0;
+}
+
+.hero-image-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--paper-soft);
+}
+
+.hero-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     opacity: 0;
-    animation: fadeUp 1s var(--ease) 1.3s forwards;
+    transform: scale(1.06);
+    animation: heroReveal 1.7s var(--ease) .2s forwards;
 }
 
-.scroll-cue span {
-    font-size: 9.5px;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    opacity: .75;
-}
-
-.scroll-cue .line {
-    width: 1px;
-    height: 44px;
-    background: currentColor;
-    opacity: .5;
-    transform-origin: top;
-    animation: scrollLine 2.4s var(--ease) infinite;
-}
-
-@keyframes scrollLine {
-    0%   { transform: scaleY(0); transform-origin: top; }
-    45%  { transform: scaleY(1); transform-origin: top; }
-    55%  { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
+@keyframes heroReveal {
+    to { opacity: 1; transform: scale(1); }
 }
 
 
@@ -779,7 +755,6 @@ footer a:hover { color: var(--ink); }
     .services-grid { grid-template-columns: 1fr; }
     .service { min-height: auto; }
     .service-name { margin-top: 28px; }
-    .scroll-cue { display: none; }
 }
 
 
@@ -795,11 +770,10 @@ footer a:hover { color: var(--ink); }
         scroll-behavior: auto !important;
     }
     .reveal { opacity: 1; transform: none; }
-    .hero-media img,
+    .hero-image-frame img,
     .hero-title span,
     .hero-eyebrow,
-    .hero-foot,
-    .scroll-cue { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .hero-foot { opacity: 1 !important; transform: none !important; animation: none !important; }
 }
 
 a:focus-visible,
@@ -841,8 +815,6 @@ button:focus-visible {
 
 <section class="hero">
 
-    <div class="hero-media" id="hero-image"></div>
-
     <div class="hero-inner">
 
         <div class="hero-eyebrow">Photographe · Martigues</div>
@@ -865,11 +837,13 @@ button:focus-visible {
 
     </div>
 
-    <div class="scroll-cue">
-        <span>Defiler</span>
-        <div class="line"></div>
-    </div>
+</section>
 
+
+<!-- ===================================================== GRANDE IMAGE ===================================================== -->
+
+<section class="hero-image reveal">
+    <div class="hero-image-frame" id="hero-image"></div>
 </section>
 
 
@@ -1008,16 +982,13 @@ button:focus-visible {
 
     (function () {
         var header = document.getElementById("site-header");
-        var hero = document.querySelector(".hero");
-        if (!header || !hero) { header && header.classList.add("solid"); return; }
+        if (!header) return;
 
         function onScroll() {
-            var threshold = hero.offsetHeight - header.offsetHeight - 40;
-            if (window.scrollY > threshold) header.classList.add("solid");
+            if (window.scrollY > 20) header.classList.add("solid");
             else header.classList.remove("solid");
         }
         window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
         onScroll();
     })();
 </script>
