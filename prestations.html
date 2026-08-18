@@ -2,1096 +2,1523 @@
 <html lang="fr">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Prestations · Morgane BS Photographe</title>
-    <meta name="description" content="Les prestations et tarifs de Morgane BS Photographe à Martigues. Portrait, couple, mariage et famille.">
+
+    <meta name="description"
+        content="Découvrez les prestations de Morgane BS Photographe à Martigues : séances photo, couples, familles, événements et mariages.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
     <style>
-/* =====================================================
-   MORGANEBS - Photographe
-   Direction artistique : editorial, clair, minimal
-===================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&display=swap');
-
-:root {
-
-    --paper:        #ffffff;
-    --paper-soft:   #f2f1ec;
-    --ink:          #16150f;
-    --ink-soft:     #55534a;
-    --line:         #dcdbd4;
-    --line-strong:  #bebbb1;
-
-    --display: "Fraunces", Georgia, "Times New Roman", serif;
-    --body:    "Inter", system-ui, -apple-system, sans-serif;
-
-    --page-x:  clamp(22px, 5.5vw, 130px);
-    --maxw:    1680px;
-
-    --ease:    cubic-bezier(.22, .61, .36, 1);
-
-    /* Titre hero : s'adapte a la fois a la largeur ET la hauteur.
-       min() prend la plus petite valeur -> jamais trop grand
-       quand la fenetre est basse (paysage) ou etroite (mobile). */
-    --hero-size:    min(15vh, 9vw, 8.4rem);
-    --hero-size-sm: min(12vh, 13vw, 5rem);
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--body);
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-}
-
-a { color: inherit; text-decoration: none; }
-
-img { display: block; width: 100%; height: auto; }
-
-::sélection { background: var(--ink); color: var(--paper); }
-
-em { font-style: italic; font-weight: 400; }
-
-
-.small {
-    font-size: clamp(10px, .72vw, 11px);
-    font-weight: 500;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    height: clamp(60px, 8vh, 80px);
-    padding: 0 var(--page-x);
-
-    color: var(--ink);
-    background: transparent;
-    border-bottom: 1px solid transparent;
-    transition: background .5s var(--ease), border-color .5s var(--ease);
-}
-
-header.solid {
-    background: color-mix(in srgb, var(--paper) 85%, transparent);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-}
-
-.logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: clamp(12px, .95vw, 13px);
-    font-weight: 500;
-    letter-spacing: .26em;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.logo-img {
-    width: auto;
-    height: clamp(28px, 4vh, 38px);
-    border-radius: 50%;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
-    flex: none;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    gap: clamp(20px, 3vw, 46px);
-}
-
-nav a {
-    position: relative;
-    font-size: clamp(12px, .95vw, 13px);
-    font-weight: 400;
-    letter-spacing: .04em;
-    opacity: .74;
-    transition: opacity .3s var(--ease);
-}
-
-nav a:hover,
-nav a.active { opacity: 1; }
-
-nav a:not(.appointment)::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform .35s var(--ease);
-}
-
-nav a:not(.appointment):hover::after,
-nav a.active:not(.appointment)::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-nav a.appointment {
-    padding: 9px 18px;
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    opacity: 1;
-    transition: background .3s var(--ease), color .3s var(--ease);
-}
-
-nav a.appointment:hover {
-    background: var(--ink);
-    color: var(--paper);
-}
-
-/* Bouton principal : fond noir plein */
-nav a.nav-cta {
-    padding: 10px 20px;
-    border-radius: 999px;
-    background: var(--ink);
-    color: var(--paper);
-    opacity: 1;
-    white-space: nowrap;
-    transition: transform .35s var(--ease), background .35s var(--ease);
-}
-
-nav a.nav-cta:hover {
-    background: #000;
-    transform: translateY(-2px);
-    color: var(--paper);
-}
-
-nav a.nav-cta::after { display: none; }
-
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    width: 26px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px 0;
-}
-
-.menu-toggle span {
-    display: block;
-    height: 1.5px;
-    width: 100%;
-    background: currentColor;
-    transition: transform .35s var(--ease), opacity .3s var(--ease);
-}
-
-body.nav-open .menu-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-body.nav-open .menu-toggle span:nth-child(2) { opacity: 0; }
-body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-
-/* =====================================================
-   HERO plein ecran (fond degrade clair, sans image)
-===================================================== */
-
-.hero {
-    position: relative;
-    min-height: 100svh;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    padding: clamp(104px, 13vh, 150px) var(--page-x) clamp(60px, 10vh, 120px);
-    overflow: hidden;
-
-    background:
-        radial-gradient(130% 100% at 82% -8%, #ffffff 0%, rgba(255,255,255,0) 58%),
-        radial-gradient(90% 70% at 4% 8%, #fbfbf9 0%, rgba(251,251,249,0) 60%),
-        linear-gradient(170deg, #ffffff 0%, #fafaf8 45%, #f4f3ef 100%);
-}
-
-.hero-inner {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: var(--maxw);
-    margin: 0 auto;
-}
-
-.hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: clamp(10px, .75vw, 11px);
-    font-weight: 500;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: clamp(22px, 4vh, 44px);
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) .25s forwards;
-}
-
-.hero-eyebrow::before {
-    content: "";
-    width: clamp(24px, 3vw, 34px);
-    height: 1px;
-    background: var(--line-strong);
-}
-
-.hero-title {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: var(--hero-size);
-    line-height: .95;
-    letter-spacing: -.02em;
-    max-width: 18ch;
-}
-
-.hero-title span {
-    display: block;
-    opacity: 0;
-    transform: translateY(26px);
-    animation: fadeUp 1.1s var(--ease) forwards;
-}
-
-.hero-title span:nth-child(1) { animation-delay: .3s; }
-.hero-title span:nth-child(2) { animation-delay: .42s; }
-.hero-title span:nth-child(3) { animation-delay: .54s; }
-
-.hero-title .accent { font-style: italic; font-weight: 400; }
-
-@keyframes fadeUp { to { opacity: 1; transform: none; } }
-
-.hero-foot {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-    margin-top: clamp(28px, 5vh, 54px);
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) .8s forwards;
-}
-
-.hero-subtitle {
-    max-width: 44ch;
-    font-size: clamp(.95rem, 1.15vw, 1.12rem);
-    line-height: 1.7;
-    color: var(--ink-soft);
-}
-
-.hero-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: clamp(13px, 1vw, 14px);
-    letter-spacing: .02em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--ink);
-    white-space: nowrap;
-    transition: gap .35s var(--ease);
-}
-
-.hero-link:hover { gap: 18px; }
-
-/* fleche de defilement discrete */
-.hero-scroll {
-    position: absolute;
-    left: 50%;
-    bottom: clamp(20px, 4vh, 34px);
-    transform: translateX(-50%);
-    z-index: 2;
-    width: 1px;
-    height: clamp(34px, 6vh, 54px);
-    background: var(--line-strong);
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) 1.2s forwards;
-}
-
-.hero-scroll::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform: translateY(-100%);
-    animation: scrollTrail 2.6s var(--ease) infinite;
-}
-
-@keyframes scrollTrail {
-    0%   { transform: translateY(-100%); }
-    50%  { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-}
-
-
-/* =====================================================
-   SECTIONS generiques
-===================================================== */
-
-.section {
-    padding: 0 var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto clamp(90px, 15vh, 200px);
-}
-
-.section-first {
-    padding-top: clamp(80px, 14vh, 170px);
-}
-
-.section-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-    margin-bottom: clamp(40px, 7vh, 80px);
-}
-
-.section-label {
-    font-size: clamp(10px, .72vw, 11px);
-    font-weight: 500;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 14px;
-}
-
-.section-title {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(2.1rem, 5.5vw, 4.6rem);
-    line-height: 1.02;
-    letter-spacing: -.015em;
-}
-
-.section-link {
-    font-size: clamp(12px, 1vw, 13px);
-    letter-spacing: .03em;
-    color: var(--ink-soft);
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--line-strong);
-    white-space: nowrap;
-    transition: color .3s var(--ease), border-color .3s var(--ease);
-}
-
-.section-link:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-}
-
-
-/* =====================================================
-   GRILLE PORTFOLIO
-===================================================== */
-
-.portfolio-grid,
-.portfolio-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(14px, 2vw, 38px);
-}
-
-.work {
-    display: block;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .8s var(--ease), transform .8s var(--ease);
-}
-
-.work.in { opacity: 1; transform: none; }
-
-.work-image {
-    position: relative;
-    overflow: hidden;
-    background: var(--paper-soft);
-    aspect-ratio: 4 / 5;
-}
-
-.work-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s var(--ease);
-}
-
-.work:hover .work-image img { transform: scale(1.05); }
-
-/* legende : uniquement la categorie, pas le nom de fichier */
-.work-caption {
-    margin-top: 14px;
-}
-
-.work-caption span {
-    font-size: clamp(10px, .78vw, 11px);
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-}
-
-.loading-note {
-    grid-column: 1 / -1;
-    padding: 60px 0;
-    text-align: center;
-    font-size: clamp(12px, 1vw, 13px);
-    letter-spacing: .04em;
-    color: var(--ink-soft);
-}
-
-
-/* =====================================================
-   A PROPOS
-===================================================== */
-
-.about {
-    padding: 0 var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto clamp(90px, 15vh, 200px);
-}
-
-.about-inner {
-    max-width: 34ch;
-}
-
-.about-text {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(1.7rem, 3.6vw, 3.2rem);
-    line-height: 1.16;
-    letter-spacing: -.015em;
-}
-
-.about-small {
-    margin-top: clamp(24px, 4vh, 40px);
-    max-width: 54ch;
-    font-size: clamp(.95rem, 1.1vw, 1.05rem);
-    color: var(--ink-soft);
-    line-height: 1.75;
-}
-
-
-/* =====================================================
-   CONTACT (bloc sur accueil)
-===================================================== */
-
-.contact {
-    padding: clamp(90px, 16vh, 220px) var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto;
-    border-top: 1px solid var(--line);
-    text-align: center;
-}
-
-.contact .section-label { margin-bottom: 26px; }
-
-.contact-title {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(2.6rem, 7vw, 6.5rem);
-    line-height: 1;
-    letter-spacing: -.02em;
-}
-
-.contact-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: clamp(34px, 6vh, 60px);
-    padding: 16px 36px;
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: 999px;
-    font-size: clamp(13px, 1vw, 14px);
-    letter-spacing: .03em;
-    transition: transform .35s var(--ease), background .35s var(--ease);
-}
-
-.contact-button:hover { transform: translateY(-3px); background: #000; }
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: clamp(28px, 4vh, 38px) var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto;
-    border-top: 1px solid var(--line);
-    font-size: clamp(11px, .9vw, 12px);
-    letter-spacing: .04em;
-    color: var(--ink-soft);
-}
-
-footer a { transition: color .3s var(--ease); }
-footer a:hover { color: var(--ink); }
-
-
-/* =====================================================
-   REVEAL au scroll (sections)
-===================================================== */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s var(--ease), transform 1s var(--ease);
-    will-change: opacity, transform;
-}
-
-.reveal.is-visible { opacity: 1; transform: none; }
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 1024px) {
-    .portfolio-grid,
-    .portfolio-gallery { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 720px) {
-
-    .logo {
-        letter-spacing: .12em;
-        font-size: 10.5px;
-        gap: 9px;
-    }
-
-    .logo-img {
-        height: 26px;
-    }
-
-    .hero-title { font-size: var(--hero-size-sm); }
-
-    .menu-toggle { display: flex; }
-
-    nav {
-        position: fixed;
-        inset: clamp(60px, 8vh, 80px) 0 auto 0;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        padding: 20px var(--page-x) 34px;
-        background: var(--paper);
-        color: var(--ink);
-        border-bottom: 1px solid var(--line);
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform .35s var(--ease), opacity .3s var(--ease);
-    }
-
-    body.nav-open nav {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    nav a {
-        width: 100%;
-        padding: 14px 0;
-        font-size: 17px;
-        opacity: 1;
-        border-bottom: 1px solid var(--line);
-    }
-
-    nav a:not(.appointment)::after { display: none; }
-
-    nav a.appointment {
-        margin-top: 16px;
-        width: auto;
-        border: 1px solid var(--ink);
-        text-align: center;
-    }
-
-    nav a.nav-cta {
-        margin-top: 10px;
-        width: auto;
-        border: none;
-        border-bottom: none;
-        text-align: center;
-    }
-
-    .hero-foot { flex-direction: column; align-items: flex-start; }
-
-    .section-head { align-items: flex-start; }
-
-    .work-image { aspect-ratio: 3 / 4; }
-}
-
-@media (max-width: 480px) {
-    .portfolio-grid,
-    .portfolio-gallery { grid-template-columns: 1fr; gap: 26px; }
-    .hero-scroll { display: none; }
-}
-
-
-/* =====================================================
-   ACCESSIBILITE : mouvement reduit
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-    }
-    .reveal, .work { opacity: 1 !important; transform: none !important; }
-    .hero-title span,
-    .hero-eyebrow,
-    .hero-foot,
-    .hero-scroll { opacity: 1 !important; transform: none !important; animation: none !important; }
-}
-
-a:focus-visible,
-button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 3px;
-}
-
-/* =====================================================
-   PAGE PRESTATIONS
-===================================================== */
-
-.presta-intro {
-    padding: clamp(104px, 12vh, 140px) var(--page-x) clamp(36px, 6vh, 70px);
-    max-width: var(--maxw);
-    margin: 0 auto;
-}
-
-.presta-intro .small {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
-}
-
-.presta-intro .small::before {
-    content: "";
-    width: clamp(24px, 3vw, 34px);
-    height: 1px;
-    background: var(--line-strong);
-}
-
-.presta-intro h1 {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: min(14vh, 8.5vw, 7rem);
-    line-height: .98;
-    letter-spacing: -.02em;
-    max-width: 16ch;
-}
-
-.presta-lede {
-    margin-top: clamp(24px, 4vh, 40px);
-    max-width: 58ch;
-    font-size: clamp(1rem, 1.2vw, 1.12rem);
-    line-height: 1.7;
-    color: var(--ink-soft);
-}
-
-
-/* Grille des trois formules */
-
-.formulas {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    max-width: var(--maxw);
-    margin: clamp(20px, 4vh, 40px) auto clamp(60px, 10vh, 120px);
-}
-
-.formula {
-    background: var(--paper);
-    padding: clamp(32px, 3.5vw, 54px) clamp(26px, 2.6vw, 42px);
-    display: flex;
-    flex-direction: column;
-}
-
-.formula-cat {
-    font-size: clamp(10px, .72vw, 11px);
-    font-weight: 500;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 18px;
-}
-
-.formula-name {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(1.8rem, 2.6vw, 2.6rem);
-    line-height: 1.05;
-    letter-spacing: -.01em;
-}
-
-.formula-price {
-    font-family: var(--display);
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-    color: var(--ink);
-    margin-top: 12px;
-    padding-bottom: clamp(22px, 3vh, 32px);
-    border-bottom: 1px solid var(--line);
-}
-
-.formula-list {
-    list-style: none;
-    margin: clamp(24px, 3vh, 32px) 0 clamp(28px, 4vh, 40px);
-    padding: 0;
-    display: grid;
-    gap: 14px;
-}
-
-.formula-list li {
-    position: relative;
-    padding-left: 22px;
-    font-size: clamp(.9rem, 1vw, 1rem);
-    line-height: 1.5;
-    color: var(--ink-soft);
-}
-
-.formula-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 9px;
-    width: 8px;
-    height: 1px;
-    background: var(--line-strong);
-}
-
-.formula-cta {
-    margin-top: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    align-self: flex-start;
-    font-size: clamp(13px, 1vw, 14px);
-    letter-spacing: .02em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--ink);
-    transition: gap .35s var(--ease);
-}
-
-.formula-cta:hover { gap: 16px; }
-
-/* formule mise en avant */
-.formula.featured {
-    position: relative;
-    background: #faf9f6;
-}
-
-.formula-badge {
-    position: absolute;
-    top: clamp(20px, 2.5vw, 30px);
-    right: clamp(26px, 2.6vw, 42px);
-    font-size: 9.5px;
-    font-weight: 500;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--ink);
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    padding: 5px 11px;
-}
-
-
-/* Tarifs annexes */
-
-.extras {
-    max-width: var(--maxw);
-    margin: 0 auto clamp(90px, 15vh, 180px);
-    padding: 0 var(--page-x);
-}
-
-.extras-head {
-    margin-bottom: clamp(32px, 5vh, 56px);
-}
-
-.extras-head .small { display: block; margin-bottom: 14px; }
-
-.extras-head h2 {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(1.8rem, 4vw, 3.2rem);
-    line-height: 1.02;
-    letter-spacing: -.015em;
-}
-
-.extras-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(24px, 3vw, 48px);
-}
-
-.extra {
-    padding-top: clamp(20px, 2.5vh, 28px);
-    border-top: 1px solid var(--line);
-}
-
-.extra-name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-    letter-spacing: -.01em;
-    margin-bottom: 10px;
-}
-
-.extra-desc {
-    font-size: clamp(.9rem, 1vw, 1rem);
-    line-height: 1.6;
-    color: var(--ink-soft);
-}
-
-
-/* Bloc contact bas de page */
-
-.presta-contact {
-    padding: clamp(80px, 14vh, 180px) var(--page-x);
-    max-width: var(--maxw);
-    margin: 0 auto;
-    border-top: 1px solid var(--line);
-    text-align: center;
-}
-
-.presta-contact .small { display: block; margin-bottom: 24px; }
-
-.presta-contact h2 {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(2.4rem, 7vw, 5.5rem);
-    line-height: 1;
-    letter-spacing: -.02em;
-}
-
-.presta-contact .link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: clamp(28px, 5vh, 46px);
-    font-size: clamp(13px, 1vw, 14px);
-    letter-spacing: .02em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--ink);
-    transition: gap .35s var(--ease);
-}
-
-.presta-contact .link:hover { gap: 18px; }
-
-
-@media (max-width: 860px) {
-    .formulas { grid-template-columns: 1fr; }
-    .extras-grid { grid-template-columns: 1fr; gap: 0; }
-    .extra { margin-top: 0; }
-}
+        :root {
+            --paper: #ffffff;
+            --paper-soft: #f2f1ec;
+            --ink: #16150f;
+            --ink-soft: #55534a;
+            --line: #dcdbd4;
+            --line-strong: #bebbb1;
+
+            --display: "Fraunces", Georgia, "Times New Roman", serif;
+            --body: "Inter", system-ui, -apple-system, sans-serif;
+
+            --page-x: clamp(22px, 5.5vw, 130px);
+            --maxw: 1680px;
+
+            --ease: cubic-bezier(.22, .61, .36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--body);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            height: clamp(60px, 8vh, 80px);
+            padding: 0 var(--page-x);
+
+            background: rgba(255, 255, 255, .88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: clamp(12px, .95vw, 13px);
+            font-weight: 500;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(20px, 3vw, 46px);
+        }
+
+        nav a {
+            position: relative;
+
+            font-size: clamp(12px, .95vw, 13px);
+            font-weight: 400;
+            letter-spacing: .04em;
+
+            opacity: .74;
+            transition: opacity .3s var(--ease);
+        }
+
+        nav a:hover,
+        nav a.active {
+            opacity: 1;
+        }
+
+        nav a:not(.nav-cta)::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+
+            width: 100%;
+            height: 1px;
+
+            background: currentColor;
+
+            transform: scaleX(0);
+            transform-origin: right;
+
+            transition: transform .35s var(--ease);
+        }
+
+        nav a:not(.nav-cta):hover::after,
+        nav a.active:not(.nav-cta)::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        nav a.nav-cta {
+            padding: 10px 20px;
+
+            border-radius: 999px;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            opacity: 1;
+            white-space: nowrap;
+
+            transition:
+                transform .35s var(--ease),
+                background .35s var(--ease);
+        }
+
+        nav a.nav-cta:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+
+            flex-direction: column;
+            gap: 5px;
+
+            width: 26px;
+
+            background: none;
+            border: none;
+
+            cursor: pointer;
+            padding: 6px 0;
+        }
+
+        .menu-toggle span {
+            display: block;
+
+            height: 1.5px;
+            width: 100%;
+
+            background: currentColor;
+
+            transition:
+                transform .35s var(--ease),
+                opacity .3s var(--ease);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding:
+                clamp(130px, 18vh, 210px)
+                var(--page-x)
+                clamp(75px, 10vh, 130px);
+
+            max-width: var(--maxw);
+            margin: auto;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: clamp(10px, .72vw, 11px);
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+
+            color: var(--ink-soft);
+
+            margin-bottom: 30px;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+
+            width: 34px;
+            height: 1px;
+
+            background: var(--line-strong);
+        }
+
+        .hero h1 {
+            max-width: 1050px;
+
+            font-family: var(--display);
+            font-size: clamp(3.5rem, 8vw, 9rem);
+            font-weight: 300;
+            line-height: .94;
+
+            letter-spacing: -.025em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-intro {
+            max-width: 650px;
+
+            margin-top: 45px;
+
+            font-size: clamp(1rem, 1.25vw, 1.18rem);
+            line-height: 1.75;
+
+            color: var(--ink-soft);
+        }
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        .container {
+            max-width: var(--maxw);
+            padding: 0 var(--page-x);
+            margin: auto;
+        }
+
+        .section {
+            padding: clamp(80px, 12vh, 150px) 0;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            gap: 40px;
+
+            margin-bottom: 65px;
+        }
+
+        .section-label {
+            font-size: clamp(10px, .72vw, 11px);
+            font-weight: 500;
+
+            letter-spacing: .22em;
+            text-transform: uppercase;
+
+            color: var(--ink-soft);
+
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: var(--display);
+            font-size: clamp(2.6rem, 5vw, 5.2rem);
+            font-weight: 300;
+
+            line-height: 1;
+
+            letter-spacing: -.02em;
+        }
+
+        .section-description {
+            max-width: 480px;
+
+            color: var(--ink-soft);
+
+            line-height: 1.75;
+        }
+
+        /* =========================
+           SEANCE CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            border-top: 1px solid var(--line);
+        }
+
+        .card {
+            padding:
+                40px
+                clamp(20px, 4vw, 70px)
+                50px 0;
+
+            min-height: 570px;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .card:nth-child(2) {
+            padding-left: clamp(20px, 4vw, 70px);
+            border-left: 1px solid var(--line);
+        }
+
+        .number {
+            font-size: 11px;
+            font-weight: 500;
+
+            letter-spacing: .2em;
+            text-transform: uppercase;
+
+            color: var(--ink-soft);
+        }
+
+        .card h3 {
+            margin-top: 16px;
+            margin-bottom: 8px;
+
+            font-family: var(--display);
+            font-size: clamp(2.4rem, 4vw, 4rem);
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+        .price {
+            margin-top: 14px;
+
+            font-family: var(--display);
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 300;
+        }
+
+        .card-intro {
+            max-width: 600px;
+
+            margin-top: 28px;
+
+            color: var(--ink-soft);
+            line-height: 1.75;
+        }
+
+        .card-intro strong {
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        .ideal {
+            margin-top: 30px;
+            margin-bottom: 10px;
+
+            font-size: 11px;
+            font-weight: 500;
+
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        .ideal-text {
+            color: var(--ink-soft);
+        }
+
+        .features {
+            list-style: none;
+
+            margin-top: 30px;
+        }
+
+        .features li {
+            position: relative;
+
+            padding-left: 20px;
+            margin-bottom: 9px;
+
+            color: var(--ink-soft);
+        }
+
+        .features li::before {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            top: .75em;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: var(--ink);
+        }
+
+        .extra {
+            margin-top: 35px;
+
+            font-size: 13px;
+            color: var(--ink-soft);
+        }
+
+        /* =========================
+           MARIAGES
+        ========================= */
+
+        .wedding-section {
+            background: var(--paper-soft);
+
+            padding:
+                clamp(70px, 9vw, 130px)
+                0;
+        }
+
+        .wedding-card {
+            padding: clamp(35px, 5vw, 75px);
+
+            background: var(--paper);
+
+            border: 1px solid var(--line);
+        }
+
+        .wedding-card + .wedding-card {
+            margin-top: 25px;
+        }
+
+        .wedding-grid {
+            display: grid;
+
+            grid-template-columns: minmax(250px, .8fr) 1.2fr;
+
+            gap: clamp(45px, 8vw, 120px);
+        }
+
+        .wedding-card h3 {
+            margin-top: 15px;
+
+            font-family: var(--display);
+            font-size: clamp(2.5rem, 4.5vw, 4.8rem);
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+        .wedding-description {
+            margin-top: 22px;
+
+            max-width: 500px;
+
+            color: var(--ink-soft);
+            line-height: 1.75;
+        }
+
+        .wedding-price {
+            margin-top: 35px;
+
+            font-family: var(--display);
+            font-size: clamp(2rem, 3vw, 3rem);
+        }
+
+        .sub-title {
+            margin-bottom: 15px;
+
+            font-size: 11px;
+            font-weight: 500;
+
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        .wedding-list {
+            list-style: none;
+
+            margin-bottom: 35px;
+        }
+
+        .wedding-list li {
+            position: relative;
+
+            padding-left: 20px;
+            margin-bottom: 9px;
+
+            color: var(--ink-soft);
+        }
+
+        .wedding-list li::before {
+            content: "—";
+
+            position: absolute;
+            left: 0;
+
+            color: var(--ink);
+        }
+
+        /* =========================
+           INFOS
+        ========================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .info {
+            padding: 55px 0;
+        }
+
+        .info + .info {
+            padding-left: clamp(25px, 6vw, 100px);
+
+            border-left: 1px solid var(--line);
+        }
+
+        .info h3 {
+            margin-bottom: 18px;
+
+            font-family: var(--display);
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 400;
+        }
+
+        .info p {
+            max-width: 650px;
+
+            color: var(--ink-soft);
+            line-height: 1.8;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta-section {
+            padding:
+                clamp(90px, 12vw, 170px)
+                var(--page-x);
+
+            background: var(--ink);
+
+            color: var(--paper);
+
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            max-width: 900px;
+
+            margin: auto;
+
+            font-family: var(--display);
+            font-size: clamp(3rem, 6vw, 6.5rem);
+            font-weight: 300;
+
+            line-height: .98;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+
+            margin: 30px auto;
+
+            color: #c9c7bf;
+        }
+
+        .cta-button {
+            display: inline-flex;
+
+            margin-top: 15px;
+
+            padding: 13px 25px;
+
+            border: 1px solid var(--paper);
+            border-radius: 999px;
+
+            transition:
+                background .3s var(--ease),
+                color .3s var(--ease);
+        }
+
+        .cta-button:hover {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            padding:
+                30px
+                var(--page-x);
+
+            border-top: 1px solid var(--line);
+
+            font-size: 12px;
+
+            color: var(--ink-soft);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                display: none;
+
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+                right: 0;
+
+                flex-direction: column;
+                align-items: flex-start;
+
+                padding: 25px var(--page-x);
+
+                background: var(--paper);
+
+                border-bottom: 1px solid var(--line);
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding-top: 125px;
+            }
+
+            .hero h1 {
+                font-size: clamp(3.3rem, 14vw, 6rem);
+            }
+
+            .section-head {
+                display: block;
+            }
+
+            .section-description {
+                margin-top: 25px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: auto;
+                padding: 40px 0 55px;
+            }
+
+            .card:nth-child(2) {
+                padding-left: 0;
+
+                border-left: 0;
+            }
+
+            .wedding-grid {
+                grid-template-columns: 1fr;
+
+                gap: 45px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info + .info {
+                padding-left: 0;
+                border-left: 0;
+
+                border-top: 1px solid var(--line);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding-bottom: 70px;
+            }
+
+            .hero-intro {
+                margin-top: 30px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .wedding-card {
+                padding: 30px 22px;
+            }
+
+            footer {
+                flex-direction: column;
+            }
+        }
     </style>
-
 </head>
 
 
 <body>
 
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-<!-- ===================================================== HEADER ===================================================== -->
+    <header>
 
-<header id="site-header" class="solid">
+        <a href="index.html" class="logo">
 
-    <a href="index.html" class="logo"><img src="logo.png" alt="" class="logo-img"><span>Morgane BS Photographe</span></a>
+            <img
+                src="logo.png"
+                alt="Morgane BS Photographe"
+                class="logo-img"
+            >
 
-    <nav>
-        <a href="index.html">Accueil</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="prestations.html" class="active">Prestations</a>
-        <a href="contact.html" class="appointment">Contact</a>
-        <a href="https://fotostudio.io" class="nav-cta" target="_blank" rel="noopener">Prendre RDV</a>
-    </nav>
+            Morgane BS
 
-    <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-</header>
+        </a>
 
 
-<!-- ===================================================== INTRO ===================================================== -->
+        <nav>
 
-<section class="presta-intro">
-    <span class="small">Prestations & tarifs</span>
-    <h1>Des séances pensées pour <em>vous.</em></h1>
-    <p class="presta-lede">
-        Trois formules pour couvrir l'essentiel. Chaque prestation peut être
-        ajustée : durée, nombre de photos, lieu. Un devis sur mesure est
-        disponible pour les projets particuliers.
-    </p>
-</section>
+            <a href="index.html">
+                Accueil
+            </a>
 
+            <a href="portfolio.html">
+                Portfolio
+            </a>
 
-<!-- ===================================================== FORMULES ===================================================== -->
+            <a href="prestations.html" class="active">
+                Prestations
+            </a>
 
-<section class="formulas">
+            <a href="contact.html">
+                À propos
+            </a>
 
-    <div class="formula">
-        <div class="formula-cat">Portrait / Couple</div>
-        <div class="formula-name">Essentiel</div>
-        <div class="formula-price">150 &euro; / séance</div>
-        <ul class="formula-list">
-            <li>1h de prise de vue, studio ou extérieur</li>
-            <li>1 tenue ou 1 décor</li>
-            <li>15 photos retouchées livrees en ligne</li>
-            <li>Galerie privée de sélection</li>
-        </ul>
-        <a href="contact.html" class="formula-cta">Réserver cette formule →</a>
-    </div>
+            <a href="contact.html" class="nav-cta">
+                Prendre rendez-vous
+            </a>
 
-    <div class="formula featured">
-        <div class="formula-badge">Le plus choisi</div>
-        <div class="formula-cat">Famille / Seance</div>
-        <div class="formula-name">Signature</div>
-        <div class="formula-price">320 &euro; / séance</div>
-        <ul class="formula-list">
-            <li>2h de prise de vue, un ou deux lieux</li>
-            <li>Jusqu'à 3 tenues ou ambiances</li>
-            <li>40 photos retouchées livrees en ligne</li>
-            <li>5 tirages fine art A4 inclus</li>
-            <li>Accompagnement et direction artistique</li>
-        </ul>
-        <a href="contact.html" class="formula-cta">Réserver cette formule →</a>
-    </div>
-
-    <div class="formula">
-        <div class="formula-cat">Mariage</div>
-        <div class="formula-name">Intégrale</div>
-        <div class="formula-price">Sur devis</div>
-        <ul class="formula-list">
-            <li>Jusqu'à une journée de reportage</li>
-            <li>Repérage préalable inclus</li>
-            <li>150+ photos retouchées</li>
-            <li>Galerie privée et tirages sur demande</li>
-            <li>Second photographe en option</li>
-        </ul>
-        <a href="contact.html" class="formula-cta">Demander un devis →</a>
-    </div>
-
-</section>
+        </nav>
 
 
-<!-- ===================================================== TARIFS ANNEXES ===================================================== -->
+        <button
+            class="menu-toggle"
+            aria-label="Ouvrir le menu"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-<section class="extras">
+    </header>
 
-    <div class="extras-head">
-        <span class="small">À la carte</span>
-        <h2>Options &amp; <em>détails.</em></h2>
-    </div>
 
-    <div class="extras-grid">
+    <main>
 
-        <div class="extra">
-            <div class="extra-name">Tirages fine art</div>
-            <p class="extra-desc">
-                A partir de 25 &euro; le tirage encadré, formats A4 a A2,
-                papier coton 310g.
+        <!-- =========================
+             HERO
+        ========================= -->
+
+        <section class="hero">
+
+            <div class="hero-eyebrow">
+                Prestations & tarifs
+            </div>
+
+            <h1>
+                Quatre façons de raconter
+                <em>votre histoire.</em>
+            </h1>
+
+            <p class="hero-intro">
+                Les plus belles photographies sont celles qui nous font
+                ressentir quelque chose. Chaque formule est pensée pour
+                prendre le temps de capturer les instants de vie,
+                les liens et les émotions qui méritent de traverser les années.
             </p>
+
+        </section>
+
+
+        <div class="container">
+
+
+            <!-- =========================
+                 SEANCES
+            ========================= -->
+
+            <section class="section">
+
+                <div class="section-head">
+
+                    <div>
+
+                        <div class="section-label">
+                            Séances photo
+                        </div>
+
+                        <h2 class="section-title">
+                            Les moments<br>
+                            qui comptent.
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Des séances pensées pour prendre le temps,
+                        varier les ambiances et créer des images
+                        naturelles qui vous ressemblent.
+                    </p>
+
+                </div>
+
+
+                <div class="cards">
+
+
+                    <!-- L'INSTANT -->
+
+                    <article class="card">
+
+                        <div class="number">
+                            01 · L'instant
+                        </div>
+
+                        <h3>
+                            L’instant
+                        </h3>
+
+                        <div class="price">
+                            119 €
+                        </div>
+
+                        <p class="card-intro">
+
+                            <strong>
+                                Un premier souvenir, simplement.
+                            </strong>
+
+                            <br>
+
+                            L’essentiel pour garder une trace
+                            d’un moment important.
+
+                        </p>
+
+
+                        <div class="ideal">
+                            Idéal pour
+                        </div>
+
+                        <p class="ideal-text">
+                            Grossesse, couple, famille, animalier,
+                            lifestyle…
+                        </p>
+
+
+                        <ul class="features">
+
+                            <li>
+                                Séance photo d’<strong>1 heure</strong>
+                            </li>
+
+                            <li>
+                                <strong>
+                                    15 photos retouchées
+                                </strong>
+                                au choix
+                            </li>
+
+                            <li>
+                                Galerie privée en ligne
+                            </li>
+
+                            <li>
+                                Conseils et accompagnement
+                                pendant la séance
+                            </li>
+
+                        </ul>
+
+
+                        <p class="extra">
+                            <strong>
+                                Tarif photo supplémentaire : 10 €
+                            </strong>
+                        </p>
+
+                    </article>
+
+
+                    <!-- L'EMOTION -->
+
+                    <article class="card">
+
+                        <div class="number">
+                            02 · L'émotion
+                        </div>
+
+                        <h3>
+                            L’émotion
+                        </h3>
+
+                        <div class="price">
+                            249 €
+                        </div>
+
+                        <p class="card-intro">
+
+                            <strong>
+                                Plus de temps, plus de photos,
+                                plus de souvenirs.
+                            </strong>
+
+                            <br>
+
+                            Une séance plus complète pour prendre
+                            le temps de varier les ambiances,
+                            les tenues et les moments, et raconter
+                            une véritable histoire à travers vos photos.
+
+                        </p>
+
+
+                        <div class="ideal">
+                            Idéal pour
+                        </div>
+
+                        <p class="ideal-text">
+                            Grossesse, couple, famille, animalier,
+                            lifestyle, anniversaire, gender reveal…
+                        </p>
+
+
+                        <ul class="features">
+
+                            <li>
+                                Séance photo de <strong>1h30 à 2h</strong>
+                            </li>
+
+                            <li>
+                                <strong>
+                                    30 photos retouchées
+                                </strong>
+                                au choix
+                            </li>
+
+                            <li>
+                                Galerie privée en ligne
+                            </li>
+
+                            <li>
+                                <strong>
+                                    Plusieurs changements de tenues possibles
+                                </strong>
+                            </li>
+
+                            <li>
+                                Plusieurs lieux ou ambiances possibles
+                                selon le shooting
+                            </li>
+
+                            <li>
+                                <strong>
+                                    Plus de temps pour varier les poses
+                                    et les situations
+                                </strong>
+                            </li>
+
+                            <li>
+                                Conseils et accompagnement personnalisé
+                            </li>
+
+                        </ul>
+
+
+                        <p class="extra">
+                            <strong>
+                                Tarif photo supplémentaire : 10 €
+                            </strong>
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
         </div>
 
-        <div class="extra">
-            <div class="extra-name">Déplacement</div>
-            <p class="extra-desc">
-                Martigues et alentours inclus. Au-dela, frais calculés selon
-                la distance, a partir de 0,45 &euro;/km.
-            </p>
+
+        <!-- =========================
+             MARIAGES
+        ========================= -->
+
+        <section class="wedding-section">
+
+            <div class="container">
+
+                <div class="section-head">
+
+                    <div>
+
+                        <div class="section-label">
+                            Mariage
+                        </div>
+
+                        <h2 class="section-title">
+                            Les moments essentiels<br>
+                            de votre histoire.
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        De la cérémonie civile à la journée complète,
+                        deux formules pour raconter votre mariage
+                        à votre manière.
+                    </p>
+
+                </div>
+
+
+                <!-- =====================
+                     ENGAGEMENT
+                ====================== -->
+
+                <article class="wedding-card">
+
+                    <div class="wedding-grid">
+
+
+                        <div>
+
+                            <div class="number">
+                                03 · L’Engagement
+                            </div>
+
+                            <h3>
+                                L’Engagement
+                            </h3>
+
+                            <p class="wedding-description">
+
+                                <strong>
+                                    Les moments essentiels
+                                    de votre mariage.
+                                </strong>
+
+                                <br><br>
+
+                                Une formule pensée pour immortaliser
+                                les moments forts de votre cérémonie civile,
+                                de la sortie des mariés jusqu’aux photos
+                                de couple.
+
+                                <br><br>
+
+                                <strong>
+                                    Idéal pour :
+                                </strong>
+
+                                mariage à la mairie,
+                                cérémonie civile,
+                                mariage intimiste…
+
+                            </p>
+
+                            <div class="wedding-price">
+                                390 €
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="sub-title">
+                                Avant le mariage
+                            </div>
+
+                            <ul class="wedding-list">
+
+                                <li>
+                                    Rendez-vous de préparation pour échanger
+                                    sur vos envies et organiser la journée
+                                </li>
+
+                            </ul>
+
+
+                            <div class="sub-title">
+                                Le jour J · 3 heures de présence
+                            </div>
+
+                            <ul class="wedding-list">
+
+                                <li>
+                                    Cérémonie civile
+                                </li>
+
+                                <li>
+                                    Sortie des mariés
+                                </li>
+
+                                <li>
+                                    Photos de groupe avec vos proches
+                                </li>
+
+                                <li>
+                                    Séance photo des mariés
+                                </li>
+
+                                <li>
+                                    <strong>
+                                        100 photos retouchées
+                                    </strong>
+                                </li>
+
+                                <li>
+                                    Galerie privée en ligne
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =====================
+                     INOUBLIABLE
+                ====================== -->
+
+                <article class="wedding-card">
+
+                    <div class="wedding-grid">
+
+
+                        <div>
+
+                            <div class="number">
+                                04 · L’Inoubliable
+                            </div>
+
+                            <h3>
+                                L’Inoubliable
+                            </h3>
+
+                            <p class="wedding-description">
+
+                                <strong>
+                                    Votre histoire,
+                                    du premier regard
+                                    jusqu’à la première danse.
+                                </strong>
+
+                                <br><br>
+
+                                Une présence tout au long de votre journée
+                                pour raconter votre mariage dans ses
+                                moindres détails, des préparatifs aux
+                                moments forts de la soirée.
+
+                            </p>
+
+                            <div class="wedding-price">
+                                1 290 €
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="sub-title">
+                                Avant le mariage
+                            </div>
+
+                            <ul class="wedding-list">
+
+                                <li>
+                                    Rendez-vous de préparation pour échanger
+                                    sur vos envies et organiser la journée
+                                </li>
+
+                            </ul>
+
+
+                            <div class="sub-title">
+                                Le jour J · environ 10 heures de présence
+                            </div>
+
+                            <ul class="wedding-list">
+
+                                <li>
+                                    Préparatifs des mariés
+                                </li>
+
+                                <li>
+                                    Découverte et premiers regards
+                                </li>
+
+                                <li>
+                                    Cérémonie(s)
+                                </li>
+
+                                <li>
+                                    Photos de groupe et séance couple
+                                </li>
+
+                                <li>
+                                    Cocktail et moments avec vos proches
+                                </li>
+
+                                <li>
+                                    Repas
+                                </li>
+
+                                <li>
+                                    Première danse
+                                </li>
+
+                                <li>
+                                    Tous les instants spontanés
+                                    qui rendent votre journée unique
+                                </li>
+
+                                <li>
+                                    <strong>
+                                        Plus de 300 photos retouchées
+                                    </strong>
+                                </li>
+
+                                <li>
+                                    Galerie privée en ligne
+                                </li>
+
+                                <li>
+                                    <strong>
+                                        Album photo offert
+                                    </strong>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             OPTIONS / INFORMATIONS
+        ========================= -->
+
+        <div class="container">
+
+            <section class="section">
+
+
+                <div class="info-grid">
+
+
+                    <!-- BESOIN DE PLUS -->
+
+                    <article class="info">
+
+                        <h3>
+                            Et si vous avez besoin de plus ?
+                        </h3>
+
+                        <p>
+                            Votre mariage ne rentre pas parfaitement
+                            dans une formule ?
+
+                            <br><br>
+
+                            Aucun problème.
+
+                            N’hésitez pas à me contacter via le formulaire.
+                        </p>
+
+                    </article>
+
+
+                    <!-- ALBUM -->
+
+                    <article class="info">
+
+                        <h3>
+                            L’album photo
+                        </h3>
+
+                        <p>
+
+                            Parce que vos photographies méritent aussi
+                            d'exister autrement que sur un écran,
+                            je propose la création d'un album photo
+                            personnalisé.
+
+                            <br><br>
+
+                            Une sélection de vos images, mise en page
+                            avec soin, pour créer un véritable objet
+                            souvenir que vous pourrez garder et transmettre
+                            au fil des années.
+
+                            <br><br>
+
+                            <strong>
+                                Album disponible en option — sur devis.
+                            </strong>
+
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+
+                <div class="info-grid" style="margin-top: 70px;">
+
+
+                    <!-- DEPLACEMENTS -->
+
+                    <article class="info">
+
+                        <h3>
+                            Frais de déplacement
+                        </h3>
+
+                        <p>
+                            Les déplacements sont inclus dans un rayon
+                            de <strong>40 km autour de Martigues</strong>.
+                        </p>
+
+                    </article>
+
+
+                    <!-- AU DELA -->
+
+                    <article class="info">
+
+                        <h3>
+                            Au-delà de 40 km
+                        </h3>
+
+                        <p>
+                            Au-delà de cette distance, des frais de
+                            déplacement sont appliqués en fonction du
+                            lieu de votre mariage / évènement.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
         </div>
 
-        <div class="extra">
-            <div class="extra-name">Photos supplémentaires</div>
-            <p class="extra-desc">
-                15 &euro; par photo retouchée additionnelle au-delà du
-                nombre inclus dans la formule.
+
+        <!-- =========================
+             CTA
+        ========================= -->
+
+        <section class="cta-section">
+
+            <h2>
+                Si vous avez une histoire
+                à raconter…
+            </h2>
+
+            <p>
+                Je serai heureuse de la raconter avec vous.
+                Parlez-moi de votre projet, de vos envies
+                et des moments que vous souhaitez garder
+                pour les années à venir.
             </p>
-        </div>
 
-    </div>
+            <a
+                href="contact.html"
+                class="cta-button"
+            >
+                Prendre rendez-vous&nbsp; →
+            </a>
 
-</section>
-
-
-<!-- ===================================================== CONTACT ===================================================== -->
-
-<section class="presta-contact">
-    <span class="small">Prête à réserver votre date ?</span>
-    <h2>Parlons-<em>en.</em></h2>
-    <a href="contact.html" class="link">Me contacter →</a>
-</section>
+        </section>
 
 
-<!-- ===================================================== FOOTER ===================================================== -->
-
-<footer>
-    <span>© 2026 Morgane BS Photographe</span>
-    <span>Martigues · France</span>
-    <a href="index.html">Accueil</a>
-</footer>
+    </main>
 
 
-<script src="script.js"></script>
-<script>
-    initUI();
-    initHeader();
-</script>
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <span>
+            © Morgane BS Photographe
+        </span>
+
+        <span>
+            Martigues · Bouches-du-Rhône · Gard
+        </span>
+
+    </footer>
+
+
+    <!-- =========================
+         MOBILE MENU
+    ========================= -->
+
+    <script>
+
+        const menuButton =
+            document.querySelector(".menu-toggle");
+
+        const nav =
+            document.querySelector("nav");
+
+
+        menuButton.addEventListener("click", () => {
+
+            nav.classList.toggle("open");
+
+        });
+
+
+        nav.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                nav.classList.remove("open");
+
+            });
+
+        });
+
+    </script>
 
 </body>
+
 </html>
