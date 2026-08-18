@@ -20,6 +20,7 @@
     <style>
         :root {
             --paper: #ffffff;
+            --paper-soft: #ffffff;
             --ink: #16150f;
             --ink-soft: #55534a;
             --line: #dcdbd4;
@@ -66,7 +67,6 @@
             color: var(--paper);
         }
 
-
         /* =========================
            HEADER
         ========================= */
@@ -88,14 +88,11 @@
             color: var(--ink);
             background: transparent;
             border-bottom: 1px solid transparent;
-
-            transition:
-                background .5s var(--ease),
-                border-color .5s var(--ease);
+            transition: background .5s var(--ease), border-color .5s var(--ease);
         }
 
         header.solid {
-            background: rgba(255, 255, 255, .92);
+            background: color-mix(in srgb, var(--paper) 85%, transparent);
             -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--line);
@@ -130,13 +127,10 @@
 
         nav a {
             position: relative;
-
             font-size: clamp(12px, .95vw, 13px);
             font-weight: 400;
             letter-spacing: .04em;
-
             opacity: .74;
-
             transition: opacity .3s var(--ease);
         }
 
@@ -147,19 +141,14 @@
 
         nav a:not(.nav-cta)::after {
             content: "";
-
             position: absolute;
             left: 0;
             bottom: -6px;
-
             width: 100%;
             height: 1px;
-
             background: currentColor;
-
             transform: scaleX(0);
             transform-origin: right;
-
             transition: transform .35s var(--ease);
         }
 
@@ -171,16 +160,11 @@
 
         nav a.appointment {
             padding: 9px 18px;
-
             border: 1px solid currentColor;
             border-radius: 999px;
-
             opacity: 1;
             white-space: nowrap;
-
-            transition:
-                background .3s var(--ease),
-                color .3s var(--ease);
+            transition: background .3s var(--ease), color .3s var(--ease);
         }
 
         nav a.appointment:hover {
@@ -194,18 +178,12 @@
 
         nav a.nav-cta {
             padding: 10px 20px;
-
             border-radius: 999px;
-
             background: var(--ink);
             color: var(--paper);
-
             opacity: 1;
             white-space: nowrap;
-
-            transition:
-                transform .35s var(--ease),
-                background .35s var(--ease);
+            transition: transform .35s var(--ease), background .35s var(--ease);
         }
 
         nav a.nav-cta:hover {
@@ -215,30 +193,21 @@
 
         .menu-toggle {
             display: none;
-
             flex-direction: column;
             gap: 5px;
-
             width: 26px;
-
             background: none;
             border: none;
-
             cursor: pointer;
             padding: 6px 0;
         }
 
         .menu-toggle span {
             display: block;
-
             height: 1.5px;
             width: 100%;
-
             background: currentColor;
-
-            transition:
-                transform .35s var(--ease),
-                opacity .3s var(--ease);
+            transition: transform .35s var(--ease), opacity .3s var(--ease);
         }
 
         body.nav-open .menu-toggle span:nth-child(1) {
@@ -253,7 +222,6 @@
             transform: translateY(-6.5px) rotate(-45deg);
         }
 
-
         /* =========================
            HERO
         ========================= */
@@ -262,7 +230,7 @@
             padding:
                 clamp(92px, 12vh, 140px)
                 var(--page-x)
-                clamp(35px, 5vh, 55px);
+                clamp(40px, 6vh, 70px);
 
             max-width: var(--maxw);
             margin: auto;
@@ -277,29 +245,23 @@
             font-weight: 500;
             letter-spacing: .22em;
             text-transform: uppercase;
-
             color: var(--ink-soft);
-
-            margin-bottom: 26px;
+            margin-bottom: 30px;
         }
 
         .hero-eyebrow::before {
             content: "";
-
             width: 34px;
             height: 1px;
-
             background: var(--line-strong);
         }
 
         .hero h1 {
             max-width: 1050px;
-
             font-family: var(--display);
             font-size: clamp(3.5rem, 8vw, 9rem);
             font-weight: 300;
             line-height: .94;
-
             letter-spacing: -.025em;
         }
 
@@ -310,15 +272,11 @@
 
         .hero-intro {
             max-width: 650px;
-
-            margin-top: 32px;
-
+            margin-top: 45px;
             font-size: clamp(1rem, 1.25vw, 1.18rem);
-            line-height: 1.7;
-
+            line-height: 1.75;
             color: var(--ink-soft);
         }
-
 
         /* =========================
            GENERAL
@@ -331,49 +289,39 @@
         }
 
         .section {
-            padding: clamp(45px, 7vh, 85px) 0;
+            padding: clamp(50px, 8vh, 100px) 0;
         }
 
         .section-head {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-
             gap: 40px;
-
-            margin-bottom: 48px;
+            margin-bottom: 65px;
         }
 
         .section-label {
             font-size: clamp(10px, .72vw, 11px);
             font-weight: 500;
-
             letter-spacing: .22em;
             text-transform: uppercase;
-
             color: var(--ink-soft);
-
-            margin-bottom: 13px;
+            margin-bottom: 15px;
         }
 
         .section-title {
             font-family: var(--display);
             font-size: clamp(2.6rem, 5vw, 5.2rem);
             font-weight: 300;
-
             line-height: 1;
-
             letter-spacing: -.02em;
         }
 
         .section-description {
             max-width: 480px;
-
             color: var(--ink-soft);
-
-            line-height: 1.7;
+            line-height: 1.75;
         }
-
 
         /* =========================
            SEANCE CARDS
@@ -382,18 +330,16 @@
         .cards {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-
             border-top: 1px solid var(--line);
         }
 
         .card {
             padding:
-                35px
+                40px
                 clamp(20px, 4vw, 70px)
-                42px 0;
+                50px 0;
 
-            min-height: 0;
-
+            min-height: 570px;
             border-bottom: 1px solid var(--line);
         }
 
@@ -405,27 +351,22 @@
         .number {
             font-size: 11px;
             font-weight: 500;
-
             letter-spacing: .2em;
             text-transform: uppercase;
-
             color: var(--ink-soft);
         }
 
         .card h3 {
-            margin-top: 14px;
-            margin-bottom: 5px;
-
+            margin-top: 16px;
+            margin-bottom: 8px;
             font-family: var(--display);
             font-size: clamp(2.4rem, 4vw, 4rem);
             font-weight: 400;
-
             line-height: 1;
         }
 
         .price {
-            margin-top: 10px;
-
+            margin-top: 14px;
             font-family: var(--display);
             font-size: clamp(2rem, 3vw, 3rem);
             font-weight: 300;
@@ -433,11 +374,9 @@
 
         .card-intro {
             max-width: 600px;
-
-            margin-top: 22px;
-
+            margin-top: 28px;
             color: var(--ink-soft);
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .card-intro strong {
@@ -446,12 +385,10 @@
         }
 
         .ideal {
-            margin-top: 24px;
-            margin-bottom: 8px;
-
+            margin-top: 30px;
+            margin-bottom: 10px;
             font-size: 11px;
             font-weight: 500;
-
             letter-spacing: .18em;
             text-transform: uppercase;
         }
@@ -462,41 +399,32 @@
 
         .features {
             list-style: none;
-
-            margin-top: 24px;
+            margin-top: 30px;
         }
 
         .features li {
             position: relative;
-
             padding-left: 20px;
-            margin-bottom: 7px;
-
+            margin-bottom: 9px;
             color: var(--ink-soft);
         }
 
         .features li::before {
             content: "";
-
             position: absolute;
             left: 0;
             top: .75em;
-
             width: 5px;
             height: 5px;
-
             border-radius: 50%;
-
             background: var(--ink);
         }
 
         .extra {
-            margin-top: 27px;
-
+            margin-top: 35px;
             font-size: 13px;
             color: var(--ink-soft);
         }
-
 
         /* =========================
            MARIAGES
@@ -504,92 +432,72 @@
 
         .wedding-section {
             background: var(--paper);
-
-            padding:
-                clamp(45px, 7vh, 85px)
-                0;
+            padding: clamp(70px, 9vw, 130px) 0;
         }
 
         .wedding-card {
-            padding: clamp(30px, 4vw, 60px);
-
+            padding: clamp(35px, 5vw, 75px);
             background: var(--paper);
-
             border: 1px solid var(--line);
         }
 
         .wedding-card + .wedding-card {
-            margin-top: 18px;
+            margin-top: 25px;
         }
 
         .wedding-grid {
             display: grid;
-
             grid-template-columns: minmax(250px, .8fr) 1.2fr;
-
-            gap: clamp(40px, 7vw, 100px);
+            gap: clamp(45px, 8vw, 120px);
         }
 
         .wedding-card h3 {
-            margin-top: 14px;
-
+            margin-top: 15px;
             font-family: var(--display);
             font-size: clamp(2.5rem, 4.5vw, 4.8rem);
             font-weight: 400;
-
             line-height: 1;
         }
 
         .wedding-description {
-            margin-top: 20px;
-
+            margin-top: 22px;
             max-width: 500px;
-
             color: var(--ink-soft);
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .wedding-price {
-            margin-top: 28px;
-
+            margin-top: 35px;
             font-family: var(--display);
             font-size: clamp(2rem, 3vw, 3rem);
         }
 
         .sub-title {
-            margin-bottom: 12px;
-
+            margin-bottom: 15px;
             font-size: 11px;
             font-weight: 500;
-
             letter-spacing: .18em;
             text-transform: uppercase;
         }
 
         .wedding-list {
             list-style: none;
-
-            margin-bottom: 28px;
+            margin-bottom: 35px;
         }
 
         .wedding-list li {
             position: relative;
-
             padding-left: 20px;
-            margin-bottom: 7px;
-
+            margin-bottom: 9px;
             color: var(--ink-soft);
         }
 
         .wedding-list li::before {
             content: "—";
-
             position: absolute;
             left: 0;
-
             color: var(--ink);
         }
-
 
         /* =========================
            INFOS
@@ -598,42 +506,31 @@
         .info-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-
             border-top: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
         }
 
         .info {
-            padding: 42px 0;
+            padding: 55px 0;
         }
 
         .info + .info {
             padding-left: clamp(25px, 6vw, 100px);
-
             border-left: 1px solid var(--line);
         }
 
         .info h3 {
-            margin-bottom: 14px;
-
+            margin-bottom: 18px;
             font-family: var(--display);
             font-size: clamp(2rem, 3vw, 3rem);
             font-weight: 400;
-
-            line-height: 1.05;
         }
 
         .info p {
             max-width: 650px;
-
             color: var(--ink-soft);
-            line-height: 1.7;
+            line-height: 1.8;
         }
-
-        .info-grid + .info-grid {
-            margin-top: 40px !important;
-        }
-
 
         /* =========================
            CTA
@@ -641,56 +538,42 @@
 
         .cta-section {
             padding:
-                clamp(75px, 10vw, 140px)
+                clamp(90px, 12vw, 170px)
                 var(--page-x);
 
-            background: var(--ink);
-
-            color: var(--paper);
-
+            background: #000000;
+            color: #ffffff;
             text-align: center;
         }
 
         .cta-section h2 {
             max-width: 900px;
-
             margin: auto;
-
             font-family: var(--display);
             font-size: clamp(3rem, 6vw, 6.5rem);
             font-weight: 300;
-
             line-height: .98;
         }
 
         .cta-section p {
             max-width: 600px;
-
-            margin: 25px auto;
-
-            color: #c9c7bf;
+            margin: 30px auto;
+            color: #c9c9c9;
         }
 
         .cta-button {
             display: inline-flex;
-
-            margin-top: 12px;
-
+            margin-top: 15px;
             padding: 13px 25px;
-
-            border: 1px solid var(--paper);
+            border: 1px solid #ffffff;
             border-radius: 999px;
-
-            transition:
-                background .3s var(--ease),
-                color .3s var(--ease);
+            transition: background .3s var(--ease), color .3s var(--ease);
         }
 
         .cta-button:hover {
-            background: var(--paper);
-            color: var(--ink);
+            background: #ffffff;
+            color: #000000;
         }
-
 
         /* =========================
            FOOTER
@@ -699,37 +582,16 @@
         footer {
             display: flex;
             justify-content: space-between;
-
             gap: 25px;
-
-            padding:
-                27px
-                var(--page-x);
-
+            padding: 30px var(--page-x);
+            background: #ffffff;
             border-top: 1px solid var(--line);
-
             font-size: 12px;
-
             color: var(--ink-soft);
         }
 
-
         /* =========================
-           TABLET
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .wedding-grid {
-                grid-template-columns: 1fr;
-
-                gap: 35px;
-            }
-        }
-
-
-        /* =========================
-           MOBILE
+           RESPONSIVE
         ========================= */
 
         @media (max-width: 720px) {
@@ -737,25 +599,17 @@
             nav {
                 position: fixed;
                 inset: clamp(60px, 8vh, 80px) 0 auto 0;
-
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 4px;
-
-                padding: 16px var(--page-x) 28px;
-
+                padding: 20px var(--page-x) 34px;
                 background: var(--paper);
                 color: var(--ink);
-
                 border-bottom: 1px solid var(--line);
-
                 transform: translateY(-12px);
                 opacity: 0;
                 pointer-events: none;
-
-                transition:
-                    transform .35s var(--ease),
-                    opacity .3s var(--ease);
+                transition: transform .35s var(--ease), opacity .3s var(--ease);
             }
 
             body.nav-open nav {
@@ -780,89 +634,40 @@
 
             nav a {
                 width: 100%;
-
-                padding: 12px 0;
-
-                font-size: 16px;
-
+                padding: 14px 0;
+                font-size: 17px;
                 border-bottom: 1px solid var(--line);
             }
 
             nav a.appointment {
                 width: auto;
-
-                margin-top: 12px;
-
+                margin-top: 16px;
                 border: 1px solid var(--ink);
-
                 text-align: center;
             }
 
             nav a.nav-cta {
                 width: auto;
-
-                margin-top: 8px;
-
+                margin-top: 10px;
                 border: none;
-
                 text-align: center;
             }
 
-
-            /* HERO */
-
             .hero {
-                padding-top: 118px;
-                padding-bottom: 38px;
-            }
-
-            .hero-eyebrow {
-                margin-bottom: 20px;
+                padding-top: 125px;
             }
 
             .hero h1 {
-                font-size: clamp(3.1rem, 13vw, 5.5rem);
-            }
-
-            .hero-intro {
-                margin-top: 24px;
-
-                font-size: 15px;
-
-                line-height: 1.65;
-            }
-
-
-            /* SECTIONS */
-
-            .section {
-                padding: 45px 0;
+                font-size: clamp(3.3rem, 14vw, 6rem);
             }
 
             .section-head {
                 display: block;
-
-                margin-bottom: 30px;
-            }
-
-            .section-label {
-                margin-bottom: 10px;
-            }
-
-            .section-title {
-                font-size: clamp(2.6rem, 11vw, 4.5rem);
             }
 
             .section-description {
-                margin-top: 18px;
-
-                font-size: 14px;
-
-                line-height: 1.65;
+                margin-top: 25px;
             }
-
-
-            /* CARDS */
 
             .cards {
                 grid-template-columns: 1fr;
@@ -870,212 +675,71 @@
 
             .card {
                 min-height: auto;
-
-                padding:
-                    28px 0
-                    32px;
+                padding: 40px 0 55px;
             }
 
             .card:nth-child(2) {
                 padding-left: 0;
-
                 border-left: 0;
             }
 
-            .card h3 {
-                margin-top: 11px;
-            }
-
-            .price {
-                margin-top: 8px;
-            }
-
-            .card-intro {
-                margin-top: 18px;
-
-                font-size: 14px;
-            }
-
-            .ideal {
-                margin-top: 20px;
-            }
-
-            .features {
-                margin-top: 20px;
-            }
-
-            .features li {
-                margin-bottom: 6px;
-
-                font-size: 14px;
-            }
-
-            .extra {
-                margin-top: 22px;
-            }
-
-
-            /* MARIAGES */
-
-            .wedding-section {
-                padding:
-                    45px 0
-                    40px;
-            }
-
-            .wedding-card {
-                padding: 25px 20px;
-            }
-
-            .wedding-card + .wedding-card {
-                margin-top: 14px;
-            }
-
             .wedding-grid {
-                gap: 28px;
+                grid-template-columns: 1fr;
+                gap: 45px;
             }
-
-            .wedding-card h3 {
-                font-size: clamp(2.5rem, 11vw, 4rem);
-            }
-
-            .wedding-description {
-                margin-top: 17px;
-
-                font-size: 14px;
-            }
-
-            .wedding-price {
-                margin-top: 22px;
-            }
-
-            .wedding-list {
-                margin-bottom: 22px;
-            }
-
-            .wedding-list li {
-                margin-bottom: 6px;
-
-                font-size: 14px;
-            }
-
-
-            /* INFOS */
 
             .info-grid {
                 grid-template-columns: 1fr;
             }
 
-            .info {
-                padding: 30px 0;
-            }
-
             .info + .info {
                 padding-left: 0;
-
                 border-left: 0;
                 border-top: 1px solid var(--line);
             }
-
-            .info h3 {
-                margin-bottom: 10px;
-
-                font-size: 2.2rem;
-            }
-
-            .info p {
-                font-size: 14px;
-
-                line-height: 1.65;
-            }
-
-            .info-grid + .info-grid {
-                margin-top: 0 !important;
-            }
-
-
-            /* CTA */
-
-            .cta-section {
-                padding:
-                    70px
-                    var(--page-x);
-            }
-
-            .cta-section h2 {
-                font-size: clamp(3rem, 12vw, 5rem);
-            }
-
-            .cta-section p {
-                margin: 22px auto;
-
-                font-size: 14px;
-
-                line-height: 1.7;
-            }
-
-
-            /* FOOTER */
-
-            footer {
-                flex-direction: column;
-
-                gap: 8px;
-
-                padding: 24px var(--page-x);
-
-                font-size: 11px;
-            }
         }
 
-
-        /* =========================
-           SMALL MOBILE
-        ========================= */
-
-        @media (max-width: 420px) {
+        @media (max-width: 600px) {
 
             .hero {
-                padding-top: 112px;
-                padding-bottom: 32px;
-            }
-
-            .hero h1 {
-                font-size: 3.15rem;
+                padding-bottom: 50px;
             }
 
             .hero-intro {
-                margin-top: 20px;
+                margin-top: 25px;
             }
 
             .section {
-                padding: 38px 0;
+                padding: 60px 0;
             }
 
             .section-head {
-                margin-bottom: 25px;
-            }
-
-            .card {
-                padding-top: 25px;
-                padding-bottom: 28px;
+                margin-bottom: 45px;
             }
 
             .wedding-section {
-                padding-top: 38px;
+                padding: 60px 0;
             }
 
             .wedding-card {
-                padding: 24px 18px;
+                padding: 30px 22px;
             }
 
             .info {
-                padding: 27px 0;
+                padding: 40px 0;
+            }
+
+            .info-grid[style] {
+                margin-top: 35px !important;
             }
 
             .cta-section {
-                padding-top: 62px;
-                padding-bottom: 62px;
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+
+            footer {
+                flex-direction: column;
             }
         }
     </style>
@@ -1084,25 +748,12 @@
 
 <body>
 
-
-    <!-- =========================
-         HEADER
-    ========================= -->
-
     <header id="site-header">
 
         <a href="index.html" class="logo">
-
-            <img
-                src="logo.png"
-                alt=""
-                class="logo-img"
-            >
-
+            <img src="logo.png" alt="" class="logo-img">
             <span>Morgane BS Photographe</span>
-
         </a>
-
 
         <nav>
 
@@ -1122,22 +773,13 @@
                 Contact
             </a>
 
-            <a
-                href="https://fotostudio.io"
-                class="nav-cta"
-                target="_blank"
-                rel="noopener"
-            >
+            <a href="https://fotostudio.io" class="nav-cta" target="_blank" rel="noopener">
                 Prendre RDV
             </a>
 
         </nav>
 
-
-        <button
-            class="menu-toggle"
-            aria-label="Ouvrir le menu"
-        >
+        <button class="menu-toggle" aria-label="Ouvrir le menu">
             <span></span>
             <span></span>
             <span></span>
@@ -1146,13 +788,9 @@
     </header>
 
 
-
     <main>
 
-
-        <!-- =========================
-             HERO
-        ========================= -->
+        <!-- HERO -->
 
         <section class="hero">
 
@@ -1175,13 +813,9 @@
         </section>
 
 
-
         <div class="container">
 
-
-            <!-- =========================
-                 SEANCES
-            ========================= -->
+            <!-- SEANCES -->
 
             <section class="section">
 
@@ -1200,7 +834,6 @@
 
                     </div>
 
-
                     <p class="section-description">
                         Des séances pensées pour prendre le temps,
                         varier les ambiances et créer des images
@@ -1211,7 +844,6 @@
 
 
                 <div class="cards">
-
 
                     <!-- L'INSTANT -->
 
@@ -1230,18 +862,13 @@
                         </div>
 
                         <p class="card-intro">
-
                             <strong>
                                 Un premier souvenir, simplement.
                             </strong>
-
                             <br>
-
                             L’essentiel pour garder une trace
                             d’un moment important.
-
                         </p>
-
 
                         <div class="ideal">
                             Idéal pour
@@ -1252,7 +879,6 @@
                             lifestyle…
                         </p>
 
-
                         <ul class="features">
 
                             <li>
@@ -1260,9 +886,7 @@
                             </li>
 
                             <li>
-                                <strong>
-                                    15 photos retouchées
-                                </strong>
+                                <strong>15 photos retouchées</strong>
                                 au choix
                             </li>
 
@@ -1277,7 +901,6 @@
 
                         </ul>
 
-
                         <p class="extra">
                             <strong>
                                 Tarif photo supplémentaire : 10 €
@@ -1285,7 +908,6 @@
                         </p>
 
                     </article>
-
 
 
                     <!-- L'EMOTION -->
@@ -1305,21 +927,15 @@
                         </div>
 
                         <p class="card-intro">
-
                             <strong>
                                 Plus de temps, plus de photos,
                                 plus de souvenirs.
                             </strong>
-
                             <br>
-
-                            Une séance plus complète pour prendre
-                            le temps de varier les ambiances,
-                            les tenues et les moments, et raconter
-                            une véritable histoire à travers vos photos.
-
+                            Une séance plus complète pour varier
+                            les ambiances, les tenues et les moments,
+                            et raconter une véritable histoire.
                         </p>
-
 
                         <div class="ideal">
                             Idéal pour
@@ -1330,7 +946,6 @@
                             lifestyle, anniversaire, gender reveal…
                         </p>
 
-
                         <ul class="features">
 
                             <li>
@@ -1338,9 +953,7 @@
                             </li>
 
                             <li>
-                                <strong>
-                                    30 photos retouchées
-                                </strong>
+                                <strong>30 photos retouchées</strong>
                                 au choix
                             </li>
 
@@ -1356,7 +969,6 @@
 
                             <li>
                                 Plusieurs lieux ou ambiances possibles
-                                selon le shooting
                             </li>
 
                             <li>
@@ -1371,7 +983,6 @@
                             </li>
 
                         </ul>
-
 
                         <p class="extra">
                             <strong>
@@ -1388,10 +999,7 @@
         </div>
 
 
-
-        <!-- =========================
-             MARIAGES
-        ========================= -->
+        <!-- MARIAGES -->
 
         <section class="wedding-section">
 
@@ -1421,13 +1029,11 @@
                 </div>
 
 
-
                 <!-- ENGAGEMENT -->
 
                 <article class="wedding-card">
 
                     <div class="wedding-grid">
-
 
                         <div>
 
@@ -1494,21 +1100,10 @@
 
                             <ul class="wedding-list">
 
-                                <li>
-                                    Cérémonie civile
-                                </li>
-
-                                <li>
-                                    Sortie des mariés
-                                </li>
-
-                                <li>
-                                    Photos de groupe avec vos proches
-                                </li>
-
-                                <li>
-                                    Séance photo des mariés
-                                </li>
+                                <li>Cérémonie civile</li>
+                                <li>Sortie des mariés</li>
+                                <li>Photos de groupe avec vos proches</li>
+                                <li>Séance photo des mariés</li>
 
                                 <li>
                                     <strong>
@@ -1529,13 +1124,11 @@
                 </article>
 
 
-
                 <!-- INOUBLIABLE -->
 
                 <article class="wedding-card">
 
                     <div class="wedding-grid">
-
 
                         <div>
 
@@ -1593,33 +1186,13 @@
 
                             <ul class="wedding-list">
 
-                                <li>
-                                    Préparatifs des mariés
-                                </li>
-
-                                <li>
-                                    Découverte et premiers regards
-                                </li>
-
-                                <li>
-                                    Cérémonie(s)
-                                </li>
-
-                                <li>
-                                    Photos de groupe et séance couple
-                                </li>
-
-                                <li>
-                                    Cocktail et moments avec vos proches
-                                </li>
-
-                                <li>
-                                    Repas
-                                </li>
-
-                                <li>
-                                    Première danse
-                                </li>
+                                <li>Préparatifs des mariés</li>
+                                <li>Découverte et premiers regards</li>
+                                <li>Cérémonie(s)</li>
+                                <li>Photos de groupe et séance couple</li>
+                                <li>Cocktail et moments avec vos proches</li>
+                                <li>Repas</li>
+                                <li>Première danse</li>
 
                                 <li>
                                     Tous les instants spontanés
@@ -1655,20 +1228,13 @@
         </section>
 
 
-
-        <!-- =========================
-             OPTIONS / INFORMATIONS
-        ========================= -->
+        <!-- INFORMATIONS -->
 
         <div class="container">
 
             <section class="section">
 
-
                 <div class="info-grid">
-
-
-                    <!-- BESOIN DE PLUS -->
 
                     <article class="info">
 
@@ -1677,7 +1243,6 @@
                         </h3>
 
                         <p>
-
                             Votre mariage ne rentre pas parfaitement
                             dans une formule ?
 
@@ -1686,14 +1251,10 @@
                             Aucun problème.
 
                             N’hésitez pas à me contacter via le formulaire.
-
                         </p>
 
                     </article>
 
-
-
-                    <!-- ALBUM -->
 
                     <article class="info">
 
@@ -1702,7 +1263,6 @@
                         </h3>
 
                         <p>
-
                             Parce que vos photographies méritent aussi
                             d'exister autrement que sur un écran,
                             je propose la création d'un album photo
@@ -1720,7 +1280,6 @@
                             <strong>
                                 Album disponible en option, sur devis.
                             </strong>
-
                         </p>
 
                     </article>
@@ -1728,11 +1287,7 @@
                 </div>
 
 
-
-                <div class="info-grid">
-
-
-                    <!-- DEPLACEMENTS -->
+                <div class="info-grid" style="margin-top: 70px;">
 
                     <article class="info">
 
@@ -1748,9 +1303,6 @@
                     </article>
 
 
-
-                    <!-- AU DELA -->
-
                     <article class="info">
 
                         <h3>
@@ -1765,7 +1317,6 @@
 
                     </article>
 
-
                 </div>
 
             </section>
@@ -1773,10 +1324,7 @@
         </div>
 
 
-
-        <!-- =========================
-             CTA
-        ========================= -->
+        <!-- CTA -->
 
         <section class="cta-section">
 
@@ -1792,23 +1340,16 @@
                 pour les années à venir.
             </p>
 
-            <a
-                href="contact.html"
-                class="cta-button"
-            >
+            <a href="contact.html" class="cta-button">
                 Prendre rendez-vous&nbsp; →
             </a>
 
         </section>
 
-
     </main>
 
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -1821,7 +1362,6 @@
         </span>
 
     </footer>
-
 
 
     <script src="script.js"></script>
