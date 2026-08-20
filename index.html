@@ -6,10 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Morgane BS Photographe</title>
+    <title>Photographe mariage, famille et portrait à Martigues · Morgane BS Photographe</title>
     <link rel="icon" type="image/png" href="logo.png">
     
     <meta name="description" content="Morgane BS Photographe, photographe à Martigues. Portraits, couples, mariages et familles. Des images naturelles, sensibles et intemporelles.">
+
+
+    <link rel="canonical" href="https://morganebsphotographe.fr/">
+
+    <!-- Partage sur les réseaux sociaux -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Morgane BS Photographe">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:url" content="https://morganebsphotographe.fr/">
+    <meta property="og:title" content="Morgane BS Photographe · Martigues">
+    <meta property="og:description" content="Portraits, couples, mariages et familles. Des images naturelles, sensibles et intemporelles.">
+    <meta property="og:image" content="https://morganebsphotographe.fr/visuels/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -294,27 +309,6 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     margin: 0 auto;
 }
 
-.hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: clamp(10px, .75vw, 11px);
-    font-weight: 500;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: clamp(22px, 4vh, 44px);
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) .25s forwards;
-}
-
-.hero-eyebrow::before {
-    content: "";
-    width: clamp(24px, 3vw, 34px);
-    height: 1px;
-    background: var(--line-strong);
-}
-
 .hero-title {
     font-family: var(--display);
     font-weight: 300;
@@ -388,37 +382,6 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6.5px) rot
     color: var(--ink);
     border-bottom-color: var(--ink);
 }
-
-/* fleche de defilement discrete */
-.hero-scroll {
-    position: absolute;
-    left: 50%;
-    bottom: clamp(20px, 4vh, 34px);
-    transform: translateX(-50%);
-    z-index: 2;
-    width: 1px;
-    height: clamp(34px, 6vh, 54px);
-    background: var(--line-strong);
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) 1.2s forwards;
-}
-
-.hero-scroll::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform: translateY(-100%);
-    animation: scrollTrail 2.6s var(--ease) infinite;
-}
-
-@keyframes scrollTrail {
-    0%   { transform: translateY(-100%); }
-    50%  { transform: translateY(0); }
-    100% { transform: translateY(100%); }
-}
-
 
 /* =====================================================
    COMPOSITION D'ACCUEIL (deux photos)
@@ -1021,9 +984,7 @@ body.lightbox-open {
     .work-image img,
     .lightbox-figure img { opacity: 1 !important; transform: none !important; }
     .hero-title span,
-    .hero-eyebrow,
-    .hero-foot,
-    .hero-scroll { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .hero-foot { opacity: 1 !important; transform: none !important; animation: none !important; }
 }
 
 a:focus-visible,
@@ -1127,11 +1088,11 @@ button:focus-visible {
 <section class="showcase reveal">
 
     <figure class="showcase-item showcase-portrait">
-        <img src="accueil%201.jpg" alt="Photographie de Morgane BS Photographe" loading="lazy">
+        <img src="accueil%201.jpg" alt="Portrait en lumière naturelle par Morgane BS Photographe" width="1473" height="2048" loading="eager" fetchpriority="high" decoding="async">
     </figure>
 
     <figure class="showcase-item showcase-landscape">
-        <img src="accueil%202.jpg" alt="Photographie de Morgane BS Photographe" loading="lazy">
+        <img src="accueil%202.jpg" alt="Séance photo en extérieur par Morgane BS Photographe" width="2048" height="1365" loading="eager" decoding="async">
     </figure>
 
 </section>
@@ -1217,6 +1178,34 @@ button:focus-visible {
     <span>© 2026 Morgane BS Photographe</span>
 </footer>
 
+
+<!-- Donnees structurees : fiche etablissement pour Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Morgane BS Photographe",
+  "description": "Photographe portrait, couple, famille, grossesse et mariage à Martigues et dans les Bouches-du-Rhône.",
+  "url": "https://morganebsphotographe.fr/",
+  "image": "https://morganebsphotographe.fr/visuels/og-image.jpg",
+  "logo": "https://morganebsphotographe.fr/logo.png",
+  "email": "morganebsphotographe@hotmail.com",
+  "priceRange": "119 € - 1290 €",
+  "sameAs": ["https://instagram.com/morganebs.photographe"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Martigues",
+    "addressRegion": "Bouches-du-Rhône",
+    "postalCode": "13500",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 43.4053, "longitude": 5.0480 },
+    "geoRadius": "40000"
+  }
+}
+</script>
 
 <script src="script.js"></script>
 <script>
