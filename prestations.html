@@ -320,29 +320,6 @@
             margin: auto;
         }
 
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-
-            font-size: clamp(10px, .72vw, 11px);
-            font-weight: 500;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--ink-soft);
-            margin-bottom: 30px;
-
-            opacity: 0;
-            animation: fadeUp 1s var(--ease) .2s forwards;
-        }
-
-        .hero-eyebrow::before {
-            content: "";
-            width: 34px;
-            height: 1px;
-            background: var(--line-strong);
-        }
-
         .hero h1 {
             max-width: 1050px;
             font-family: var(--display);
@@ -480,25 +457,6 @@
             border-left: 1px solid var(--line);
         }
 
-        .card-media {
-            overflow: hidden;
-            border-radius: clamp(8px, 1vw, 14px);
-            background: var(--paper-soft);
-            margin-bottom: 32px;
-        }
-
-        .card-media img {
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 3 / 2;
-            object-fit: cover;
-            transition: transform 1.2s var(--ease);
-        }
-
-        .card:hover .card-media img {
-            transform: scale(1.04);
-        }
-
         .card-title-row {
             display: flex;
             align-items: baseline;
@@ -587,27 +545,6 @@
 
         .wedding-card + .wedding-card {
             margin-top: 25px;
-        }
-
-        .wedding-media {
-            overflow: hidden;
-            background: var(--paper-soft);
-            margin:
-                calc(-1 * clamp(35px, 5vw, 75px))
-                calc(-1 * clamp(35px, 5vw, 75px))
-                clamp(40px, 5vw, 60px);
-        }
-
-        .wedding-media img {
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 2 / 1;
-            object-fit: cover;
-            transition: transform 1.4s var(--ease);
-        }
-
-        .wedding-card:hover .wedding-media img {
-            transform: scale(1.03);
         }
 
         .wedding-grid {
@@ -837,7 +774,6 @@
             }
 
             .hero h1,
-            .hero-eyebrow,
             .hero-intro {
                 opacity: 1 !important;
                 transform: none !important;
@@ -957,10 +893,6 @@
                 padding-left: 0;
                 border-left: 0;
                 transition-delay: 0s;
-            }
-
-            .wedding-media img {
-                aspect-ratio: 3 / 2;
             }
 
             .wedding-grid {
@@ -1112,10 +1044,6 @@
 
         <section class="hero">
 
-            <div class="hero-eyebrow">
-                Prestations &amp; tarifs
-            </div>
-
             <h1>
                 Quatre façons de raconter
                 <em>votre histoire.</em>
@@ -1167,14 +1095,6 @@
 
                     <article class="card reveal">
 
-                        <figure class="card-media">
-                            <picture>
-                                <source srcset="visuels/formule-instant.webp" type="image/webp">
-                                <img src="visuels/formule-instant.jpg" width="1600" height="1066" loading="lazy"
-                                    decoding="async"
-                                    alt="Famille en contre-jour au coucher du soleil sur la côte, séance photo à Martigues">
-                            </picture>
-                        </figure>
 
                         <div class="card-title-row">
                             <h3>
@@ -1239,14 +1159,6 @@
 
                     <article class="card reveal">
 
-                        <figure class="card-media">
-                            <picture>
-                                <source srcset="visuels/formule-emotion.webp" type="image/webp">
-                                <img src="visuels/formule-emotion.jpg" width="1600" height="1149" loading="lazy"
-                                    decoding="async"
-                                    alt="Famille complice et joyeuse lors d’une séance photo en bord de mer">
-                            </picture>
-                        </figure>
 
                         <div class="card-title-row">
                             <h3>
@@ -1366,14 +1278,6 @@
 
                 <article class="wedding-card reveal">
 
-                    <figure class="wedding-media">
-                        <picture>
-                            <source srcset="visuels/formule-engagement.webp" type="image/webp">
-                            <img src="visuels/formule-engagement.jpg" width="1600" height="800" loading="lazy"
-                                decoding="async"
-                                alt="Échange des alliances lors d’une cérémonie de mariage près de Martigues">
-                        </picture>
-                    </figure>
 
                     <div class="wedding-grid">
 
@@ -1466,14 +1370,6 @@
 
                 <article class="wedding-card reveal">
 
-                    <figure class="wedding-media">
-                        <picture>
-                            <source srcset="visuels/formule-inoubliable.webp" type="image/webp">
-                            <img src="visuels/formule-inoubliable.jpg" width="1600" height="800" loading="lazy"
-                                decoding="async"
-                                alt="Mariés et voile porté par le vent lors d’une séance couple en extérieur">
-                        </picture>
-                    </figure>
 
                     <div class="wedding-grid">
 
