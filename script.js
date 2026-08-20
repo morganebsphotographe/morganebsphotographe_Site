@@ -446,7 +446,19 @@ async function loadHomeGallery() {
 
 /* =====================================================
    PORTFOLIO - toutes les photos + filtres
+   -----------------------------------------------------
+   Les photos ne sont pas toutes affichees d'un coup :
+   on en montre PAGE_SIZE, puis le bouton "Voir plus"
+   en ajoute PAGE_SIZE a chaque clic.
+   Changer de filtre remet le compteur a zero.
 ===================================================== */
+
+/* Nombre de photos affichees par palier */
+const PAGE_SIZE = 10;
+
+let currentCategory = "all";
+let visibleCount = PAGE_SIZE;
+
 
 async function loadPortfolio() {
 
@@ -466,36 +478,132 @@ async function loadPortfolio() {
         gallery.appendChild(createPhoto(photo));
     });
 
-    setupFilters();
+    setupFilters(images);
+    setupLoadMore();
+    applyPagination();
     revealCards(gallery);
+}
+
+
+/* Photos correspondant au filtre actif */
+function matchingWorks() {
+    const works = document.querySelectorAll(".portfolio-gallery .work");
+    return Array.prototype.filter.call(works, function (work) {
+        return currentCategory === "all" ||
+               work.dataset.category === currentCategory;
+    });
+}
+
+
+/* =====================================================
+   Affichage par paliers de PAGE_SIZE
+===================================================== */
+
+function applyPagination() {
+
+    const all      = document.querySelectorAll(".portfolio-gallery .work");
+    const matching = matchingWorks();
+
+    const button = document.getElementById("load-more");
+    const foot   = document.getElementById("gallery-foot");
+    const count  = document.getElementById("gallery-count");
+    const empty  = document.getElementById("empty-collection");
+
+    /* On masque tout, puis on revele les premieres photos du filtre */
+    Array.prototype.forEach.call(all, function (work) {
+        work.style.display = "none";
+    });
+
+    const shown = Math.min(visibleCount, matching.length);
+
+    for (let i = 0; i < shown; i++) {
+        matching[i].style.display = "";
+    }
+
+    /* Collection encore vide (dossier sans photo) */
+    if (empty) empty.hidden = matching.length !== 0;
+
+    /* Pied de galerie : bouton + compteur */
+    const remaining = matching.length - shown;
+
+    if (button) {
+        button.hidden = remaining <= 0;
+        button.textContent = remaining > 0
+            ? "Voir plus (" + remaining + ")"
+            : "Voir plus";
+    }
+
+    if (count) {
+        count.hidden = matching.length <= PAGE_SIZE;
+        count.textContent = shown + " sur " + matching.length + " photographies";
+    }
+
+    if (foot) {
+        foot.hidden = matching.length <= PAGE_SIZE;
+    }
+}
+
+
+function setupLoadMore() {
+
+    const button = document.getElementById("load-more");
+    if (!button || button.dataset.ready === "1") return;
+
+    button.dataset.ready = "1";
+
+    button.addEventListener("click", function () {
+
+        /* Position de la premiere photo qui va apparaitre */
+        const premiereNouvelle = visibleCount;
+
+        visibleCount += PAGE_SIZE;
+        applyPagination();
+
+        /* On amene le regard sur la premiere nouvelle photo,
+           sans sauter brutalement en bas de page. */
+        const cible = matchingWorks()[premiereNouvelle];
+        if (cible && cible.scrollIntoView) {
+            cible.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    });
 }
 
 
 /* =====================================================
    FILTRES du portfolio
+   Les categories sans aucune photo sont masquees :
+   inutile de proposer un filtre qui ne renvoie rien.
 ===================================================== */
 
-function setupFilters() {
+function setupFilters(images) {
 
     const buttons = document.querySelectorAll(".filter");
 
-    buttons.forEach(button => {
+    /* Nombre de photos par categorie */
+    const counts = {};
+    (images || []).forEach(function (photo) {
+        counts[photo.category] = (counts[photo.category] || 0) + 1;
+    });
 
-        button.addEventListener("click", () => {
+    buttons.forEach(function (button) {
 
-            const category = button.dataset.category;
+        const category = button.dataset.category;
+
+        /* Filtre sans aucune photo : on le retire du menu */
+        if (images && category !== "all" && !counts[category]) {
+            button.hidden = true;
+            return;
+        }
+
+        button.addEventListener("click", function () {
 
             buttons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            const works = document.querySelectorAll(".portfolio-gallery .work");
+            currentCategory = category;
+            visibleCount = PAGE_SIZE;
 
-            works.forEach(work => {
-                const show =
-                    category === "all" ||
-                    work.dataset.category === category;
-                work.style.display = show ? "" : "none";
-            });
+            applyPagination();
         });
     });
 }
