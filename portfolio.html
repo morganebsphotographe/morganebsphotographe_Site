@@ -6,9 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio · Morgane BS Photographe</title>
+    <title>Portfolio photographe à Martigues · Morgane BS Photographe</title>
     <link rel="icon" type="image/png" href="logo.png">
     <meta name="description" content="Le portfolio de Morgane BS Photographe, photographe à Martigues. Portrait, couple, mariage et famille.">
+
+
+    <link rel="canonical" href="https://morganebsphotographe.fr/portfolio.html">
+
+    <!-- Partage sur les réseaux sociaux -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Morgane BS Photographe">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:url" content="https://morganebsphotographe.fr/portfolio.html">
+    <meta property="og:title" content="Portfolio · Morgane BS Photographe">
+    <meta property="og:description" content="Portrait, couple, mariage et famille. Les collections de Morgane BS Photographe, photographe à Martigues.">
+    <meta property="og:image" content="https://morganebsphotographe.fr/visuels/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1072,6 +1087,75 @@ button:focus-visible {
     }
 }
 
+
+/* =====================================================
+   BOUTON "VOIR PLUS" + COMPTEUR
+===================================================== */
+
+.gallery-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    padding: 0 var(--page-x);
+    max-width: var(--maxw);
+    margin: clamp(40px, 7vh, 76px) auto clamp(50px, 8vh, 90px);
+}
+
+.gallery-foot[hidden] { display: none; }
+
+.load-more {
+    font-family: var(--body);
+    font-size: clamp(12px, 1vw, 13px);
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 14px 34px;
+    cursor: pointer;
+
+    transition: background .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+}
+
+.load-more:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-2px);
+}
+
+.load-more[hidden] { display: none; }
+
+.gallery-count {
+    font-size: clamp(10px, .78vw, 11px);
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.gallery-count[hidden] { display: none; }
+
+/* Message affiche quand une collection ne contient pas encore de photo */
+.empty-collection {
+    padding: 0 var(--page-x);
+    max-width: var(--maxw);
+    margin: clamp(30px, 5vh, 60px) auto;
+    text-align: center;
+
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+}
+
+.empty-collection[hidden] { display: none; }
+
+
 </style>
 
 </head>
@@ -1133,6 +1217,15 @@ button:focus-visible {
 <section id="portfolio-gallery" class="portfolio-gallery">
     <p class="loading-note">Chargement des photographies…</p>
 </section>
+
+<p class="empty-collection" id="empty-collection" hidden>
+    Cette collection arrive bientôt.
+</p>
+
+<div class="gallery-foot" id="gallery-foot" hidden>
+    <button class="load-more" id="load-more" type="button" hidden>Voir plus</button>
+    <p class="gallery-count" id="gallery-count" aria-live="polite" hidden></p>
+</div>
 
 
 <!-- ===================================================== CONTACT ===================================================== -->
