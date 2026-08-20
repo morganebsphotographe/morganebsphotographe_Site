@@ -533,7 +533,7 @@
         ========================= */
 
         .wedding-section {
-            background: var(--paper-soft);
+            background: var(--paper);
             padding: clamp(70px, 9vw, 130px) 0;
         }
 
@@ -629,68 +629,6 @@
         }
 
         /* =========================
-           QUESTIONS FREQUENTES
-        ========================= */
-
-        .faq {
-            max-width: 900px;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid var(--line);
-        }
-
-        .faq-item:first-of-type {
-            border-top: 1px solid var(--line);
-        }
-
-        .faq-item summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-
-            padding: 26px 0;
-            cursor: pointer;
-            list-style: none;
-
-            font-family: var(--display);
-            font-size: clamp(1.1rem, 1.6vw, 1.45rem);
-            font-weight: 400;
-            transition: color .3s var(--ease);
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .faq-item summary::after {
-            content: "";
-            flex: none;
-            width: 11px;
-            height: 11px;
-            border-right: 1px solid var(--ink-soft);
-            border-bottom: 1px solid var(--ink-soft);
-            transform: rotate(45deg) translate(-3px, -3px);
-            transition: transform .35s var(--ease);
-        }
-
-        .faq-item[open] summary::after {
-            transform: rotate(-135deg) translate(-3px, -3px);
-        }
-
-        .faq-item summary:hover {
-            color: var(--ink-soft);
-        }
-
-        .faq-answer {
-            padding-bottom: 28px;
-            max-width: 700px;
-            color: var(--ink-soft);
-            line-height: 1.8;
-        }
-
-        /* =========================
            CTA
         ========================= */
 
@@ -754,8 +692,7 @@
         ========================= */
 
         a:focus-visible,
-        button:focus-visible,
-        summary:focus-visible {
+        button:focus-visible {
             outline: 2px solid currentColor;
             outline-offset: 3px;
         }
@@ -1557,103 +1494,6 @@
                         </p>
 
                     </article>
-
-                </div>
-
-            </section>
-
-        </div>
-
-
-        <!-- QUESTIONS FREQUENTES -->
-
-        <div class="container">
-
-            <section class="section">
-
-                <div class="section-head reveal">
-
-                    <div>
-
-                        <div class="section-label">
-                            Questions fréquentes
-                        </div>
-
-                        <h2 class="section-title">
-                            Tout ce que<br>
-                            vous vous demandez.
-                        </h2>
-
-                    </div>
-
-                    <p class="section-description">
-                        Une question qui ne figure pas ici ?
-                        Écrivez-moi, je réponds toujours.
-                    </p>
-
-                </div>
-
-
-                <!--
-                    ==========================================================
-                    ATTENTION : les réponses ci-dessous sont des PLACEHOLDERS.
-                    Chaque bloc marqué [À COMPLÉTER] doit être remplacé par
-                    les conditions réelles de Morgane avant publication.
-                    ==========================================================
-                -->
-
-                <div class="faq reveal">
-
-                    <details class="faq-item">
-                        <summary>Sous quel délai je reçois mes photos ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : indiquer le délai réel, par exemple
-                            « Vous recevez votre galerie privée sous 3 semaines
-                            pour une séance et sous 6 semaines pour un mariage. »]
-                        </p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Comment réserver une date ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : préciser le montant ou le pourcentage
-                            de l’acompte, le mode de règlement et à partir de quand
-                            la date est bloquée.]
-                        </p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Que se passe-t-il en cas d’annulation ou de report ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : conditions d’annulation, de report,
-                            et sort de l’acompte.]
-                        </p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Combien de temps la galerie reste-t-elle en ligne ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : durée de mise à disposition et si le
-                            téléchargement en haute définition est inclus.]
-                        </p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Qu’est-ce que comprend la retouche ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : décrire ce qui est inclus, par exemple
-                            colorimétrie, lumière, retouches légères, et ce qui ne
-                            l’est pas.]
-                        </p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Puis-je publier mes photos sur les réseaux sociaux ?</summary>
-                        <p class="faq-answer">
-                            [À COMPLÉTER : usage privé autorisé, mention du crédit
-                            photo souhaité, et cas des usages commerciaux.]
-                        </p>
-                    </details>
 
                 </div>
 
