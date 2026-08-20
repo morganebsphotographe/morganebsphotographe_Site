@@ -207,6 +207,36 @@ nav a.nav-cta:hover {
 nav a.nav-cta::after { display: none; }
 
 
+/* Lien Instagram : icone monochrome */
+.nav-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    flex: none;
+
+    border-radius: 50%;
+    color: var(--ink);
+    opacity: .72;
+
+    transition: opacity .3s var(--ease), background .3s var(--ease);
+}
+
+.nav-social:hover {
+    opacity: 1;
+    background: var(--paper-soft);
+}
+
+.nav-social svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+}
+
+.nav-social::after { display: none; }
+
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -604,6 +634,15 @@ footer a:hover { color: var(--ink); }
 }
 
 @media (max-width: 720px) {
+
+    /* L'icone Instagram reste ronde dans le menu deroulant */
+    nav a.nav-social {
+        width: 38px;
+        padding: 0;
+        margin-top: 14px;
+        border-bottom: none;
+    }
+
 
     .logo {
         letter-spacing: .12em;
@@ -1019,6 +1058,8 @@ button:focus-visible {
         <a href="prestations.html">Prestations</a>
         <a href="contact.html" class="appointment">Contact</a>
         <a href="https://fotostudio.io" class="nav-cta" target="_blank" rel="noopener">Prendre RDV</a>
+
+        <a href="https://instagram.com/morganbs.photographe" class="nav-social" target="_blank" rel="noopener" aria-label="Instagram de Morgane BS Photographe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
     </nav>
 
     <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
