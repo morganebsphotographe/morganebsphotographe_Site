@@ -445,6 +445,60 @@ async function loadHomeGallery() {
 
 
 /* =====================================================
+   ORDRE D'AFFICHAGE DU PORTFOLIO
+   -----------------------------------------------------
+   Sans traitement, les photos arrivent categorie par
+   categorie : 9 portraits, puis 6 couples, etc. Les dix
+   premieres vignettes ne montreraient donc qu'une seule
+   collection, et une categorie qui ne contient qu'une
+   photo se retrouverait tout en bas de la page.
+
+   On alterne donc les categories : une photo de chacune,
+   puis une deuxieme de chacune, et ainsi de suite. Les
+   premieres vignettes donnent un apercu de tout le travail.
+
+   Passez SHUFFLE_PORTFOLIO a false pour figer l'ordre
+   des photos a l'interieur de chaque categorie (ordre
+   alphabetique des fichiers).
+===================================================== */
+
+const SHUFFLE_PORTFOLIO = true;
+
+function interleave(images) {
+
+    /* Regroupement par categorie */
+    const parCategorie = {};
+    images.forEach(function (photo) {
+        (parCategorie[photo.category] = parCategorie[photo.category] || []).push(photo);
+    });
+
+    /* On respecte l'ordre defini dans "categories" et on ignore les vides */
+    const listes = categories
+        .map(function (c) { return parCategorie[c] || []; })
+        .filter(function (l) { return l.length > 0; })
+        .map(function (l) { return SHUFFLE_PORTFOLIO ? shuffle(l) : l; });
+
+    /* Distribution en alternance */
+    const sortie = [];
+    let rang = 0;
+    let encore = true;
+
+    while (encore) {
+        encore = false;
+        listes.forEach(function (liste) {
+            if (rang < liste.length) {
+                sortie.push(liste[rang]);
+                encore = true;
+            }
+        });
+        rang++;
+    }
+
+    return sortie;
+}
+
+
+/* =====================================================
    PORTFOLIO - toutes les photos + filtres
    -----------------------------------------------------
    Les photos ne sont pas toutes affichees d'un coup :
@@ -474,7 +528,9 @@ async function loadPortfolio() {
         return;
     }
 
-    images.forEach(photo => {
+    /* Ordre alterne : les premieres vignettes montrent
+       un echantillon de chaque collection */
+    interleave(images).forEach(photo => {
         gallery.appendChild(createPhoto(photo));
     });
 

@@ -4,40 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Tarifs photographe à Martigues · Morgane BS Photographe</title>
+    <title>Page introuvable · Morgane BS Photographe</title>
     <!-- Favicon : plusieurs tailles, multiples de 48px, exigence de Google -->
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="canonical" href="https://morganebsphotographe.fr/prestations.html">
-
-    <meta name="description"
-        content="Tarifs et formules de Morgane BS Photographe, photographe à Martigues. Séances portrait, couple, famille et grossesse à partir de 119 €, mariages à partir de 390 €.">
-
-    <!-- Partage sur les réseaux sociaux -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Morgane BS Photographe">
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:url" content="https://morganebsphotographe.fr/prestations.html">
-    <meta property="og:title" content="Prestations et tarifs · Morgane BS Photographe">
-    <meta property="og:description"
-        content="Séances photo à partir de 119 €, mariages à partir de 390 €. Photographe à Martigues, déplacements inclus dans un rayon de 40 km.">
-    <meta property="og:image" content="https://morganebsphotographe.fr/visuels/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="noindex">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
+
         :root {
             --paper: #ffffff;
             --paper-soft: #f2f1ec;
@@ -325,6 +306,29 @@
             margin: auto;
         }
 
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: clamp(10px, .72vw, 11px);
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-bottom: 30px;
+
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) .2s forwards;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+            width: 34px;
+            height: 1px;
+            background: var(--line-strong);
+        }
+
         .hero h1 {
             max-width: 1050px;
             font-family: var(--display);
@@ -447,19 +451,36 @@
             display: flex;
             flex-direction: column;
 
-            padding: 40px 0 50px;
-            border-bottom: 1px solid var(--line);
-        }
+            padding:
+                40px
+                clamp(20px, 4vw, 70px)
+                50px 0;
 
-        /* Les deux colonnes doivent avoir la MEME largeur utile,
-           sinon les deux visuels n'ont pas la meme hauteur. */
-        .card:nth-child(1) {
-            padding-right: clamp(20px, 4vw, 70px);
+            border-bottom: 1px solid var(--line);
         }
 
         .card:nth-child(2) {
             padding-left: clamp(20px, 4vw, 70px);
             border-left: 1px solid var(--line);
+        }
+
+        .card-media {
+            overflow: hidden;
+            border-radius: clamp(8px, 1vw, 14px);
+            background: var(--paper-soft);
+            margin-bottom: 32px;
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease);
+        }
+
+        .card:hover .card-media img {
+            transform: scale(1.04);
         }
 
         .card-title-row {
@@ -538,7 +559,7 @@
         ========================= */
 
         .wedding-section {
-            background: var(--paper);
+            background: var(--paper-soft);
             padding: clamp(70px, 9vw, 130px) 0;
         }
 
@@ -550,6 +571,27 @@
 
         .wedding-card + .wedding-card {
             margin-top: 25px;
+        }
+
+        .wedding-media {
+            overflow: hidden;
+            background: var(--paper-soft);
+            margin:
+                calc(-1 * clamp(35px, 5vw, 75px))
+                calc(-1 * clamp(35px, 5vw, 75px))
+                clamp(40px, 5vw, 60px);
+        }
+
+        .wedding-media img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 2 / 1;
+            object-fit: cover;
+            transition: transform 1.4s var(--ease);
+        }
+
+        .wedding-card:hover .wedding-media img {
+            transform: scale(1.03);
         }
 
         .wedding-grid {
@@ -634,6 +676,68 @@
         }
 
         /* =========================
+           QUESTIONS FREQUENTES
+        ========================= */
+
+        .faq {
+            max-width: 900px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .faq-item:first-of-type {
+            border-top: 1px solid var(--line);
+        }
+
+        .faq-item summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+
+            padding: 26px 0;
+            cursor: pointer;
+            list-style: none;
+
+            font-family: var(--display);
+            font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+            font-weight: 400;
+            transition: color .3s var(--ease);
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: "";
+            flex: none;
+            width: 11px;
+            height: 11px;
+            border-right: 1px solid var(--ink-soft);
+            border-bottom: 1px solid var(--ink-soft);
+            transform: rotate(45deg) translate(-3px, -3px);
+            transition: transform .35s var(--ease);
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(-135deg) translate(-3px, -3px);
+        }
+
+        .faq-item summary:hover {
+            color: var(--ink-soft);
+        }
+
+        .faq-answer {
+            padding-bottom: 28px;
+            max-width: 700px;
+            color: var(--ink-soft);
+            line-height: 1.8;
+        }
+
+        /* =========================
            CTA
         ========================= */
 
@@ -697,7 +801,8 @@
         ========================= */
 
         a:focus-visible,
-        button:focus-visible {
+        button:focus-visible,
+        summary:focus-visible {
             outline: 2px solid currentColor;
             outline-offset: 3px;
         }
@@ -716,6 +821,7 @@
             }
 
             .hero h1,
+            .hero-eyebrow,
             .hero-intro {
                 opacity: 1 !important;
                 transform: none !important;
@@ -827,14 +933,14 @@
                 padding: 40px 0 55px;
             }
 
-            .card:nth-child(1) {
-                padding-right: 0;
-            }
-
             .card:nth-child(2) {
                 padding-left: 0;
                 border-left: 0;
                 transition-delay: 0s;
+            }
+
+            .wedding-media img {
+                aspect-ratio: 3 / 2;
             }
 
             .wedding-grid {
@@ -921,13 +1027,62 @@
                 height: 15px;
             }
         }
+    
+
+        .notfound {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            min-height: 78vh;
+            padding: clamp(120px, 16vh, 200px) var(--page-x) clamp(60px, 10vh, 120px);
+        }
+
+        .notfound h1 {
+            font-family: var(--display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: .96;
+            letter-spacing: -.025em;
+            text-wrap: balance;
+        }
+
+        .notfound h1 em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .notfound p {
+            max-width: 46ch;
+            margin: clamp(24px, 4vh, 38px) auto 0;
+            color: var(--ink-soft);
+            line-height: 1.75;
+        }
+
+        .notfound-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(18px, 2.5vw, 34px);
+            margin-top: clamp(34px, 5vh, 54px);
+        }
+
+        .notfound-links a {
+            padding-bottom: 6px;
+            font-size: clamp(13px, 1vw, 14px);
+            border-bottom: 1px solid var(--ink);
+            transition: opacity .3s var(--ease);
+        }
+
+        .notfound-links a:hover { opacity: .6; }
     </style>
 </head>
 
-
 <body>
 
-    <header id="site-header">
+<header id="site-header">
 
         <div class="brand">
 
@@ -957,7 +1112,7 @@
                 Portfolio
             </a>
 
-            <a href="prestations.html" class="active">
+            <a href="prestations.html">
                 Prestations
             </a>
 
@@ -979,611 +1134,24 @@
 
     </header>
 
-
-    <main>
-
-        <!-- HERO -->
-
-        <section class="hero">
-
-            <h1>
-                Quatre façons de raconter
-                <em>votre histoire.</em>
-            </h1>
-
-            <p class="hero-intro">
-                Les plus belles photographies sont celles qui nous font
-                ressentir quelque chose. Chaque formule est pensée pour
-                prendre le temps de capturer les instants de vie,
-                les liens et les émotions qui méritent de traverser les années.
-            </p>
-
-        </section>
-
-
-        <div class="container">
-
-            <!-- SEANCES -->
-
-            <section class="section">
-
-                <div class="cards">
-
-                    <!-- L'INSTANT -->
-
-                    <article class="card reveal">
-
-
-                        <div class="card-title-row">
-                            <h3>
-                                L’instant
-                            </h3>
-                        </div>
-
-                        <div class="price">
-                            119 €
-                        </div>
-
-                        <p class="card-intro">
-                            <strong>
-                                Un premier souvenir, simplement.
-                            </strong>
-                            <br>
-                            L’essentiel pour garder une trace
-                            d’un moment important.
-                        </p>
-
-                        <div class="ideal">
-                            Idéal pour
-                        </div>
-
-                        <p class="ideal-text">
-                            Grossesse, couple, famille, animalier,
-                            lifestyle…
-                        </p>
-
-                        <ul class="features">
-
-                            <li>
-                                Séance photo d’<strong>1 heure</strong>
-                            </li>
-
-                            <li>
-                                <strong>15 photos retouchées</strong>
-                                au choix
-                            </li>
-
-                            <li>
-                                Galerie privée en ligne
-                            </li>
-
-                            <li>
-                                Conseils et accompagnement
-                                pendant la séance
-                            </li>
-
-                        </ul>
-
-                        <p class="extra">
-                            <strong>
-                                Tarif photo supplémentaire : 10 €
-                            </strong>
-                        </p>
-
-                    </article>
-
-
-                    <!-- L'EMOTION -->
-
-                    <article class="card reveal">
-
-
-                        <div class="card-title-row">
-                            <h3>
-                                L’émotion
-                            </h3>
-                            <span class="badge">La plus choisie</span>
-                        </div>
-
-                        <div class="price">
-                            249 €
-                        </div>
-
-                        <p class="card-intro">
-                            <strong>
-                                Plus de temps, plus de photos,
-                                plus de souvenirs.
-                            </strong>
-                            <br>
-                            Une séance plus complète pour varier
-                            les ambiances, les tenues et les moments,
-                            et raconter une véritable histoire.
-                        </p>
-
-                        <div class="ideal">
-                            Idéal pour
-                        </div>
-
-                        <p class="ideal-text">
-                            Grossesse, couple, famille, animalier,
-                            lifestyle, anniversaire, gender reveal…
-                        </p>
-
-                        <ul class="features">
-
-                            <li>
-                                Séance photo de <strong>1h30 à 2h</strong>
-                            </li>
-
-                            <li>
-                                <strong>30 photos retouchées</strong>
-                                au choix
-                            </li>
-
-                            <li>
-                                Galerie privée en ligne
-                            </li>
-
-                            <li>
-                                <strong>
-                                    Plusieurs changements de tenues possibles
-                                </strong>
-                            </li>
-
-                            <li>
-                                Plusieurs lieux ou ambiances possibles
-                            </li>
-
-                            <li>
-                                <strong>
-                                    Plus de temps pour varier les poses
-                                    et les situations
-                                </strong>
-                            </li>
-
-                            <li>
-                                Conseils et accompagnement personnalisé
-                            </li>
-
-                        </ul>
-
-                        <p class="extra">
-                            <strong>
-                                Tarif photo supplémentaire : 10 €
-                            </strong>
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </section>
-
+    <main class="notfound">
+        <h1>Cette page n’existe <em>plus.</em></h1>
+        <p>
+            Le lien que vous avez suivi ne mène nulle part.
+            Le portfolio et les prestations, eux, sont toujours là.
+        </p>
+        <div class="notfound-links">
+            <a href="index.html">Retour à l’accueil →</a>
+            <a href="portfolio.html">Voir le portfolio →</a>
+            <a href="contact.html">Me contacter →</a>
         </div>
-
-
-        <!-- MARIAGES -->
-
-        <section class="wedding-section">
-
-            <div class="container">
-
-                <div class="section-head reveal">
-
-                    <div>
-
-                        <div class="section-label">
-                            Mariage
-                        </div>
-
-                        <h2 class="section-title">
-                            Les moments essentiels<br>
-                            de votre histoire.
-                        </h2>
-
-                    </div>
-
-                    <p class="section-description">
-                        De la cérémonie civile à la journée complète,
-                        deux formules pour raconter votre mariage
-                        à votre manière.
-                    </p>
-
-                </div>
-
-
-                <!-- ENGAGEMENT -->
-
-                <article class="wedding-card reveal">
-
-
-                    <div class="wedding-grid">
-
-                        <div>
-
-                            <h3>
-                                L’Engagement
-                            </h3>
-
-                            <p class="wedding-description">
-
-                                <strong>
-                                    Les moments essentiels
-                                    de votre mariage.
-                                </strong>
-
-                                <br><br>
-
-                                Une formule pensée pour immortaliser
-                                les moments forts de votre cérémonie civile,
-                                de la sortie des mariés jusqu’aux photos
-                                de couple.
-
-                                <br><br>
-
-                                <strong>
-                                    Idéal pour :
-                                </strong>
-
-                                mariage à la mairie,
-                                cérémonie civile,
-                                mariage intimiste…
-
-                            </p>
-
-                            <div class="wedding-price">
-                                390 €
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="sub-title">
-                                Avant le mariage
-                            </div>
-
-                            <ul class="wedding-list">
-
-                                <li>
-                                    Rendez-vous de préparation pour échanger
-                                    sur vos envies et organiser la journée
-                                </li>
-
-                            </ul>
-
-
-                            <div class="sub-title">
-                                Le jour J · 3 heures de présence
-                            </div>
-
-                            <ul class="wedding-list">
-
-                                <li>Cérémonie civile</li>
-                                <li>Sortie des mariés</li>
-                                <li>Photos de groupe avec vos proches</li>
-                                <li>Séance photo des mariés</li>
-
-                                <li>
-                                    <strong>
-                                        100 photos retouchées
-                                    </strong>
-                                </li>
-
-                                <li>
-                                    Galerie privée en ligne
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- INOUBLIABLE -->
-
-                <article class="wedding-card reveal">
-
-
-                    <div class="wedding-grid">
-
-                        <div>
-
-                            <h3>
-                                L’Inoubliable
-                            </h3>
-
-                            <p class="wedding-description">
-
-                                <strong>
-                                    Votre histoire,
-                                    du premier regard
-                                    jusqu’à la première danse.
-                                </strong>
-
-                                <br><br>
-
-                                Une présence tout au long de votre journée
-                                pour raconter votre mariage dans ses
-                                moindres détails, des préparatifs aux
-                                moments forts de la soirée.
-
-                            </p>
-
-                            <div class="wedding-price">
-                                1 290 €
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="sub-title">
-                                Avant le mariage
-                            </div>
-
-                            <ul class="wedding-list">
-
-                                <li>
-                                    Rendez-vous de préparation pour échanger
-                                    sur vos envies et organiser la journée
-                                </li>
-
-                            </ul>
-
-
-                            <div class="sub-title">
-                                Le jour J · environ 10 heures de présence
-                            </div>
-
-                            <ul class="wedding-list">
-
-                                <li>Préparatifs des mariés</li>
-                                <li>Découverte et premiers regards</li>
-                                <li>Cérémonie(s)</li>
-                                <li>Photos de groupe et séance couple</li>
-                                <li>Cocktail et moments avec vos proches</li>
-                                <li>Repas</li>
-                                <li>Première danse</li>
-
-                                <li>
-                                    Tous les instants spontanés
-                                    qui rendent votre journée unique
-                                </li>
-
-                                <li>
-                                    <strong>
-                                        Plus de 300 photos retouchées
-                                    </strong>
-                                </li>
-
-                                <li>
-                                    Galerie privée en ligne
-                                </li>
-
-                                <li>
-                                    <strong>
-                                        Album photo offert
-                                    </strong>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- INFORMATIONS -->
-
-        <div class="container">
-
-            <section class="section">
-
-                <div class="info-grid">
-
-                    <article class="info reveal">
-
-                        <h3>
-                            Et si vous avez besoin de plus ?
-                        </h3>
-
-                        <p>
-                            Votre mariage ne rentre pas parfaitement
-                            dans une formule ?
-
-                            <br><br>
-
-                            Aucun problème.
-
-                            N’hésitez pas à me contacter via le formulaire.
-                        </p>
-
-                    </article>
-
-
-                    <article class="info reveal">
-
-                        <h3>
-                            L’album photo
-                        </h3>
-
-                        <p>
-                            Parce que vos photographies méritent aussi
-                            d’exister autrement que sur un écran,
-                            je propose la création d’un album photo
-                            personnalisé.
-
-                            <br><br>
-
-                            Une sélection de vos images, mise en page
-                            avec soin, pour créer un véritable objet
-                            souvenir que vous pourrez garder et transmettre
-                            au fil des années.
-
-                            <br><br>
-
-                            <strong>
-                                L’album est offert avec la formule L’Inoubliable.
-                                Il est disponible en option, sur devis,
-                                avec toutes les autres formules.
-                            </strong>
-                        </p>
-
-                    </article>
-
-                </div>
-
-
-                <div class="info-grid info-grid--spaced">
-
-                    <article class="info reveal">
-
-                        <h3>
-                            Frais de déplacement
-                        </h3>
-
-                        <p>
-                            Les déplacements sont inclus dans un rayon
-                            de <strong>40 km autour de Martigues</strong>.
-                        </p>
-
-                    </article>
-
-
-                    <article class="info reveal">
-
-                        <h3>
-                            Au-delà de 40 km
-                        </h3>
-
-                        <p>
-                            Au-delà de cette distance, des frais de
-                            déplacement sont appliqués en fonction du
-                            lieu de votre mariage ou de votre évènement.
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </section>
-
-        </div>
-
-
-        <!-- CTA -->
-
-        <section class="cta-section">
-
-            <h2>
-                Si vous avez une histoire
-                à raconter…
-            </h2>
-
-            <p>
-                Je serai heureuse de la raconter avec vous.
-                Parlez-moi de votre projet, de vos envies
-                et des moments que vous souhaitez garder
-                pour les années à venir.
-            </p>
-
-            <a href="contact.html" class="cta-button">
-                Prendre rendez-vous&nbsp; →
-            </a>
-
-        </section>
-
     </main>
 
-
-    <!-- FOOTER -->
     <footer>
-        <span>
-            © 2026 Morgane BS Photographe
-        </span>
+        <span>© 2026 Morgane BS Photographe</span>
     </footer>
 
-
-    <!-- Donnees structurees : aide Google a afficher les tarifs -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Morgane BS Photographe",
-      "description": "Photographe portrait, couple, famille, grossesse et mariage à Martigues et dans les Bouches-du-Rhône.",
-      "url": "https://morganebsphotographe.fr/",
-      "image": "https://morganebsphotographe.fr/visuels/og-image.jpg",
-      "email": "morganebsphotographe@hotmail.com",
-      "priceRange": "119 € - 1290 €",
-      "sameAs": ["https://instagram.com/morganebs.photographe"],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Martigues",
-        "addressRegion": "Bouches-du-Rhône",
-        "postalCode": "13500",
-        "addressCountry": "FR"
-      },
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 43.4053,
-          "longitude": 5.0480
-        },
-        "geoRadius": "40000"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Prestations photographiques",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "name": "L'instant",
-            "description": "Séance photo d'1 heure, 15 photos retouchées, galerie privée en ligne.",
-            "price": "119",
-            "priceCurrency": "EUR"
-          },
-          {
-            "@type": "Offer",
-            "name": "L'émotion",
-            "description": "Séance photo de 1h30 à 2h, 30 photos retouchées, plusieurs tenues et lieux.",
-            "price": "249",
-            "priceCurrency": "EUR"
-          },
-          {
-            "@type": "Offer",
-            "name": "L'Engagement",
-            "description": "Mariage, 3 heures de présence, cérémonie civile et séance couple, 100 photos retouchées.",
-            "price": "390",
-            "priceCurrency": "EUR"
-          },
-          {
-            "@type": "Offer",
-            "name": "L'Inoubliable",
-            "description": "Mariage, journée complète d'environ 10 heures, plus de 300 photos retouchées, album offert.",
-            "price": "1290",
-            "priceCurrency": "EUR"
-          }
-        ]
-      }
-    }
-    </script>
-
-
     <script src="script.js"></script>
-
     <script>
         initUI();
         initHeader();
